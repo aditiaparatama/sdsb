@@ -1,0 +1,82 @@
+.dropdown .dropdown-menu.submenu,
+.dropdown .dropdown-menu{
+	border: 0;
+}
+
+#drop-nav li ul{
+	margin-top: 0 !important;
+}
+
+.dropdown-menu{
+	min-width: 120px !important;
+}
+
+#drop-nav ul li{
+	padding: 0;
+}
+
+.modal-backdrop {
+  background-color: #000 !important;
+}
+
+table tr td,
+.historyDataTable{
+	color: #333;
+}
+
+#drop-nav ul li.grid-demo:hover{
+	background-color: #bb1500 !important;
+}
+
+#drop-nav ul li.grid-demo{
+	cursor: default !important
+}
+.swal-overlay {
+  background-color: rgba(43, 165, 137, 0.45);
+}
+.swal-text {
+  text-align: center;
+}
+
+#loginForm .form-group{
+	float: left;
+}
+
+#usertxt, #passtxt, #codetxt, img.captcha {
+	margin-right: 5px;
+}
+
+/*
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
+	color: #fff;
+}
+*/
+
+.float-right-chat span,
+.dropdown-toggle span,
+ul.selectpicker li a span,
+.input-group span i,
+table#historyDataTable tbody td{
+	color:#333;
+}
+
+ul.selectpicker li.active a span,
+ul.selectpicker li:hover a span{
+	color: #fff;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+	background-color: #337ab7 !important;
+}
+
+.blue i{
+	color: #337ab7;
+}
+
+
+.flip-counter ul.cd{float:left;list-style-type:none;margin:0;padding:0}
+.flip-counter li{background:url(digits-trans.png) 0 0 no-repeat; margin-left:-10px;}
+.flip-counter li.t{background-position:0 0;width:43px;height:39px; }
+.flip-counter li.b{background-position:0 0;width:43px;height:54px;}
+.flip-counter li.s{background-position:-53px -1030px;width:10px;height:93px; margin:-20px 0 0 0;}
+#flip-counter-wrap { float:right; width:750px; height:100px;}

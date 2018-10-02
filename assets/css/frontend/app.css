@@ -1,0 +1,22 @@
+/*header*/
+#navbg{
+background: #28a9e0;
+}
+.nav li ul{display:none;z-index:30;}
+.nav li:hover ul{display:block;position:absolute;}
+.nav li:hover li{float:none;}
+.nav ul li{display:block;position:relative;float:none;}
+ul.nav > li{display:inline-block; float: left;margin-right: 1px;}
+ul.nav {width: 1000px;margin: 0 auto;/* text-align: center; */}
+.nav ul li a{display:block;text-decoration:none;color:#fff;}
+.nav ul li{    background-color: #041c29;
+    width: 1015px;
+    height: 198px;
+    margin-top: 0px;}
+.nav ul li.slots{background-color:#00061e; padding:10px;height:198px;margin-top:1px;width:auto;}
+/*.nav ul{min-width:1000px;margin-left:-120px;}*/
+
+.home-ico{
+    border-radius: 5px 0 0 5px;
+    margin-left: 60px !important;
+}

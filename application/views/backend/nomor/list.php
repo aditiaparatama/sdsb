@@ -9,24 +9,17 @@
                     <div class="header">
                         <h2>
                             List Nomor Kupon
-                            <small>Daftar nomor kupon yang aktif <a href="https://datatables.net/" target="_blank">datatables.net</a></small>
+                            <small>Daftar nomor kupon yang aktif 
+                                <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
+                            </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('nomor/downloadexcel'); ?>">Download Excel</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <ul class="header-dropdown m-r--5"></ul>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-light-blue">
                                         <th>Nomor Kupon</th>
                                         <th>Customer</th>
                                         <th>Action</th>
@@ -41,15 +34,15 @@
                                     <?php foreach($lists as $list) { 
                                         ?>
                                     <tr>
-                                        <td><?php echo $list->nomor; ?></td>
-                                        <td><?php echo $list->nama_customer; ?></td>
+                                        <td><?php echo $list->nnomor; ?></td>
+                                        <td><?php echo $list->cnama; ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('nomor/hapusnomor/'.$list->id_nomor); ?>" class=" waves-effect waves-block">Hapus</a></li>
+                                                    <li><a href="<?php echo base_url('nomor/hapusnomor/'.$list->nid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </td>

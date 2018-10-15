@@ -16,7 +16,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="jumlah" class="form-control" value="<?php echo $detail->qty_general; ?>" reqired>
+                                        <input type="number" name="jumlah" class="form-control" value="<?php echo $detail->gqty; ?>" reqired>
                                         <label class="form-label">Jumlah Pembelian</label>
                                     </div>
                                 </div>
@@ -24,12 +24,12 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="potongan" class="form-control" value="<?php echo $detail->diskon_general; ?>" required>
+                                        <input type="number" name="potongan" class="form-control" value="<?php echo $detail->gdiskon; ?>" required>
                                         <label class="form-label">Potongan (format persen (%))</label>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="id_potongan" value="<?php echo $detail->id_general; ?>">
+                            <input type="hidden" name="id_potongan" value="<?php echo $detail->gid; ?>">
 
                             <div class="col-sm-12">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect">UPDATE</button>&nbsp;&nbsp;

@@ -12,19 +12,19 @@ class M_voucher extends CI_Model {
     public function SearchVoucher($id){
         $this->db->select('*');
         $this->db->from($this->table[1]);
-        $this->db->where('status_voucher', 1);
-        $this->db->where('kode_voucher', $id);
+        $this->db->where('vstatus', 1);
+        $this->db->where('vkode', $id);
 
         $data = $this->db->get()->row();
         return $data;
     }
 
 
-    //backend
+    //halaman backend
     public function Voucher(){
-        $this->db->select('id_voucher, kode_voucher, aktif_voucher, nonaktif_voucher, potongan_voucher');
+        $this->db->select('vid, vkode, vawal, vakhir, vpotongan');
         $this->db->from($this->table[1]);
-        $this->db->where('status_voucher', 1);
+        $this->db->where('vstatus', 1);
 
         $data = $this->db->get()->result();
         return $data;
@@ -38,24 +38,23 @@ class M_voucher extends CI_Model {
     public function DetailVoucher($id){
         $this->db->select('*');
         $this->db->from($this->table[1]);
-        $this->db->where('status_voucher', 1);
-        $this->db->where('id_voucher', $id);
+        $this->db->where('vstatus', 1);
+        $this->db->where('vid', $id);
 
         $data = $this->db->get()->row();
         return $data;
     }
 
     public function EditVoucher($id, $data) {
-        $this->db->where('id_voucher',$id);
+        $this->db->where('vid',$id);
         $this->db->update('voucher',$data);
 
         return $data;
     }
 
     public function HapusVoucher($id){
-        $this->db->set('status_voucher', 0);
-        $this->db->where('id_voucher',$id);
+        $this->db->set('vstatus', 0);
+        $this->db->where('vid',$id);
         $this->db->update($this->table[1]);
     }
-
 }

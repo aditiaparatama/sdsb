@@ -27,7 +27,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-light-blue">
                                         <th>Jumlah Pembelian</th>
                                         <th>Potongan</th>
                                         <th>Action</th>
@@ -42,16 +42,16 @@
                                 <tbody>
                                     <?php foreach($lists as $list) { ?>
                                     <tr>
-                                        <td><?php echo $list->qty_general; ?></td>
-                                        <td><?php echo $list->diskon_general; ?>%</td>
+                                        <td><?php echo $list->gqty; ?></td>
+                                        <td><?php echo $list->gdiskon; ?>%</td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('general/editpotongan/'.$list->id_general); ?>" class=" waves-effect waves-block">Edit Potongan</a></li>
-                                                    <li><a href="<?php echo base_url('general/hapusgeneral/'.$list->id_general); ?>" class=" waves-effect waves-block">Hapus</a></li>
+                                                    <li><a href="<?php echo base_url('general/editpotongan/'.$list->gid); ?>" class=" waves-effect waves-block">Edit Potongan</a></li>
+                                                    <li><a href="<?php echo base_url('general/hapusgeneral/'.$list->gid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </td>

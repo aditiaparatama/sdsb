@@ -39,18 +39,18 @@
                                     <?php foreach($lists as $list) { 
                                         ?>
                                     <tr>
-                                        <td><?php echo date('l', strtotime($list->tanggal_pemenang)); ?></td>
-                                        <td><?php echo date('d F Y', strtotime($list->tanggal_pemenang)); ?></td>
-                                        <td><b><?php echo $list->nomor_pemenang; ?></b></td>
-                                        <td>Pemenang <?php echo $list->order_pemenang; ?></td>
-                                        <td><b><?php echo $list->nama_customer; ?></b></td>
+                                        <td><?php echo date('l', strtotime($list->pperiode)); ?></td>
+                                        <td><?php echo date('d F Y', strtotime($list->pperiode)); ?></td>
+                                        <td><b><?php echo $list->pnomor; ?></b></td>
+                                        <td>Pemenang <?php echo $list->porder; ?></td>
+                                        <td><b><?php echo $list->cnama; ?></b></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('pemenang/editgrouppemenang/'.$list->id_pemenang); ?>" class=" waves-effect waves-block">Edit Pemenang</a></li>
+                                                    <li><a href="<?php echo base_url('pemenang/editgrouppemenang/'.$list->pid); ?>" class=" waves-effect waves-block">Edit Pemenang</a></li>
                                                     <!-- <li><a href="<?php echo base_url('pemenang/hapuspemenang/'.$list->id_pemenang); ?>" class=" waves-effect waves-block">Hapus</a></li> -->
                                                 </ul>
                                             </div>

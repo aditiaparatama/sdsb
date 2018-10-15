@@ -15,12 +15,12 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang" value="<?php echo $detail->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang" value="<?php echo $detail->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang</label>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="id_pemenang" value="<?php echo $detail->id_pemenang; ?>">
+                            <input type="hidden" name="id_pemenang" value="<?php echo $detail->pid; ?>">
 
                             <div class="col-sm-12">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect">SIMPAN</button>&nbsp;&nbsp;

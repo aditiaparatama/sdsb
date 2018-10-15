@@ -7,61 +7,227 @@ class Customer extends CI_Controller {
 		parent::__construct();
 	  	$this->load->model('m_customer');
 		$this->load->library('upload');
+		$this->load->helper('string');
 	}
 	
-	//dashboard
-	public function profile(){
- 		if($this->session->userdata('status') != "user"){
-			redirect(base_url('login'));
+	//halaman backend
+ 	public function addcustomer(){
+ 		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
 		}
-		$id = $this->session->userdata('id');
- 		$data['detail'] 	= $this->m_customer->EditCustomer($id);
-	  	$data['customer']	= $this->m_customer->DataCustomer($id);
+		
+		$data['title'] = 'Tambah Customer Baru - '.BRAND;
+		$data['page']  = 'backend/customer/add';
+		$this->load->view('backend/thamplate', $data);		
+ 	}
 
- 		$data['title'] = 'Edit Customer - '.BRAND;
- 		$data['page']  = 'dashboard/profile/edit';
- 		$this->load->view('dashboard/thamplate', $data);
-	}
-
- 	public function profile_act(){
- 		if($this->session->userdata('status') != "user"){
-			redirect(base_url('login'));
+ 	public function addcustomer_act(){
+  		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tlp', 'Telepon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('alamat', 'Alamat', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('nmrek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('norek', 'Pemilik Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('nmrek', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('norek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			if($this->form_validation->run() == false){
-		        $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect($_SERVER['HTTP_REFERER']);
 		  	} else { 		
-				$data['id_customer']			= $this->session->userdata('id');
-				$data['nama_customer']			= $this->input->post('nama');
-				$data['email_customer']			= $this->input->post('email');
-				$data['pass_customer'] 			= $this->input->post('password');
-				$data['tlp_customer'] 			= $this->input->post('tlp');
-				$data['alamat_customer'] 		= $this->input->post('alamat');
-				$data['bank_customer'] 			= $this->input->post('bank');
-				$data['nmrrekening_customer'] 	= $this->input->post('norek');
-				$data['nmrekening_customer'] 	= $this->input->post('nmrek');
+				$this->load->model('m_transaksi');
+				$this->load->model('m_rekening');
+				$usersbo	 	= $this->input->post('usersbo');
+				$useribc	 	= $this->input->post('ibcbet');
+				$userhorey	 	= $this->input->post('horey4d');
+				$usertangkas 	= $this->input->post('tangkasnet');
+				$usersdsb	 	= $this->input->post('sdsb');
+		  		
+		  		$wheresbo 	 	= array('cusersbo' => $usersbo);
+		  		$cusersbo 	 	= $this->m_customer->CekCustomer($wheresbo)->num_rows();
+		  		$whereibc 	 	= array('cuseribc' => $useribc);
+		  		$cuseribc 	 	= $this->m_customer->CekCustomer($whereibc)->num_rows();
+		  		$wherehorey  	= array('cuserhorey' => $usersbo);
+		  		$cuserhorey 	= $this->m_customer->CekCustomer($wherehorey)->num_rows();
+		  		$wheretangkas 	= array('cusertangkas' => $usersbo);
+		  		$cusertangkas 	= $this->m_customer->CekCustomer($wheretangkas)->num_rows();
+		  		$wheresdsb 	 	= array('cuser' => $usersbo);
+		  		$cusersdsb 	 	= $this->m_customer->CekCustomer($wheresdsb)->num_rows();
+		  		if($cusersbo > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user SBOBET sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cuseribc > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user IBCBET sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cuserhorey > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user HOREY4D sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cusertangkas > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user TANGKASNET sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cusersdsb > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user SDSB sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
 
-		        if(!empty($_FILES['photo']['name'])) {
-		  			$data['profile_customer']	= $this->upload('photo');
-		        }
-	  	 		$this->m_customer->EditCustomerAct($data);	
-	       		redirect(base_url().'customer/profile');
+					$data['cnama']				= $this->input->post('nama');
+					$data['cuser'] 				= $this->input->post('sdsb');
+					$data['cusersbo']			= $this->input->post('usersbo');
+					$data['cuseribc']			= $this->input->post('ibcbet');
+					$data['cuserhorey']			= $this->input->post('horey4d');
+					$data['cusertangkas']		= $this->input->post('tangkasnet');
+					$data['cemail']				= $this->input->post('email');
+					$data['cpass'] 				= md5($this->input->post('pass'));
+					$data['ctlp']				= $this->input->post('tlp');
+					$data['calamat']			= $this->input->post('alamat');
+					$data['cbank']				= $this->input->post('bank');
+					$data['cnamarek']			= $this->input->post('nmrek');
+					$data['cnorek']				= $this->input->post('norek');
+					$data['cdeposit']			= $this->input->post('dsdsb');
+					$data['cdepositsbo']		= $this->input->post('dsbobet');
+					$data['cdepositibc']		= $this->input->post('dibcbet');
+					$data['cdeposithorey']		= $this->input->post('dhorey4d');
+					$data['cdeposittangkas']	= $this->input->post('dtangkas');
+					$data['cterbaca']			= 1;
+					$data['cstatus']			= 1;
+					$data['cdate']				= date('Y-m-d H:i:s');
+			        if(!empty($_FILES['photo']['name'])) {
+			  			$data['cfoto']			= $this->upload('photo');
+			        }
+	  	 		$this->m_customer->SaveCustomer($data);	
+ 				$customer = $this->m_customer->SearchCustomer($this->input->post('email'));
+
+	  	 		if($this->input->post('dsbobet') != ''){		
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $customer->cid;
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $customer->cusersbo;
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dsbobet');
+					$row['tgrandtotal'] = $this->input->post('dsbobet');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 1;
+					$row['tketerangan'] = 'Saldo awal SBOBET customer '.$customer->cusersbo;
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsbobet');
+	  	 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	  	 		}
+
+	  	 		if($this->input->post('dibcbet') != ''){		
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $customer->cid;
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $customer->cuseribc;
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dibcbet');
+					$row['tgrandtotal'] = $this->input->post('dibcbet');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 2;
+					$row['tketerangan'] = 'Saldo awal IBCBET customer '.$customer->cuseribc;
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dibcbet');
+	  	 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	  	 		}
+
+	  	 		if($this->input->post('dhorey4d') != ''){		
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $customer->cid;
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $customer->cuserhorey;
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dhorey4d');
+					$row['tgrandtotal'] = $this->input->post('dhorey4d');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 3;
+					$row['tketerangan'] = 'Saldo awal HOREY4D customer '.$customer->cuserhorey;
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dhorey4d');
+	  	 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	  	 		}
+
+	  	 		if($this->input->post('dtangkas') != ''){		
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $customer->cid;
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $customer->cusertangkas;
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dtangkas');
+					$row['tgrandtotal'] = $this->input->post('dtangkas');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 4;
+					$row['tketerangan'] = 'Saldo awal TANGKASNET customer '.$customer->cusertangkas;
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dtangkas');
+	  	 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	  	 		}
+
+	  	 		if($this->input->post('dsdsb') != ''){		
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $customer->cid;
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $customer->cuser;
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dsdsb');
+					$row['tgrandtotal'] = $this->input->post('dsdsb');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 5;
+					$row['tketerangan'] = 'Saldo awal SDSB customer '.$customer->cuser;
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsdsb');
+	  	 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	  	 		}
+	       		redirect(base_url().'customer/listcustomer');
 		  	}
 	    }
  	}
 
-
-
-	//Halaman Backend
 	public function listcustomer(){
 		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));
@@ -82,7 +248,6 @@ class Customer extends CI_Controller {
  		$data['title'] = 'Edit Customer - '.BRAND;
  		$data['page']  = 'backend/customer/edit';
  		$this->load->view('backend/thamplate', $data);
-
  	}
 
  	public function editcustomer_act(){
@@ -91,7 +256,6 @@ class Customer extends CI_Controller {
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('username', 'Username', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tlp', 'Telepon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -99,39 +263,189 @@ class Customer extends CI_Controller {
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('nmrek', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('norek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('usersbo', 'Username SBOBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('ibcbet', 'Username IBCBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('horey4d', 'Username Horey', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('tangkasnet', 'Username Tangkas', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('dsbobet', 'Deposit SBOBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('dibcbet', 'Deposit IBCBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('dhorey4d', 'Deposit Horey', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('dtangkas', 'Deposit Tangkas', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect($_SERVER['HTTP_REFERER']);
-		  	} else { 		
-					$id	  								= $this->input->post('id_customer');
-					$data['id_customer']				= $this->input->post('id_customer');
-					$data['nama_customer']				= $this->input->post('nama');
-					$data['email_customer']				= $this->input->post('email');
-					$data['username_customer'] 			= $this->input->post('username');
-					$data['usersbobet_customer']		= $this->input->post('usersbo');
-					$data['useribcbet_customer']		= $this->input->post('ibcbet');
-					$data['userhoreybet_customer']		= $this->input->post('horey4d');
-					$data['usertangkasbet_customer']	= $this->input->post('tangkasnet');
-					$data['pass_customer'] 				= md5($this->input->post('username'));
-					$data['tlp_customer']				= $this->input->post('tlp');
-					$data['alamat_customer']			= $this->input->post('alamat');
-					$data['bank_customer']				= $this->input->post('bank');
-					$data['nmrekening_customer']		= $this->input->post('nmrek');
-					$data['nmrrekening_customer']		= $this->input->post('norek');
-					$data['depositsbobet_customer']		= $this->input->post('dsbobet');
-					$data['depositibcbet_customer']		= $this->input->post('dibcbet');
-					$data['deposithoreybet_customer']	= $this->input->post('dhorey4d');
-					$data['deposittangkasbet_customer']	= $this->input->post('dtangkas');
+		  	} else { 	
+		  		$this->load->model('m_transaksi');
+				$this->load->model('m_rekening');
+				$usersbo	 	= $this->input->post('usersbo');
+				$useribc	 	= $this->input->post('ibcbet');
+				$userhorey	 	= $this->input->post('horey4d');
+				$usertangkas 	= $this->input->post('tangkasnet');
+				$usersdsb	 	= $this->input->post('sdsb');
+		  		
+		  		$wheresbo 	 	= array('cusersbo' => $usersbo);
+		  		$cusersbo 	 	= $this->m_customer->CekCustomer($wheresbo)->num_rows();
+		  		$whereibc 	 	= array('cuseribc' => $useribc);
+		  		$cuseribc 	 	= $this->m_customer->CekCustomer($whereibc)->num_rows();
+		  		$wherehorey  	= array('cuserhorey' => $usersbo);
+		  		$cuserhorey 	= $this->m_customer->CekCustomer($wherehorey)->num_rows();
+		  		$wheretangkas 	= array('cusertangkas' => $usersbo);
+		  		$cusertangkas 	= $this->m_customer->CekCustomer($wheretangkas)->num_rows();
+		  		$wheresdsb 	 	= array('cuser' => $usersbo);
+		  		$cusersdsb 	 	= $this->m_customer->CekCustomer($wheresdsb)->num_rows();
+		  		if($cusersbo > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user SBOBET sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cuseribc > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user IBCBET sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cuserhorey > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user HOREY4D sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cusertangkas > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user TANGKASNET sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cusersdsb > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user SDSB sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+					$id	  						= $this->input->post('idcus');
+					$data['cnama']				= $this->input->post('nama');
+					$data['cemail']				= $this->input->post('email');
+					$data['cuser'] 				= $this->input->post('sdsb');
+					$data['cusersbo']			= $this->input->post('usersbo');
+					$data['cuseribc']			= $this->input->post('ibcbet');
+					$data['cuserhorey']			= $this->input->post('horey4d');
+					$data['cusertangkas']		= $this->input->post('tangkasnet');
+					$data['cpass'] 				= md5($this->input->post('pass'));
+					$data['ctlp']				= $this->input->post('tlp');
+					$data['calamat']			= $this->input->post('alamat');
+					$data['cbank']				= $this->input->post('bank');
+					$data['cnamarek']			= $this->input->post('nmrek');
+					$data['cnorek']				= $this->input->post('norek');
+					$data['cdepositsbo']		= $this->input->post('dsbobet');
+					$data['cdepositibc']		= $this->input->post('dibcbet');
+					$data['cdeposithorey']		= $this->input->post('dhorey4d');
+					$data['cdeposittangkas']	= $this->input->post('dtangkas');
+					$data['cdeposit']			= $this->input->post('dsdsb');
 
+			        if(!empty($_FILES['photo']['name'])) {
+			  			$data['cfoto']			= $this->upload('photo');
+			        }
 	  	 		$this->m_customer->EditCustomerAct($id, $data);	
+
+		 		if($this->input->post('dsbobet')-$this->input->post('olddsbo') != 0){		
+			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $this->input->post('idcus');
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $this->input->post('usersbo');
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dsbobet')-$this->input->post('olddsbo');
+					$row['tgrandtotal'] = $this->input->post('dsbobet')-$this->input->post('olddsbo');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 1;
+					$row['tketerangan'] = 'Update saldo SBOBET customer '.$this->input->post('usersbo');
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsbobet')-$this->input->post('olddsbo');
+			 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+					$this->m_rekening->UpdateSaldo($idrek, $record);	
+		 		}
+		 		if($this->input->post('dibcbet')-$this->input->post('olddibc') != 0){		
+			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $this->input->post('idcus');
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $this->input->post('ibcbet');
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dibcbet')-$this->input->post('olddibc');
+					$row['tgrandtotal'] = $this->input->post('dibcbet')-$this->input->post('olddibc');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 2;
+					$row['tketerangan'] = 'Update saldo IBCBET customer '.$this->input->post('ibcbet');
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dibcbet')-$this->input->post('olddibc');
+			 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+					$this->m_rekening->UpdateSaldo($idrek, $record);	
+		 		}
+		 		if($this->input->post('dhorey4d')-$this->input->post('olddhorey') != 0){		
+			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $this->input->post('idcus');
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $this->input->post('horey4d');
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dhorey4d')-$this->input->post('olddhorey');
+					$row['tgrandtotal'] = $this->input->post('dhorey4d')-$this->input->post('olddhorey');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 3;
+					$row['tketerangan'] = 'Update saldo HOREY4D customer '.$this->input->post('horey4d');
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dhorey4d')-$this->input->post('olddhorey');
+			 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+					$this->m_rekening->UpdateSaldo($idrek, $record);	
+		 		}
+		 		if($this->input->post('dtangkas')-$this->input->post('olddtangkas') != 0){		
+			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $this->input->post('idcus');
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $this->input->post('tangkasnet');
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dtangkas')-$this->input->post('olddtangkas');
+					$row['tgrandtotal'] = $this->input->post('dtangkas')-$this->input->post('olddtangkas');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 4;
+					$row['tketerangan'] = 'Update saldo TANGKASNET customer '.$this->input->post('tangkasnet');
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dtangkas')-$this->input->post('olddtangkas');
+			 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+					$this->m_rekening->UpdateSaldo($idrek, $record);	
+		 		}
+		 		if($this->input->post('dsdsb')-$this->input->post('olddsdsb') != 0){		
+			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+					$row['tcustomer']	= $this->input->post('idcus');
+					$row['tnomor']		= random_string('alnum', 15);
+					$row['tdari']		= $this->input->post('sdsb');
+					$row['ttujuan']	 	= $rekening->rno;
+					$row['tharga']		= $this->input->post('dsdsb')-$this->input->post('olddsdsb');
+					$row['tgrandtotal'] = $this->input->post('dsdsb')-$this->input->post('olddsdsb');
+					$row['tjenis']		= 6;
+					$row['tsubjenis']	= 51;
+					$row['tsubdeposit']	= 61;
+					$row['tbrand']		= 4;
+					$row['tketerangan'] = 'Update saldo SDSB customer '.$this->input->post('sdsb');
+					$row['tstatus']	 	= 1;
+					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tdate'] 		= date('Y-m-d H:i:s');
+					
+					$idrek 				= $rekening->rno;
+					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsdsb')-$this->input->post('olddsdsb');
+			 		
+		  	 		$this->m_transaksi->SaveTransaksi($row);
+					$this->m_rekening->UpdateSaldo($idrek, $record);	
+		 		}
+
 	       		redirect(base_url().'customer/listcustomer');
 		  	}
 	    }
@@ -146,6 +460,32 @@ class Customer extends CI_Controller {
 		redirect(base_url('customer/listcustomer'));
 	}
 
+
+	public function listdeposit(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+		$data['lists'] = $this->m_customer->Customer();
+
+		$data['title'] = 'List Deposit Customer - '.BRAND;
+		$data['page']  = 'backend/customer/deposit';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
+	public function detail($id){ 		
+		if($this->session->userdata('status') != "backend"){
+ 			redirect(base_url('cmskita'));
+ 		}
+		$this->load->model('m_transaksi');
+ 		$data['detail'] 	= $this->m_customer->EditCustomer($id);
+		$data['deposit'] 	= $this->m_transaksi->RiwayatCustomerDeposit($id);
+		$data['withdraw'] 	= $this->m_transaksi->RiwayatCustomerWithdraw($id);
+
+ 		$data['title'] = 'Detail Customer - '.BRAND;
+ 		$data['page']  = 'backend/customer/detail';
+ 		$this->load->view('backend/thamplate', $data);
+	}
+
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
 		   redirect(base_url('cmskita'));
@@ -153,6 +493,117 @@ class Customer extends CI_Controller {
 		$data['lists'] = $this->m_customer->DetailCustomer();
 
 		$this->load->view('backend/customer/downloadexcel', $data);
+	}
+
+	public function caricustomer(){
+		$username	= $this->input->post("user");
+		$where 		= array('cuser' => $username);
+		$data['customer'] 	= $this->m_customer->SearchCustomerUsername($where);
+		$count 				= $this->m_customer->CariCustomer($where)->num_rows();
+		if($count == 0){
+			$data['bank'] 		= '';
+			$data['rekening'] 	= '';
+			$data['norek'] 		= '';
+		}else{
+			$data['bank'] 		= $data['customer']->cbank;
+			$data['rekening'] 	= $data['customer']->cnamarek;
+			$data['norek'] 		= $data['customer']->cnorek;
+		}
+
+		$data['page']  = 'backend/customer/search';
+		$this->load->view('backend/customer/search', $data); 
+	}
+
+	public function caridepositcustomer(){
+	  	$this->load->model('m_brand');
+		$brand		= $this->input->post("brand");
+		$user		= $this->input->post("user");
+		$where  	= array('bnama' => $brand);		
+		$userbrand 	= $this->m_brand->CariBrand($where);  	
+		$deposit 	= $userbrand->bfield2;	
+
+		$where2 = array(
+		    $userbrand->bfield1 => $user
+	    );
+
+		$data['customer'] 	= $this->m_customer->SearchCustomerUsername($where2);
+		$count 				= $this->m_customer->CariCustomer($where2)->num_rows();
+		if($count == 0){
+			$data['userid']  = '';
+			$data['deposit'] = '';
+			$data['deposio'] = '';
+			$data['sumber']  = '';	
+		}else{
+			$data['userid']  = $data['customer']->cid;
+			$data['deposit'] = 'Rp. '.number_format($data['customer']->$deposit);
+			$data['deposio'] = $data['customer']->$deposit;
+			$data['sumber']  = 'DEPOSIT '. $userbrand->bnama;	
+		}
+
+		$data['page']  = 'backend/customer/searchdeposit';
+		$this->load->view('backend/customer/searchdeposit', $data); 
+	}
+
+	public function carirekeningcustomer(){
+	  	$this->load->model('m_brand');
+		$brand		= $this->input->post("brand"); 	
+		$user		= $this->input->post("user");
+		$where  	= array('bnama' => $brand);		
+		$userbrand 	= $this->m_brand->CariBrand($where); 
+		$deposit 	= $userbrand->bfield2;	
+
+		$where2 = array(
+		    $userbrand->bfield1 => $user
+	    );
+
+		$data['customer'] 	= $this->m_customer->SearchCustomerUsername($where2);
+		$count 				= $this->m_customer->CariCustomer($where2)->num_rows();
+		if($count == 0){
+			$data['userid']  	= '';
+			$data['deposit'] 	= '';
+			$data['deposio'] 	= '';
+			$data['sumber']  	= '';
+			$data['tujuan']  	= '';	
+			$data['rekening']  	= '';	
+		}else{
+			$data['userid']  	= $data['customer']->cid;
+			$data['deposit'] 	= 'Rp. '.number_format($data['customer']->$deposit);
+			$data['deposio'] 	= $data['customer']->$deposit;
+			$data['sumber']  	= 'DEPOSIT '. $userbrand->bnama;
+			$data['tujuan']  	= $data['customer']->cnorek.' ('.$data['customer']->cbank.' - '.$data['customer']->cnamarek.')';
+			$data['rekening']  	= $data['customer']->cnorek;
+		}
+
+		$data['page']  = 'backend/customer/searchrekening';
+		$this->load->view('backend/customer/searchrekening', $data); 
+	}
+
+	public function carirekening(){
+	  	$this->load->model('m_brand');
+		$brand		= $this->input->post("brand"); 	
+		$user		= $this->input->post("user");
+		$where  	= array('bnama' => $brand);		
+		$userbrand 	= $this->m_brand->CariBrand($where); 
+		$deposit 	= $userbrand->bfield2;	
+
+		$where2 = array(
+		    $userbrand->bfield1 => $user
+	    );
+
+		$data['customer'] 	= $this->m_customer->SearchCustomerUsername($where2);
+		$count 				= $this->m_customer->CariCustomer($where2)->num_rows();
+		if($count == 0){
+			$data['bank'] 		= '';
+			$data['rekening'] 	= '';
+			$data['norek'] 		= '';
+		}else{
+			$data['bank'] 		= $data['customer']->cbank;
+			$data['rekening'] 	= $data['customer']->cnamarek;
+			$data['norek'] 		= $data['customer']->cnorek;
+		}
+
+		$data['page']  = 'backend/customer/search';
+		$this->load->view('backend/customer/search', $data); 
 	}
 
 	public function upload($name) {
@@ -187,5 +638,4 @@ class Customer extends CI_Controller {
 		}
 		return $config['file_name'];
 	}
-
 }

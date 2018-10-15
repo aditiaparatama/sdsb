@@ -49,7 +49,7 @@ defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_ST
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 defined('BRAND')       							OR define('BRAND', 'SDSB Online');
 defined('DOMAIN_WEB')							OR define('DOMAIN_WEB', 'sdsb.online');
-defined('URL_ASSETS')       					OR define('URL_ASSETS', 'http://localhost/development/backup/sidejob/sdsb/assets/');
+defined('URL_ASSETS')       					OR define('URL_ASSETS', 'http://localhost/development/sidejob/sdsb/assets/');
 
 /*
 |--------------------------------------------------------------------------

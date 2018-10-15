@@ -8,14 +8,13 @@ class M_pemenang extends CI_Model {
       parent::__construct();
     }
 
-
     //backend
     public function PemenangHome($limit) {
-        $this->db->select('p.nomor_pemenang, c.nama_customer');
+        $this->db->select('p.pnomor, c.cnama');
         $this->db->from($this->table[1].' as p');
-        $this->db->join($this->table[2].' as c','p.customer_pemenang = c.id_customer','left');
-        $this->db->where('p.status_pemenang', 1);
-        $this->db->group_by('tanggal_pemenang'); 
+        $this->db->join($this->table[2].' as c','c.Cid = p.pcustomer','left');
+        $this->db->where('p.pstatus', 1);
+        $this->db->group_by('p.pperiode'); 
         $this->db->limit($limit);
 
         $data = $this->db->get()->result();
@@ -23,22 +22,22 @@ class M_pemenang extends CI_Model {
     }
 
     public function Pemenang() {
-        $this->db->select('p.id_pemenang, p.tanggal_pemenang, p.nomor_pemenang, p.order_pemenang, c.nama_customer');
+        $this->db->select('p.pid, p.pperiode, p.pnomor, p.porder, c.cnama');
         $this->db->from($this->table[1].' as p');
-        $this->db->join($this->table[2].' as c','p.customer_pemenang = c.id_customer','left');
-        $this->db->where('p.status_pemenang', 1);
- 		$this->db->group_by('tanggal_pemenang'); 
+        $this->db->join($this->table[2].' as c','c.cid = p.pcustomer','left');
+        $this->db->where('p.pstatus', 1);
+        $this->db->group_by('p.pperiode'); 
 
         $data = $this->db->get()->result();
         return $data;
     }
 
     public function GroupPemenang($id) {
-        $this->db->select('p.id_pemenang, p.tanggal_pemenang, p.nomor_pemenang, p.order_pemenang, c.nama_customer');
+        $this->db->select('p.pid, p.pperiode, p.pnomor, p.porder, c.cnama');
         $this->db->from($this->table[1].' as p');
-        $this->db->join($this->table[2].' as c','p.customer_pemenang = c.id_customer','left');
-        $this->db->where('p.status_pemenang', 1);
-        $this->db->where('p.tanggal_pemenang', $id);
+        $this->db->join($this->table[2].' as c','c.cid = p.pcustomer','left');
+        $this->db->where('p.pstatus', 1);
+        $this->db->where('p.pperiode', $id);
 
         $data = $this->db->get()->result();
         return $data;
@@ -50,41 +49,40 @@ class M_pemenang extends CI_Model {
     }
 
     public function Detail($id,$order){
-        $this->db->select('id_pemenang, tanggal_pemenang, nomor_pemenang');
+        $this->db->select('pid, pperiode, pnomor');
         $this->db->from($this->table[1]);
-        $this->db->where('status_pemenang', 1);
-        $this->db->where('tanggal_pemenang', $id);
-        $this->db->where('order_pemenang', $order);
+        $this->db->where('pstatus', 1);
+        $this->db->where('pperiode', $id);
+        $this->db->where('porder', $order);
 
         $data = $this->db->get()->row();
         return $data;
     }
 
     public function DetailGroup($id){
-        $this->db->select('id_pemenang, nomor_pemenang');
+        $this->db->select('pid, pnomor');
         $this->db->from($this->table[1]);
-        $this->db->where('status_pemenang', 1);
-        $this->db->where('id_pemenang', $id);
+        $this->db->where('pstatus', 1);
+        $this->db->where('pid', $id);
 
         $data = $this->db->get()->row();
         return $data;
     }
 
     public function EditGroupPemenang($id, $data) {
-        $this->db->where('id_pemenang',$id);
+        $this->db->where('pid',$id);
         $this->db->update('pemenang',$data);
 
         return $data;
     }
 
     public function ExcelPemenang() {
-        $this->db->select('p.id_pemenang, p.tanggal_pemenang, p.nomor_pemenang, p.order_pemenang, c.nama_customer');
+        $this->db->select('p.pid, p.pperiode, p.pnomor, p.porder, c.cnama');
         $this->db->from($this->table[1].' as p');
-        $this->db->join($this->table[2].' as c','p.customer_pemenang = c.id_customer','left');
-        $this->db->where('p.status_pemenang', 1);
+        $this->db->join($this->table[2].' as c','c.cid = p.pcustomer','left');
+        $this->db->where('p.pstatus', 1);
 
         $data = $this->db->get()->result();
         return $data;
     }
-
 }

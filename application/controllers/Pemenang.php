@@ -49,25 +49,25 @@ class Pemenang extends CI_Controller {
 		  		}
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang1);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang1;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 1;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
-				$row['nomor'] 				= $pemenang1;
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang1;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 1;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
+				$row['nnomor'] 		= $pemenang1;
 	  	 		$this->m_pemenang->SavePemenang($data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
 		  		$pemenang1 	= $this->input->post('pemenang1');
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang1);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang1;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 1;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang1;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 1;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
 	  	 		$this->m_pemenang->SavePemenang($data);	
 		  	}
 
@@ -81,25 +81,25 @@ class Pemenang extends CI_Controller {
 		  		}
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang2);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang2;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 2;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
-				$row['nomor'] 				= $pemenang2;
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang2;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 2;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
+				$row['nnomor'] 		= $pemenang2;
 	  	 		$this->m_pemenang->SavePemenang($data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
 		  		$pemenang2 	= $this->input->post('pemenang2');
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang2);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang2;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 2;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang2;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 2;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
 	  	 		$this->m_pemenang->SavePemenang($data);	
 		  	}
 
@@ -113,25 +113,25 @@ class Pemenang extends CI_Controller {
 		  		}
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang3);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang3;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 3;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
-				$row['nomor'] 				= $pemenang3;
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang3;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 3;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
+				$row['nnomor'] 				= $pemenang3;
 	  	 		$this->m_pemenang->SavePemenang($data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
 		  		$pemenang3 	= $this->input->post('pemenang3');
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang3);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang3;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 3;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang3;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 3;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
 	  	 		$this->m_pemenang->SavePemenang($data);	
 		  	}
 
@@ -145,25 +145,25 @@ class Pemenang extends CI_Controller {
 		  		}
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang4);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang4;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 4;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
-				$row['nomor'] 				= $pemenang4;
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang4;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 4;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
+				$row['nnomor'] 				= $pemenang4;
 	  	 		$this->m_pemenang->SavePemenang($data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
 		  		$pemenang4 	= $this->input->post('pemenang4');
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang4);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang4;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 4;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang4;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 4;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
 	  	 		$this->m_pemenang->SavePemenang($data);	
 		  	}
 
@@ -177,25 +177,25 @@ class Pemenang extends CI_Controller {
 		  		}
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang5);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang5;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 5;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
-				$row['nomor'] 				= $pemenang5;
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang5;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 5;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
+				$row['nnomor'] 				= $pemenang5;
 	  	 		$this->m_pemenang->SavePemenang($data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
 		  		$pemenang5 	= $this->input->post('pemenang5');
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang5);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang5;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 5;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang5;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 5;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
 	  	 		$this->m_pemenang->SavePemenang($data);	
 		  	}
 
@@ -209,25 +209,25 @@ class Pemenang extends CI_Controller {
 		  		}
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang6);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang6;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 6;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
-				$row['nomor'] 				= $pemenang6;
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang6;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 6;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
+				$row['nnomor'] 				= $pemenang6;
 	  	 		$this->m_pemenang->SavePemenang($data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
 		  		$pemenang6 	= $this->input->post('pemenang6');
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang6);
 
-				$data['tanggal_pemenang']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$data['nomor_pemenang'] 	= $pemenang6;
-				$data['customer_pemenang'] 	= $customer->customer_transaksi;
-				$data['order_pemenang'] 	= 6;
-				$data['status_pemenang'] 	= 1;
-				$data['date_pemenang'] 		= date('Y-m-d H:i:s');
+				$data['pperiode']  	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['pnomor'] 	= $pemenang6;
+				$data['pcustomer'] 	= $customer->tcustomer;
+				$data['porder'] 	= 6;
+				$data['pstatus'] 	= 1;
+				$data['pdate'] 		= date('Y-m-d H:i:s');
 	  	 		$this->m_pemenang->SavePemenang($data);	
 		  	}
 
@@ -283,10 +283,10 @@ class Pemenang extends CI_Controller {
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang1);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang1,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang1,
+					'pcustomer' 	=> $customer->tcustomer
 				);
-				$row['nomor'] 				= $pemenang1;
+				$row['nnomor'] 				= $pemenang1;
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
@@ -295,8 +295,8 @@ class Pemenang extends CI_Controller {
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang1);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang1,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang1,
+					'pcustomer' 	=> $customer->tcustomer
 				);
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);
 		  	}
@@ -313,10 +313,10 @@ class Pemenang extends CI_Controller {
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang2);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang2,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang2,
+					'pcustomer' 	=> $customer->tcustomer
 				);
-				$row['nomor'] 				= $pemenang2;
+				$row['nnomor'] 				= $pemenang2;
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
@@ -325,8 +325,8 @@ class Pemenang extends CI_Controller {
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang2);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang2,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang2,
+					'pcustomer' 	=> $customer->tcustomer
 				);
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 		  	}
@@ -343,10 +343,10 @@ class Pemenang extends CI_Controller {
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang3);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang3,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang3,
+					'pcustomer' 	=> $customer->tcustomer
 				);
-				$row['nomor'] 				= $pemenang3;
+				$row['nnomor'] 				= $pemenang3;
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
@@ -355,8 +355,8 @@ class Pemenang extends CI_Controller {
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang3);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang3,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang3,
+					'pcustomer' 	=> $customer->tcustomer
 				);
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 		  	}
@@ -373,10 +373,10 @@ class Pemenang extends CI_Controller {
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang4);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang4,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang4,
+					'pcustomer' 	=> $customer->tcustomer
 				);
-				$row['nomor'] 				= $pemenang4;
+				$row['nnomor'] 				= $pemenang4;
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
@@ -385,8 +385,8 @@ class Pemenang extends CI_Controller {
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang4);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang4,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang4,
+					'pcustomer' 	=> $customer->tcustomer
 				);
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 		  	}
@@ -403,10 +403,10 @@ class Pemenang extends CI_Controller {
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang5);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang5,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang5,
+					'pcustomer' 	=> $customer->tcustomer
 				);
-				$row['nomor'] 				= $pemenang5;
+				$row['nnomor'] 				= $pemenang5;
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
@@ -415,8 +415,8 @@ class Pemenang extends CI_Controller {
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang5);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang5,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang5,
+					'pcustomer' 	=> $customer->tcustomer
 				);
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 		  	}
@@ -433,10 +433,10 @@ class Pemenang extends CI_Controller {
 		  		$customer = $this->m_transaksi->CariTransaksi($pemenang6);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang6,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang6,
+					'pcustomer' 	=> $customer->tcustomer
 				);
-				$row['nomor'] 				= $pemenang6;
+				$row['nnomor'] 				= $pemenang6;
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 		$this->m_nomor->SaveNomor($row);	
 		  	}else{
@@ -445,8 +445,8 @@ class Pemenang extends CI_Controller {
 		  		$customer 	= $this->m_transaksi->CariTransaksi($pemenang6);
 
 				$data = array(
-					'nomor_pemenang'		=> $pemenang6,
-					'customer_pemenang' 	=> $customer->customer_transaksi
+					'pnomor'		=> $pemenang6,
+					'pcustomer' 	=> $customer->tcustomer
 				);
 		  	 	$this->m_pemenang->EditGroupPemenang($id, $data);	
 		  	}
@@ -479,18 +479,18 @@ class Pemenang extends CI_Controller {
 		  		if($count > 0){
 		  			$customer 	= $this->m_transaksi->CariTransaksi($pemenang);
 					$data = array(
-						'nomor_pemenang'		=> $pemenang,
-						'customer_pemenang' 	=> $customer->customer_transaksi
+						'pnomor'		=> $pemenang,
+						'pcustomer' 	=> $customer->tcustomer
 					);
 		  	 		$this->m_pemenang->EditGroupPemenang($id, $data);	
 		       		redirect(base_url().'pemenang/listpemenang');
 		  		}else{
 		  			$customer 	= $this->m_transaksi->CariTransaksi($pemenang);
 					$data = array(
-						'nomor_pemenang'		=> $pemenang,
-						'customer_pemenang' 	=> $customer->customer_transaksi
+						'pnomor'		=> $pemenang,
+						'pcustomer' 	=> $customer->tcustomer
 					);
-					$row['nomor'] 				= $pemenang;
+					$row['nnomor']		= $pemenang;
 		  	 		$this->m_pemenang->EditGroupPemenang($id, $data);	
 	  	 			$this->m_nomor->SaveNomor($row);	
 		       		redirect(base_url().'pemenang/listpemenang');

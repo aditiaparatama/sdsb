@@ -8,10 +8,9 @@ class M_nomor extends CI_Model {
       parent::__construct();
     }
 
-
-    //backend
+    //halaman backend
     function CNomor(){      
-        $this->db->select('id_nomor');
+        $this->db->select('nid');
         $this->db->from($this->table[1]);
 
         $data = $this->db->get()->num_rows();
@@ -19,23 +18,23 @@ class M_nomor extends CI_Model {
     }
 
     public function Nomor(){
-        $this->db->select('n.id_nomor, n.nomor, c.nama_customer');
+        $this->db->select('n.nid, n.nnomor, c.cnama');
         $this->db->from($this->table[1].' as n');
-        $this->db->join($this->table[2].' as c','c.id_customer = n.customer_nomor');
+        $this->db->join($this->table[2].' as c','c.cid = n.ncustomer');
      
         $data = $this->db->get()->result();
         return $data;
     }
 
 	public function HapusNomor($id){
-		$this->db->where('id_nomor', $id);
+		$this->db->where('nid', $id);
 		$this->db->delete($this->table[1]);
 	}
 
     public function CountNomor($nomor) {
-        $this->db->select('nomor');
+        $this->db->select('nnomor');
         $this->db->from($this->table[1]);
-        $this->db->where('nomor', $nomor);
+        $this->db->where('nnomor', $nomor);
 
         $data = $this->db->get()->num_rows();
         return $data;

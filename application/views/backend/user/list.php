@@ -8,8 +8,10 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            List User
-                            <small>Daftar user yang aktif <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
+                            List User Access
+                            <small>Daftar user yang aktif 
+                                <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
+                            </small>
                         </h2>
                         <ul class="header-dropdown m-r--5">
                             <li class="dropdown">
@@ -18,7 +20,6 @@
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a href="<?php echo base_url('user/adduser'); ?>">Tambah User</a></li>
-                                    <li><a href="<?php echo base_url('user/downloadexcel'); ?>">Download Excel</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -27,46 +28,49 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-light-blue">
                                         <th>Nama Lengkap</th>
                                         <th>Username</th>
+                                        <th>Email</th>
                                         <th>Role</th>
-                                        <th>Alamat</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                         <th>Nama Lengkap</th>
                                         <th>Username</th>
+                                        <th>Email</th>
                                         <th>Role</th>
-                                        <th>Alamat</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     <?php 
                                         foreach($lists as $list) { 
-                                        if($list->role_user == 1){
+                                        if($list->urole == 1){
                                             $role = 'Super Admin';
                                             $style = 'display:none';
+                                        }else if($list->urole == 2){
+                                            $role = 'Administrator';
+                                            $style = '';
                                         }else{
-                                            $role = 'Admin';
+                                            $role = 'Acounting';
                                             $style ='';
                                         }
                                     ?>
                                     <tr>
-                                        <td><b><?php echo $list->nama_user; ?></b></td>
-                                        <td><?php echo $list->username_user; ?></td>
+                                        <td><?php echo $list->unama; ?></td>
+                                        <td><?php echo $list->uuser; ?></td>
+                                        <td><?php echo $list->uemail; ?></td>
                                         <td><?php echo $role; ?></td>
-                                        <td><?php echo $list->alamat_user; ?></td>
                                         <td>
                                             <div class="btn-group" style="<?php echo $style; ?>">
-                                                <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('user/edituser/'.$list->id_user); ?>" class=" waves-effect waves-block">Edit User</a></li>
-                                                    <li><a href="<?php echo base_url('user/hapususer/'.$list->id_user); ?>" class=" waves-effect waves-block">Hapus</a></li>
+                                                    <li><a href="<?php echo base_url('user/edituser/'.$list->uuser); ?>" class=" waves-effect waves-block">Edit User</a></li>
+                                                    <li><a href="<?php echo base_url('user/hapususer/'.$list->uuser); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </td>

@@ -1,4 +1,6 @@
 <link href="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<link href="<?php echo URL_ASSETS; ?>vendors/backend/multi-select/css/multi-select.css" rel="stylesheet">
+<link href="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
 <section class="content">
     <div class="container-fluid">
@@ -14,6 +16,36 @@
 
                         <form action="<?php echo base_url('general/addpengeluaran_act'); ?>" method="POST">
                         <div class="row clearfix">
+                            <div class="col-sm-12">                                        
+                                <select class="form-control show-tick" name="transfer" required onchange="getsaldo(this.value)">
+                                    <option value="<?php echo $transfer->rno; ?>" selected="selected">
+                                        <?php echo $transfer->rno; ?> - <?php echo $transfer->rbank; ?> (<?php echo $transfer->rnama; ?>)
+                                    </option>
+                                    <?php
+                                      foreach ($lists as $list) { 
+                                    ?>
+                                    <option value="<?php echo $list->rno; ?>">
+                                        <?php echo $list->rno; ?> - <?php echo $list->rbank; ?> (<?php echo $list->rnama; ?>)
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-12" id="saldo">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" name="saldo" class="form-control" value="Rp. <?php echo number_format($transfer->rsaldo); ?>" readonly>
+                                        <label class="form-label">Saldo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" name="pengeluaran" class="form-control" required>
+                                        <label class="form-label">Pengeluaran</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -25,8 +57,24 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="biaya" class="form-control" required>
-                                        <label class="form-label">Biaya</label>
+                                        <input type="text" name="keterangan2" class="form-control">
+                                        <label class="form-label">Keterangan 2</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" name="harga" class="form-control" required>
+                                        <label class="form-label">Harga US</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" name="rate" class="form-control" required>
+                                        <label class="form-label">Rate IDR</label>
                                     </div>
                                 </div>
                             </div>
@@ -55,6 +103,7 @@
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap/js/bootstrap.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-select/js/bootstrap-select.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="<?php echo URL_ASSETS; ?>vendors/backend/multi-select/js/jquery.multi-select.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/node-waves/waves.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/autosize/autosize.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/momentjs/moment.js"></script>
@@ -63,3 +112,16 @@
 <!-- Custom Js -->
 <script src="<?php echo URL_ASSETS; ?>js/backend/admin.js"></script>
 <script src="<?php echo URL_ASSETS; ?>js/backend/pages/forms/basic-form-elements.js"></script>
+<script>
+function getsaldo(id){
+   $.ajax({
+        type: "POST",
+        url: "<?php echo base_url('rekening/getsaldo'); ?>",
+        data: "id="+id,
+        success: function(data){
+            $("#saldo").show();
+            $("#saldo").html(data);
+        }
+    })
+};
+</script>

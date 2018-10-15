@@ -9,7 +9,9 @@
                     <div class="header">
                         <h2>
                             List Customer
-                            <small>Daftar customer yang aktif <a href="https://datatables.net/" target="_blank">datatables.net</a></small>
+                            <small>Daftar customer yang aktif
+                                <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
+                            </small>
                         </h2>
                         <ul class="header-dropdown m-r--5">
                             <li class="dropdown">
@@ -17,7 +19,7 @@
                                     <i class="material-icons">more_vert</i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('customer/downloadexcel'); ?>">Download Excel</a></li>
+                                    <li><a href="<?php echo base_url('customer/addcustomer'); ?>">Customer Baru</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -26,21 +28,23 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-light-blue">
                                         <th>Nama</th>
-                                        <th>Telepon</th>
-                                        <th>Bank</th>
-                                        <th>Nama Pemilik Rekening</th>
-                                        <th>Nomor Rekening</th>
+                                        <th>User SBOBET</th>
+                                        <th>User IBCBET</th>
+                                        <th>User HOREY4D</th>
+                                        <th>User TANGKASNET</th>
+                                        <th>User SDSB</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                         <th>Nama</th>
-                                        <th>Telepon</th>
-                                        <th>Bank</th>
-                                        <th>Nama Pemilik Rekening</th>
-                                        <th>Nomor Rekening</th>
+                                        <th>User SBOBET</th>
+                                        <th>User IBCBET</th>
+                                        <th>User HOREY4D</th>
+                                        <th>User TANGKASNET</th>
+                                        <th>User SDSB</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -48,21 +52,22 @@
                                     <?php foreach($lists as $list) { 
                                         ?>
                                     <tr>
-                                        <td><b><a href="<?php echo base_url('customer/editcustomer/'.$list->id_customer); ?>">
-                                            <?php echo $list->nama_customer; ?>
-                                        </a></b></td>
-                                        <td><?php echo $list->tlp_customer; ?></td>
-                                        <td><?php echo $list->bank_customer; ?></td>
-                                        <td><?php echo $list->nmrekening_customer; ?></td>
-                                        <td><?php echo $list->nmrrekening_customer; ?></td>
+                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>">
+                                            <?php echo $list->cnama; ?>
+                                        </a></td>
+                                        <td><?php echo $list->cusersbo; ?></td>
+                                        <td><?php echo $list->cuseribc; ?></td>
+                                        <td><?php echo $list->cuserhorey; ?></td>
+                                        <td><?php echo $list->cusertangkas; ?></td>
+                                        <td><?php echo $list->cuser; ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('customer/editcustomer/'.$list->id_customer); ?>" class=" waves-effect waves-block">Edit Customer</a></li>
-                                                    <li><a href="<?php echo base_url('customer/hapuscustomer/'.$list->id_customer); ?>" class=" waves-effect waves-block">Hapus</a></li>
+                                                    <li><a href="<?php echo base_url('customer/editcustomer/'.$list->cemail); ?>" class=" waves-effect waves-block">Edit Customer</a></li>
+                                                    <li><a href="<?php echo base_url('customer/hapuscustomer/'.$list->cemail); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </td>

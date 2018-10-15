@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <select class="form-control show-tick" name="role">
-                                    <option value="2">Admin</option>
+                                    <option value="2">Administrator</option>
                                     <option value="3">Accounting</option>
                                 </select>
                             </div>

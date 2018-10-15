@@ -16,34 +16,34 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="kode" class="form-control" value="<?php echo $detail->kode_voucher; ?>" reqired>
-                                        <label class="form-label">Kode Voucher</label>
+                                        <input type="text" name="kode" class="form-control" value="<?php echo $detail->vkode; ?>" reqired>
+                                        <label class="form-label">Voucher</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal1" class="datepicker form-control" placeholder="Tanggal Aktif" value="<?php echo date('l d F Y', strtotime($detail->aktif_voucher)); ?>" required>
+                                        <input type="text" name="tanggal1" class="datepicker form-control" placeholder="Tanggal Aktif" value="<?php echo date('l d F Y', strtotime($detail->vawal)); ?>" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal2" class="datepicker form-control" placeholder="Tanggal Non-Aktif" value="<?php echo date('l d F Y', strtotime($detail->nonaktif_voucher)); ?>" required>
+                                        <input type="text" name="tanggal2" class="datepicker form-control" placeholder="Tanggal Non-Aktif" value="<?php echo date('l d F Y', strtotime($detail->vakhir)); ?>" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="potongan" class="form-control" value="<?php echo $detail->potongan_voucher; ?>" required>
+                                        <input type="number" name="potongan" class="form-control" value="<?php echo $detail->vpotongan; ?>" required>
                                         <label class="form-label">Potongan Harga (format persen (%))</label>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="id_voucher" value="<?php echo $detail->id_voucher; ?>">
+                            <input type="hidden" name="id_voucher" value="<?php echo $detail->vid; ?>">
 
                             <div class="col-sm-12">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect">SIMPAN</button>&nbsp;&nbsp;

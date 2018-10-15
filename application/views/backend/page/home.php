@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box bg-pink hover-zoom-effect">
                     <div class="icon">
-                        <i class="material-icons">beenhere</i>
+                        <i class="material-icons">archive</i>
                     </div>
                     <div class="content">
                         <div class="text">NOMOR KUPON</div>
@@ -39,7 +39,7 @@
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box bg-orange hover-zoom-effect">
                     <div class="icon">
-                        <i class="material-icons">person</i>
+                        <i class="material-icons">supervisor_account</i>
                     </div>
                     <div class="content">
                         <div class="text">CUSTOMER</div>
@@ -115,9 +115,9 @@
                         <ul class="dashboard-stat-list">
                             <?php foreach($pemenanglist as $pemenang) { ?>
                             <li>
-                                <?php echo $pemenang->nama_customer; ?>
+                                <?php echo $pemenang->cnama; ?>
                                 <span class="pull-right">
-                                   <?php echo $pemenang->nomor_pemenang; ?>
+                                   <?php echo $pemenang->pnomor; ?>
                                 </span>
                             </li>
                             <?php } ?>
@@ -134,7 +134,7 @@
                         <ul class="dashboard-stat-list">
                             <?php foreach($latestkupon as $latest) { ?>
                             <li>
-                                <?php echo $latest->nama_customer; ?>
+                                <?php echo $latest->cnama; ?>
                                 <span class="pull-right"><b><?php echo $latest->jumlah; ?></b> <small>KUPON</small></span>
                             </li>
                             <?php } ?>
@@ -159,7 +159,6 @@
                                         <th>#</th>
                                         <th>Customer</th>
                                         <th>Total</th>
-                                        <th>Link</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -167,20 +166,18 @@
                                     <?php 
                                         $i = 1;
                                         foreach($deposits as $deposit) { 
-                                        if($deposit->status_deposit == 3){
+                                        if($deposit->tstatus == 3){
                                             $status = '<span class="label bg-red">Pending Pembayaran</span>';
-                                        }elseif($deposit->status_deposit == 2){
+                                        }elseif($deposit->tstatus == 2){
                                             $status = '<span class="label bg-light-blue">Validasi Pembayaran</span>';
-                                        }elseif($deposit->status_deposit == 1){
+                                        }elseif($deposit->tstatus == 1){
                                             $status = '<span class="label bg-blue">Lunas</span>';
                                         }
                                     ?>
                                     <tr>
                                         <td><?php echo $i; ?></td>
-                                        <td><?php echo $deposit->nama_customer; ?></td>
-                                        <td>Rp. <?php echo number_format($deposit->grandtotal_deposit); ?></td>
-                                        <td><a href="<?php echo URL_ASSETS."images/backend/upload/".$deposit->link_deposit; ?>" target="_blank"><?php echo $deposit->link_deposit; ?></a>
-                                        </td>
+                                        <td><?php echo $deposit->cnama; ?></td>
+                                        <td>Rp. <?php echo number_format($deposit->tgrandtotal); ?></td>
                                         <td><?php echo $status; ?></span></td>
                                     </tr>
                                     <?php $i++; } ?>
@@ -210,7 +207,7 @@
                                     <?php 
                                         $i = 1;
                                         foreach($transfers as $list) { 
-                                        if($list->status_transfer == 3){
+                                        if($list->tstatus == 3){
                                             $status = '<span class="label bg-green">Pending Transfer</span>';
                                         }else{
                                             $status = '<span class="label bg-orange">Transfer Berhasil</span>';
@@ -218,9 +215,9 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $i; ?></td>
-                                        <td><?php echo $list->nama_customer; ?></td>
-                                        <td><?php echo $list->tujuan_transfer; ?></td>
-                                        <td>Rp. <?php echo number_format($list->nominal_transfer); ?></td>
+                                        <td><?php echo $list->cnama; ?></td>
+                                        <td><?php echo $list->ttujuan; ?></td>
+                                        <td>Rp. <?php echo number_format($list->tgrandtotal); ?></td>
                                         <td><?php echo $status; ?></span></td>
                                     </tr>
                                     <?php $i++; } ?>

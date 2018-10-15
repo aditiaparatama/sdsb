@@ -9,14 +9,62 @@ class User extends CI_Controller {
 		$this->load->library('upload');
 	}
 	
-	//Halaman Backend
+	//halaman backend
+	public function login(){
+		$data['title'] = 'CMS Login - '.BRAND;
+		$this->load->view('backend/login', $data);
+	}
+
+	public function login_act() {
+	    if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('user', 'User', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+	            $this->session->set_flashdata('warning', 'Maaf, validasi anda salah!');
+	          	redirect(base_url().'cmskita');
+		  	} else { 		
+
+		  		$user 	= $this->input->post('user');
+		  		$pass 	= md5($this->input->post('pass'));
+		  		$where 	= array(
+				    'uuser' => $user,
+				    'upass' => $pass
+			    );
+		  		$this->load->model('m_user');
+				$cek = $this->m_user->cek_login($where)->num_rows();
+				if($cek > 0){
+					$data = $this->m_user->data_login($user,$pass);
+					$data_session = array(
+						'id' 		=> $data->uid,
+						'nama' 		=> $data->unama,
+						'email' 	=> $data->uemail,
+						'foto' 		=> $data->ufoto,
+						'role' 		=> $data->urole,
+						'status' 	=> "backend"
+			    	);
+				    $this->session->set_userdata($data_session);
+					redirect(base_url('backend'));
+				}else{
+		            $this->session->set_flashdata('warning', 'Maaf, anda gagal login!');
+					redirect(base_url('cmskita'));
+				}
+			}
+		}
+	}
+
+	public function logout() {
+		$this->session->sess_destroy();
+		redirect(base_url('user/login'));
+	}
+
+
 	public function listuser(){
 		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));
 		}
 		$data['lists'] = $this->m_user->User();
 
-		$data['title'] = 'List User - '.BRAND;
+		$data['title'] = 'List User Access - '.BRAND;
 		$data['page']  = 'backend/user/list';
 		$this->load->view('backend/thamplate', $data); 
  	}
@@ -26,7 +74,7 @@ class User extends CI_Controller {
 			redirect(base_url('cmskita'));
 		}
 		
-		$data['title'] = 'Tambah User - '.BRAND;
+		$data['title'] = 'Tambah User Access - '.BRAND;
 		$data['page']  = 'backend/user/add';
 		$this->load->view('backend/thamplate', $data);		
  	}
@@ -47,30 +95,30 @@ class User extends CI_Controller {
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect(base_url().'user/adduser');
 		  	} else { 		
-				$data['nama_user']  	= $this->input->post('nama');
-				$data['username_user'] 	= $this->input->post('user');
-				$data['password_user'] 	= md5($this->input->post('pass'));
-				$data['email_user'] 	= $this->input->post('email');
-				$data['tlp_user'] 		= $this->input->post('tlp');
-				$data['alamat_user'] 	= $this->input->post('alamat');
-				$data['foto_user'] 		= $this->upload('foto');
-				$data['role_user'] 		= $this->input->post('role');
-				$data['status_user'] 	= 1;
-				$data['date_user'] 		= date('Y-m-d H:i:s');
+				$data['unama']  	= $this->input->post('nama');
+				$data['uuser'] 		= $this->input->post('user');
+				$data['upass'] 		= md5($this->input->post('pass'));
+				$data['uemail'] 	= $this->input->post('email');
+				$data['utlp'] 		= $this->input->post('tlp');
+				$data['ualamat'] 	= $this->input->post('alamat');
+				$data['ufoto'] 		= $this->upload('foto');
+				$data['urole'] 		= $this->input->post('role');
+				$data['ustatus'] 	= 1;
+				$data['udate'] 		= date('Y-m-d H:i:s');
 
 	  	 		$this->m_user->SaveUser($data);	
 	       		redirect(base_url().'user/listuser');
 		  	}
 	    }
  	}
-
+ 	
  	public function edituser($id){
  		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));
 		}
  		$data['detail'] = $this->m_user->DetailUser($id);
 
- 		$data['title'] = 'Edit User - '.BRAND;
+ 		$data['title'] = 'Edit User Access - '.BRAND;
  		$data['page']  = 'backend/user/edit';
  		$this->load->view('backend/thamplate', $data);
 
@@ -93,19 +141,17 @@ class User extends CI_Controller {
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect($_SERVER['HTTP_REFERER']);
 		  	} else { 		
-				$id	  						= $this->input->post('id_user');
-				$data['nama_user']			= $this->input->post('nama');
-				$data['username_user']		= $this->input->post('user');
-				$data['password_user'] 		= md5($this->input->post('pass'));
-				$data['email_user'] 		= $this->input->post('email');
-				$data['tlp_user'] 			= $this->input->post('tlp');
-				$data['alamat_user'] 		= $this->input->post('alamat');
-				$data['role_user'] 			= $this->input->post('role');
-				$data['status_user'] 		= 1;
-				$data['date_user'] 			= date('Y-m-d H:i:s');
+				$id	  				= $this->input->post('id');
+				$data['unama']		= $this->input->post('nama');
+				$data['uuser']		= $this->input->post('user');
+				$data['upass'] 		= md5($this->input->post('pass'));
+				$data['uemail'] 	= $this->input->post('email');
+				$data['utlp'] 		= $this->input->post('tlp');
+				$data['ualamat'] 	= $this->input->post('alamat');
+				$data['urole'] 		= $this->input->post('role');
 
 		        if(!empty($_FILES['foto']['name'])) {
-		  			$data['foto_user'] = $this->upload('foto');
+		  			$data['ufoto'] 	= $this->upload('foto');
 		        }
 	  	 		$this->m_user->EditUser($id, $data);	
 	       		redirect(base_url().'user/listuser');
@@ -153,5 +199,4 @@ class User extends CI_Controller {
 		}
 		return $config['file_name'];
 	}
-
 }

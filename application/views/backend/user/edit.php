@@ -17,7 +17,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="nama" class="form-control" value="<?php echo $detail->nama_user; ?>" required>
+                                        <input type="text" name="nama" class="form-control" value="<?php echo $detail->unama; ?>" required>
                                         <label class="form-label">Nama</label>
                                     </div>
                                 </div>
@@ -25,7 +25,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="user" class="form-control" value="<?php echo $detail->username_user; ?>" required>
+                                        <input type="text" name="user" class="form-control" value="<?php echo $detail->uuser; ?>" required>
                                         <label class="form-label">Username</label>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="email" name="email" class="form-control" value="<?php echo $detail->email_user; ?>" required>
+                                        <input type="email" name="email" class="form-control" value="<?php echo $detail->uemail; ?>" required>
                                         <label class="form-label">Email</label>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="tlp" class="form-control" value="<?php echo $detail->tlp_user; ?>" required>
+                                        <input type="number" name="tlp" class="form-control" value="<?php echo $detail->utlp; ?>" required>
                                         <label class="form-label">Telepon</label>
                                     </div>
                                 </div>
@@ -67,25 +67,25 @@
                                     <div class="form-line">
                                         <input type="file" id="foto" name="foto" class="file" accept="image/jpg, image/jpeg, image/png">
                                     </div>
-                                        <img src="<?php echo URL_ASSETS; ?>images/backend/profile/<?php echo $detail->foto_user; ?>" class="img-thumbnail" style="width: 150px;margin-top:20px;">
+                                        <img src="<?php echo URL_ASSETS; ?>images/backend/profile/<?php echo $detail->ufoto; ?>" class="img-thumbnail" style="width: 150px;margin-top:20px;">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <textarea cols="30" rows="3" name="alamat" class="form-control no-resize" required aria-required="true"><?php echo $detail->alamat_user ?></textarea>
+                                    <textarea cols="30" rows="3" name="alamat" class="form-control no-resize" required aria-required="true"><?php echo $detail->ualamat ?></textarea>
                                     <label class="form-label">Alamat</label>
                                 </div>
                             </div>
                             </div>
                             <div class="col-sm-12">
                                 <select class="form-control show-tick" name="role">
-                                    <option value="2" <?php if($detail->role_user==2) echo 'selected="selected"'?>>Admin</option>
-                                    <option value="2" <?php if($detail->role_user==3) echo 'selected="selected"'?>>Accounting</option>
+                                    <option value="2" <?php if($detail->urole==2) echo 'selected="selected"'?>>Admin</option>
+                                    <option value="3" <?php if($detail->urole==3) echo 'selected="selected"'?>>Accounting</option>
                                 </select>
                             </div>
                             <div class="col-sm-12">
-                                <input type="hidden" name="id_user" value="<?php echo $detail->id_user; ?>">
+                                <input type="hidden" name="id" value="<?php echo $detail->uid; ?>">
                                 <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">SIMPAN</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('user/listuser'); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>

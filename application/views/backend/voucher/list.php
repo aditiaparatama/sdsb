@@ -17,8 +17,7 @@
                                     <i class="material-icons">more_vert</i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('voucher/addvoucher'); ?>">Tambah Voucher</a></li>
-                                    <li><a href="<?php echo base_url('voucher/downloadexcel'); ?>">Download Excel</a></li>
+                                    <li><a href="<?php echo base_url('voucher/addvoucher'); ?>">Voucher Baru</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -27,8 +26,8 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
-                                    <tr>
-                                        <th>Kode Voucher</th>
+                                    <tr class="bg-light-blue">
+                                        <th>Voucher</th>
                                         <th>Aktif</th>
                                         <th>Non Aktif</th>
                                         <th>Potongan</th>
@@ -36,7 +35,7 @@
                                     </tr>
                                 </thead>
                                 <tfoot>
-                                        <th>Kode Voucher</th>
+                                        <th>Voucher</th>
                                         <th>Aktif</th>
                                         <th>Non Aktif</th>
                                         <th>Potongan</th>
@@ -46,18 +45,18 @@
                                 <tbody>
                                     <?php foreach($lists as $list) { ?>
                                     <tr>
-                                        <td><b><?php echo $list->kode_voucher; ?></b></td>
-                                        <td><?php echo date('d F Y', strtotime($list->aktif_voucher)); ?></td>
-                                        <td><?php echo date('d F Y', strtotime($list->nonaktif_voucher)); ?></td>
-                                        <td><?php echo $list->potongan_voucher; ?>%</td>
+                                        <td><b><?php echo $list->vkode; ?></b></td>
+                                        <td><?php echo date('d F Y', strtotime($list->vawal)); ?></td>
+                                        <td><?php echo date('d F Y', strtotime($list->vakhir)); ?></td>
+                                        <td><?php echo $list->vpotongan; ?>%</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('voucher/editvoucher/'.$list->id_voucher); ?>" class=" waves-effect waves-block">Edit Voucher</a></li>
-                                                    <li><a href="<?php echo base_url('voucher/hapusvoucher/'.$list->id_voucher); ?>" class=" waves-effect waves-block">Hapus</a></li>
+                                                    <li><a href="<?php echo base_url('voucher/editvoucher/'.$list->vid); ?>" class=" waves-effect waves-block">Edit Voucher</a></li>
+                                                    <li><a href="<?php echo base_url('voucher/hapusvoucher/'.$list->vid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </td>

@@ -19,7 +19,6 @@
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a href="<?php echo base_url('general/addpengeluaran'); ?>"> Tambah Pengeluaran Bulanan</a></li>
-                                    <li><a href="<?php echo base_url('general/excelpengeluaranbulanan'); ?>">Download Excel</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -45,17 +44,17 @@
                                 <tbody>
                                     <?php foreach($lists as $list) { ?>
                                     <tr>
-                                        <td><?php echo $list->name_general; ?></td>
-                                        <td>Rp. <?php echo number_format($list->harga_general); ?></td>
-                                        <td><?php echo date('F', strtotime($list->periode_general)); ?></td>
+                                        <td><?php echo $list->gname; ?></td>
+                                        <td>Rp. <?php echo number_format($list->gharga); ?></td>
+                                        <td><?php echo date('F Y', strtotime($list->gperiode)); ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('general/editpengeluaran/'.$list->id_general); ?>" class=" waves-effect waves-block">Edit Pengeluaran</a></li>
-                                                    <li><a href="<?php echo base_url('general/hapuspengeluaran/'.$list->id_general); ?>" class=" waves-effect waves-block">Hapus</a></li>
+                                                    <li><a href="<?php echo base_url('general/editpengeluaran/'.$list->gid); ?>" class=" waves-effect waves-block">Edit Pengeluaran</a></li>
+                                                    <li><a href="<?php echo base_url('general/hapuspengeluaran/'.$list->gid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </td>

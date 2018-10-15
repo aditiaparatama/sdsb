@@ -17,14 +17,14 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal" class="datepicker form-control" value="<?php echo date('l d F Y', strtotime($detail1->tanggal_pemenang)); ?>" readonly>
+                                        <input type="text" name="tanggal" class="datepicker form-control" value="<?php echo date('l d F Y', strtotime($detail1->pperiode)); ?>" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang1" value="<?php echo $detail1->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang1" value="<?php echo $detail1->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang 1</label>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang2" value="<?php echo $detail2->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang2" value="<?php echo $detail2->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang 2</label>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang3" value="<?php echo $detail3->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang3" value="<?php echo $detail3->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang 3</label>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang4" value="<?php echo $detail4->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang4" value="<?php echo $detail4->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang 4</label>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang5" value="<?php echo $detail5->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang5" value="<?php echo $detail5->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang 5</label>
                                     </div>
                                 </div>
@@ -69,17 +69,17 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="pemenang6" value="<?php echo $detail6->nomor_pemenang; ?>" class="form-control">
+                                        <input type="number" name="pemenang6" value="<?php echo $detail6->pnomor; ?>" class="form-control">
                                         <label class="form-label">Pemenang 6</label>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="id_pemenang1" value="<?php echo $detail1->id_pemenang; ?>">
-                            <input type="hidden" name="id_pemenang2" value="<?php echo $detail2->id_pemenang; ?>">
-                            <input type="hidden" name="id_pemenang3" value="<?php echo $detail3->id_pemenang; ?>">
-                            <input type="hidden" name="id_pemenang4" value="<?php echo $detail4->id_pemenang; ?>">
-                            <input type="hidden" name="id_pemenang5" value="<?php echo $detail5->id_pemenang; ?>">
-                            <input type="hidden" name="id_pemenang6" value="<?php echo $detail6->id_pemenang; ?>">
+                            <input type="hidden" name="id_pemenang1" value="<?php echo $detail1->pid; ?>">
+                            <input type="hidden" name="id_pemenang2" value="<?php echo $detail2->pid; ?>">
+                            <input type="hidden" name="id_pemenang3" value="<?php echo $detail3->pid; ?>">
+                            <input type="hidden" name="id_pemenang4" value="<?php echo $detail4->pid; ?>">
+                            <input type="hidden" name="id_pemenang5" value="<?php echo $detail5->pid; ?>">
+                            <input type="hidden" name="id_pemenang6" value="<?php echo $detail6->pid; ?>">
                             <div class="col-sm-12">
                                 <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">SIMPAN</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('pemenang/listpemenang'); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>

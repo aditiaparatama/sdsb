@@ -8,24 +8,25 @@ class M_user extends CI_Model {
       parent::__construct();
     }
 
+    //halaman backend
     function cek_login($where){      
         return $this->db->get_where($this->table[1], $where);
     }
 
     function data_login($user,$pass){      
-        $this->db->select('id_user, nama_user, username_user, email_user, foto_user, role_user');
+        $this->db->select('uid, unama, uemail, ufoto, urole');
         $this->db->from($this->table[1]);
-        $this->db->where('username_user', $user);
-        $this->db->where('password_user', $pass);
+        $this->db->where('uuser', $user);
+        $this->db->where('upass', $pass);
 
         $data = $this->db->get()->row();
         return $data;
     }
 
     public function User(){
-        $this->db->select('id_user, nama_user, username_user, alamat_user, role_user');
+        $this->db->select('uid, unama, uuser, uemail, urole');
         $this->db->from($this->table[1]);
-        $this->db->where('status_user', 1);
+        $this->db->where('ustatus', 1);
 
         $data = $this->db->get()->result();
         return $data;
@@ -39,23 +40,23 @@ class M_user extends CI_Model {
     public function DetailUser($id){
         $this->db->select('*');
         $this->db->from($this->table[1]);
-        $this->db->where('status_user', 1);
-        $this->db->where('id_user', $id);
+        $this->db->where('ustatus', 1);
+        $this->db->where('uuser', $id);
 
         $data = $this->db->get()->row();
         return $data;
     }
 
     public function EditUser($id, $data) {
-        $this->db->where('id_user',$id);
+        $this->db->where('uid',$id);
         $this->db->update('user',$data);
 
         return $data;
     }
 
     public function HapusUser($id){
-        $this->db->set('status_user', 0);
-        $this->db->where('id_user',$id);
+        $this->db->set('ustatus', 0);
+        $this->db->where('uuser',$id);
         $this->db->update($this->table[1]);
     }
 

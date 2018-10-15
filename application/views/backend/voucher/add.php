@@ -7,9 +7,10 @@
                 <div class="card">
                     <div class="body">
                         <h2 class="card-inside-title">
-                            Tambah Voucher
-                            <small>Tambah voucher 
-                            <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
+                            Voucher Baru
+                            <small>Tambah voucher baru 
+                                <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
+                            </small>
                         </h2><br>
 
                         <form action="<?php echo base_url('voucher/addvoucher_act'); ?>" method="POST">
@@ -18,7 +19,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" name="kode" class="form-control" required>
-                                        <label class="form-label">Kode Voucher</label>
+                                        <label class="form-label">Voucher</label>
                                     </div>
                                 </div>
                             </div>

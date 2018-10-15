@@ -18,13 +18,13 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" name="harga" class="form-control" required>
-                                        <label class="form-label">Rp. <?php echo number_format($lists->harga_general); ?></label>
+                                        <label class="form-label">Rp. <?php echo number_format($lists->gharga); ?></label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
-                                <input type="hidden" name="id" value="<?php echo $lists->id_general; ?>">
+                                <input type="hidden" name="id" value="<?php echo $lists->gid; ?>">
                                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect">UPDATE</button>
                             </div>
                         </div>

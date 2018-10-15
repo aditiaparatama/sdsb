@@ -18,7 +18,6 @@
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a href="<?php echo base_url('pemenang/addpemenang'); ?>">Tambah Pemenang</a></li>
-                                    <li><a href="<?php echo base_url('pemenang/downloadexcel'); ?>">Download Excel</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -47,21 +46,21 @@
                                     <?php foreach($lists as $list) { 
                                         ?>
                                     <tr>
-                                        <td><?php echo date('l', strtotime($list->tanggal_pemenang)); ?></td>
+                                        <td><?php echo date('l', strtotime($list->pperiode)); ?></td>
                                         <td><b>
-                                            <a href="<?php echo base_url('pemenang/listgroup/'.$list->tanggal_pemenang); ?>">
-                                                <?php echo date('d F Y', strtotime($list->tanggal_pemenang)); ?>
+                                            <a href="<?php echo base_url('pemenang/listgroup/'.$list->pperiode); ?>">
+                                                <?php echo date('d F Y', strtotime($list->pperiode)); ?>
                                             </a>
                                         </b></td>
-                                        <td><?php echo $list->nomor_pemenang; ?></td>
-                                        <td><?php echo $list->nama_customer; ?></td>
+                                        <td><?php echo $list->pnomor; ?></td>
+                                        <td><?php echo $list->cnama; ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('pemenang/editpemenang/'.$list->tanggal_pemenang); ?>" class=" waves-effect waves-block">Edit List Pemenang</a></li>
+                                                    <li><a href="<?php echo base_url('pemenang/editpemenang/'.$list->pperiode); ?>" class=" waves-effect waves-block">Edit List Pemenang</a></li>
                                                     <!-- <li><a href="<?php echo base_url('pemenang/hapuspemenang/'.$list->id_pemenang); ?>" class=" waves-effect waves-block">Hapus</a></li> -->
                                                 </ul>
                                             </div>

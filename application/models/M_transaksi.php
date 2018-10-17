@@ -7,6 +7,23 @@ class M_transaksi extends CI_Model {
     public function __construct(){
       parent::__construct();
     }
+    //dashboard
+        public function ListDeposit($id){
+        $this->db->select('t.tnomor, t.tpotongan, t.tgrandtotal, t.tstatus, t.tperiode, t.tdate, c.cnama, c.cdeposit');
+        $this->db->from($this->table[1].' as t');
+        $this->db->join($this->table[2].' as c','c.cid = t.tcustomer');
+        $this->db->where('t.tcustomer',$id);
+        $this->db->where('t.tjenis', 1);
+        $this->db->where('t.tbrand', 5);
+        $this->db->where_in('t.tstatus', [1,2]);
+
+        $data = $this->db->get()->result();
+        return $data;
+    }
+
+
+
+
 
     //halaman backend
     public function CDeposit(){      

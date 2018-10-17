@@ -7,6 +7,35 @@ class M_customer extends CI_Model {
     public function __construct(){
       parent::__construct();
     }
+    //dashboard
+    function cek_login($where){      
+        return $this->db->get_where($this->table[1], $where);
+    }
+
+
+
+    
+
+    function data_login($email,$pass){      
+        $this->db->select('cid, cnama, cemail, cfoto, cdeposit');
+        $this->db->from($this->table[1]);
+        $this->db->where('cemail', $email);
+        $this->db->where('cpass', $pass);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
+    public function DataCustomer($id){
+        $this->db->select('cid, cnama, cuser, cdeposit, cfoto, cbank, cnamarek, cnorek, cdate');
+        $this->db->from($this->table[1]);
+        $this->db->where('cstatus', 1);
+        $this->db->where('cid', $id);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
 
     //halaman backend
     public function CekCustomer($where){      

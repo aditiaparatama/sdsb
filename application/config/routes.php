@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['default_controller'] 	= "Frontend";
-$route['login'] 				= "User/logindashboard";
+$route['login'] 				= "Customer/logindashboard";
 $route['cmskita'] 				= "User/login";
 $route['backend'] 				= "General/backend";
 

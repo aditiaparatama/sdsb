@@ -36,24 +36,9 @@
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white page-sidebar-closed">
 <div class="page-wrapper">
     
-    <!-- Top Bar -->
-    <?php $this->load->view("dashboard/global/header.php"); ?>
-
-    <div class="page-container">
-        <div class="page-content-wrapper">
-            <div class="page-content">
-                <div class="row">
-                    <div class="col-md-12">
-                    
-                    <!-- content -->
-                    <?php $this->load->view($page); ?>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    <!-- content -->
+    <?php $this->load->view($page); ?>
+                      
     <div class="page-footer">
         <div class="page-footer-inner">
         2018 &copy; made with <i class="fa fa-heart" aria-hidden="true"></i> in

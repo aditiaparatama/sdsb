@@ -9,6 +9,54 @@ class Customer extends CI_Controller {
 		$this->load->library('upload');
 		$this->load->helper('string');
 	}
+
+	//halaman dashboard
+	public function logindashboard(){
+		$data['title'] = 'Login Dashboard - '.BRAND;
+		$this->load->view('dashboard/login', $data);
+	}
+
+	public function logindashboard_act() {
+	    if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('email', 'Email', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('password', 'password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+	            $this->session->set_flashdata('warning', 'Maaf, validasi anda salah!');
+				redirect(base_url('login'));
+		  	} else { 		
+
+		  		$email 	= $this->input->post('email');
+		  		$pass 	= md5($this->input->post('password'));
+		  		$where 	= array(
+				    'cemail' => $email,
+				    'cpass'  => $pass
+			    );
+				$cek = $this->m_customer->cek_login($where)->num_rows();
+				if($cek > 0){
+					$data = $this->m_customer->data_login($email,$pass);
+					$data_session = array(
+						'id' 		=> $data->cid,
+						'nama' 		=> $data->cnama,
+						'email' 	=> $data->cemail,
+						'foto' 		=> $data->cfoto,
+						'deposito'  => $data->cdeposit,
+						'status' 	=> "user"
+			    	);
+				    $this->session->set_userdata($data_session);
+					redirect(base_url('dashboard'));
+				}else{
+		            $this->session->set_flashdata('warning', 'Maaf, anda gagal login!');
+					redirect(base_url('login'));
+				}
+			}
+		}
+	}
+
+	public function logoutdashboard() {
+		$this->session->sess_destroy();
+		redirect(base_url('login'));
+	}
+
 	
 	//halaman backend
  	public function addcustomer(){

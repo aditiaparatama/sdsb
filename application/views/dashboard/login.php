@@ -24,7 +24,7 @@
         </div>
         <div class="card">
             <div class="body">
-                <form action="<?php echo base_url('auth/logindashboard_act'); ?>" method="POST">
+                <form action="<?php echo base_url('customer/logindashboard_act'); ?>" method="POST">
                     <div class="msg">Sign in to start your session</div>
                     <div class="input-group">
                         <span class="input-group-addon">

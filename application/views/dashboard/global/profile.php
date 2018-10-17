@@ -5,7 +5,7 @@
         </div>
 
         <div class="profile-usertitle">
-            <div class="profile-usertitle-name"><?php echo $$customer->nama_customer; ?></div>
+            <div class="profile-usertitle-name"><?php echo $$customer->cnama; ?></div>
             <div class="profile-usertitle-name"><?php echo $this->session->userdata('nama'); ?></div>
         </div>
 

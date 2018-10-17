@@ -77,7 +77,7 @@
                 </a>
                 <ul class="ml-menu">
                     <li>
-                        <a href="<?php echo base_url('customer/listcustomer'); ?>"><span>Identitas Customer</span></a>
+                        <a href="<?php echo base_url('customer/listcustomer'); ?>"><span>List Customer</span></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('customer/listdeposit'); ?>"><span>Deposit Customer</span></a>

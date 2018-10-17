@@ -38,7 +38,7 @@ class Rekening extends CI_Controller {
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('nama', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('no', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('saldo', 'Saldo Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('saldo', 'Saldo Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect(base_url().'rekening/addrekening');
@@ -58,18 +58,18 @@ class Rekening extends CI_Controller {
 	  	 			$jenis 			= 0;
 	  	 		}
 
-				$data['rbank']  	= $this->input->post('bank');
-				$data['rnama'] 		= $this->input->post('nama');
-				$data['rno'] 		= $this->input->post('no');
-				$data['rsaldo'] 	= $this->input->post('saldo');
-				$data['rjenis'] 	= $jenis;;
-				$data['rstatus'] 	= 1;
-				$data['rdate'] 		= date('Y-m-d H:i:s');
+				$data['rbank']  		= $this->input->post('bank');
+				$data['rnama'] 			= $this->input->post('nama');
+				$data['rno'] 			= $this->input->post('no');
+				$data['rsaldo'] 		= str_replace(".", "", $this->input->post('saldo'));
+				$data['rjenis'] 		= $jenis;;
+				$data['rstatus'] 		= 1;
+				$data['rdate'] 			= date('Y-m-d H:i:s');
 
 				$record['tnomor']		= random_string('alnum', 15);
 				$record['ttujuan']		= $this->input->post('no');
-				$record['tharga']		= $this->input->post('saldo');
-				$record['tgrandtotal']	= $this->input->post('saldo');
+				$record['tharga']		= str_replace(".", "", $this->input->post('saldo'));
+				$record['tgrandtotal']	= str_replace(".", "", $this->input->post('saldo'));
 				$record['tbrand']		= 5;
 				$record['tjenis']		= 5;
 				$record['tsubjenis']	= 51;
@@ -104,7 +104,7 @@ class Rekening extends CI_Controller {
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('nama', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('no', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('saldo', 'Saldo Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('saldo', 'Saldo Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect($_SERVER['HTTP_REFERER']);
@@ -128,14 +128,14 @@ class Rekening extends CI_Controller {
 				$data['rbank']		= $this->input->post('bank');
 				$data['rnama']		= $this->input->post('nama');
 				$data['rno'] 		= $this->input->post('no');
-				$data['rsaldo'] 	= $this->input->post('saldo');
+				$data['rsaldo'] 	= str_replace(",", "", $this->input->post('saldo'));
 				$data['rjenis'] 	= $jenis;
 
 				$record['tnomor']		= random_string('alnum', 15);
 				$record['tdari']		= $this->input->post('oldno');
 				$record['ttujuan']		= $this->input->post('no');
-				$record['tharga']		= $this->input->post('saldo');
-				$record['tgrandtotal']	= $this->input->post('saldo');
+				$record['tharga']		= str_replace(",", "", $this->input->post('saldo'));
+				$record['tgrandtotal']	= str_replace(",", "", $this->input->post('saldo'));
 				$record['tbrand']		= 5;
 				$record['tjenis']		= 5;
 				$record['tsubjenis']	= 53;

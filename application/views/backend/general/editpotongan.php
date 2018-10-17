@@ -17,7 +17,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" name="jumlah" class="form-control" value="<?php echo $detail->gqty; ?>" reqired>
-                                        <label class="form-label">Jumlah Pembelian</label>
+                                        <label class="form-label">Jumlah Pembelian Kupon</label>
                                     </div>
                                 </div>
                             </div>

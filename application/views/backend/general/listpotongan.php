@@ -28,14 +28,14 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
-                                        <th>Jumlah Pembelian</th>
-                                        <th>Potongan</th>
+                                        <th>Jumlah Pembelian Kupon</th>
+                                        <th>Potongan Pembelian (%)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
-                                        <th>Jumlah Pembelian</th>
-                                        <th>Potongan</th>
+                                        <th>Jumlah Pembelian Kupon</th>
+                                        <th>Potongan Pembelian (%)</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

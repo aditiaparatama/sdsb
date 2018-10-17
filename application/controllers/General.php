@@ -45,13 +45,13 @@ class General extends CI_Controller {
 			redirect(base_url('cmskita'));
 		}
 		if (isset($_POST['submit'])) {
-			$this->form_validation->set_rules('harga', 'Harga Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('harga', 'Harga Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
             	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect(base_url().'general/harga');
 		  	} else { 		
 				$id				= $this->input->post('id');
-				$data['gharga'] = $this->input->post('harga');
+				$data['gharga'] = str_replace(",", "", $this->input->post('harga'));
 
 	  			$this->load->model('m_general');
 	  	 		$this->m_general->SaveHarga($id, $data);	
@@ -92,6 +92,7 @@ class General extends CI_Controller {
             	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect(base_url().'general/addpotongan');
 		  	} else { 		
+				$data['gname']  	= 'Potongan Pembelian';
 				$data['gqty']  		= $this->input->post('jumlah');
 				$data['gdiskon'] 	= $this->input->post('potongan');
 				$data['gstatus'] 	= 2;
@@ -129,6 +130,7 @@ class General extends CI_Controller {
 		  	} else { 		
 				$id	  = $this->input->post('id_potongan');
 				$data = array(
+					'gname'  	=> 'Potongan Pembelian',
 					'gqty'		=> $this->input->post('jumlah'),
 					'gdiskon' 	=> $this->input->post('potongan')
 				);
@@ -182,8 +184,8 @@ class General extends CI_Controller {
 			$this->form_validation->set_rules('transfer', 'Rekening Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('pengeluaran', 'Pengeluaran', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('harga', 'Harga', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('rate', 'Rate', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('harga', 'Harga', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('rate', 'Rate', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tanggal', 'Periode', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
             	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
@@ -193,8 +195,10 @@ class General extends CI_Controller {
 	  			$this->load->model('m_rekening');
 	  			$this->load->model('m_transaksi');
 	  			$this->load->model('m_reportlabarugi');
+	  			$harga 			= str_replace(".", "", $this->input->post('harga'));
+	  			$rate 			= str_replace(".", "", $this->input->post('rate'));
 	  	 		$saldorekening 	= $this->m_rekening->DetailRekening($this->input->post('transfer'));
-		  		$total		 	= $this->input->post('harga')*$this->input->post('rate');
+		  		$total		 	= $harga*$rate;
 				$periode		= date('Y-m-d', strtotime($this->input->post('tanggal')));
 		  		$cperiode  		= array('rperiode' => $periode);		
 				$report 		= $this->m_reportlabarugi->CariLabaRugi($cperiode);
@@ -206,13 +210,13 @@ class General extends CI_Controller {
 		  		}
 
 				$data['gname']  		= $this->input->post('pengeluaran');
-				$data['gdolar'] 		= $this->input->post('harga');
-				$data['grate'] 			= $this->input->post('rate');
+				$data['gdolar'] 		= $harga;
+				$data['grate'] 			= $rate;
 				$data['gharga'] 		= $total;
 				$data['gperiode'] 		= date('Y-m-d', strtotime($this->input->post('tanggal')));
 				$data['gketerangan'] 	= $this->input->post('keterangan');
-				$data['gketerangan2'] 	= $this->input->post('Keterangan2');
-				$data['gstatus'] 		= 4;
+				$data['gketerangan2'] 	= $this->input->post('keterangan2');
+				$data['gstatus'] 		= 8;
 				$data['gdate'] 			= date('Y-m-d H:i:s');
 
 				$record['tnomor']		= random_string('alnum', 15);
@@ -224,7 +228,7 @@ class General extends CI_Controller {
 				$record['tsubjenis']	= 52;
 				$record['tsubdeposit'] 	= 62;
 				$record['tperiode'] 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
-				$record['tketerangan']  = 'Pengeluaran Bulanan'.' - Biaya '.$this->input->post('pengeluaran');
+				$record['tketerangan']  = 'Pengeluaran bulanan '.$this->input->post('pengeluaran');
 				$record['tstatus']		= 1;
 				$record['tuser'] 		= $this->session->userdata('id');
 				$record['tdate'] 		= date('Y-m-d H:i:s');
@@ -277,8 +281,8 @@ class General extends CI_Controller {
 			$this->form_validation->set_rules('transfer', 'Rekening Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('pengeluaran', 'Pengeluaran', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('harga', 'Harga', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('rate', 'Rate', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('harga', 'Harga', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('rate', 'Rate', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tanggal', 'Periode', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
@@ -289,8 +293,10 @@ class General extends CI_Controller {
   			$this->load->model('m_transaksi');
   			$this->load->model('m_reportlabarugi');
 
+	  		$harga 			= str_replace(",", "", $this->input->post('harga'));
+	  		$rate 			= str_replace(",", "", $this->input->post('rate'));
   	 		$saldorekening 	= $this->m_rekening->DetailRekening($this->input->post('transfer'));
-	  		$total		 	= $this->input->post('harga')*$this->input->post('rate');
+	  		$total		 	= $harga*$rate;
 			$periode		= date('Y-m-d', strtotime($this->input->post('tanggal')));
 	  		$cperiode  		= array('rperiode' => $periode);		
 			$report 		= $this->m_reportlabarugi->CariLabaRugi($cperiode);
@@ -303,17 +309,14 @@ class General extends CI_Controller {
 
 			$id 					= $this->input->post('id');
 			$data['gname']  		= $this->input->post('pengeluaran');
-			$data['gdolar'] 		= $this->input->post('harga');
-			$data['grate'] 			= $this->input->post('rate');
+			$data['gdolar'] 		= $harga;
+			$data['grate'] 			= $rate;
 			$data['gharga'] 		= $total;
 			$data['gperiode'] 		= date('Y-m-d', strtotime($this->input->post('tanggal')));
 			$data['gketerangan'] 	= $this->input->post('keterangan');
-			$data['gketerangan2'] 	= $this->input->post('Keterangan2');
-			$data['gstatus'] 		= 4;
-			$data['gdate'] 			= date('Y-m-d H:i:s');
+			$data['gketerangan2'] 	= $this->input->post('keterangan2');
 
 			$transaksi 				= $this->input->post('nomor');
-			$record['tnomor']		= random_string('alnum', 15);
 			$record['tdari']		= $this->input->post('transfer');
 			$record['ttujuan']		= 'Pengeluaran Bulanan';
 			$record['tharga']		= $total;
@@ -323,9 +326,7 @@ class General extends CI_Controller {
 			$record['tsubdeposit'] 	= 62;
 			$record['tperiode'] 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
 			$record['tketerangan']  = 'Pengeluaran Bulanan'.' - Biaya '.$this->input->post('pengeluaran');
-			$record['tstatus']		= 1;
 			$record['tuser'] 		= $this->session->userdata('id');
-			$record['tdate'] 		= date('Y-m-d H:i:s');
 
 			$rekening 		= $this->input->post('transfer');
 			$row['rsaldo'] 	= $calculate;
@@ -339,7 +340,7 @@ class General extends CI_Controller {
 		 		$this->m_reportlabarugi->SaveLabaRugi($report);	
 			}else{
 				$periode				  	  = $periode;
-				$report2['rbiayaoperasional'] = $report->rbiayaoperasional-$this->input->post('total')+$total;
+				$report2['rbiayaoperasional'] = $report->rbiayaoperasional+$this->input->post('total')-$total;
 		 		
 		 		$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
 			}

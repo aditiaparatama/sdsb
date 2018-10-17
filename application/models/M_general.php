@@ -62,7 +62,7 @@ class M_general extends CI_Model {
     public function PengeluaranBulanan(){
         $this->db->select('gid, gname, gharga, gperiode');
         $this->db->from($this->table[1]);
-        $this->db->where('gstatus', 4);
+        $this->db->where('gstatus', 8);
 
         $data = $this->db->get()->result();
         return $data;

@@ -138,11 +138,11 @@ class Customer extends CI_Controller {
 					$data['cbank']				= $this->input->post('bank');
 					$data['cnamarek']			= $this->input->post('nmrek');
 					$data['cnorek']				= $this->input->post('norek');
-					$data['cdeposit']			= $this->input->post('dsdsb');
-					$data['cdepositsbo']		= $this->input->post('dsbobet');
-					$data['cdepositibc']		= $this->input->post('dibcbet');
-					$data['cdeposithorey']		= $this->input->post('dhorey4d');
-					$data['cdeposittangkas']	= $this->input->post('dtangkas');
+					$data['cdeposit']			= str_replace(".", "", $this->input->post('dsdsb'));
+					$data['cdepositsbo']		= str_replace(".", "", $this->input->post('dsbobet'));
+					$data['cdepositibc']		= str_replace(".", "", $this->input->post('dibcbet'));
+					$data['cdeposithorey']		= str_replace(".", "", $this->input->post('dhorey4d'));
+					$data['cdeposittangkas']	= str_replace(".", "", $this->input->post('dtangkas'));
 					$data['cterbaca']			= 1;
 					$data['cstatus']			= 1;
 					$data['cdate']				= date('Y-m-d H:i:s');
@@ -158,9 +158,9 @@ class Customer extends CI_Controller {
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cusersbo;
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dsbobet');
-					$row['tgrandtotal'] = $this->input->post('dsbobet');
-					$row['tjenis']		= 6;
+					$row['tharga']		= str_replace(".", "", $this->input->post('dsbobet'));
+					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dsbobet'));
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 1;
@@ -170,7 +170,7 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsbobet');
+					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dsbobet'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -182,9 +182,9 @@ class Customer extends CI_Controller {
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cuseribc;
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dibcbet');
-					$row['tgrandtotal'] = $this->input->post('dibcbet');
-					$row['tjenis']		= 6;
+					$row['tharga']		= str_replace(".", "", $this->input->post('dibcbet'));
+					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dibcbet'));
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 2;
@@ -194,7 +194,7 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dibcbet');
+					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dibcbet'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -206,9 +206,9 @@ class Customer extends CI_Controller {
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cuserhorey;
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dhorey4d');
-					$row['tgrandtotal'] = $this->input->post('dhorey4d');
-					$row['tjenis']		= 6;
+					$row['tharga']		= str_replace(".", "", $this->input->post('dhorey4d'));
+					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dhorey4d'));
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 3;
@@ -218,7 +218,7 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dhorey4d');
+					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dhorey4d'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -230,9 +230,9 @@ class Customer extends CI_Controller {
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cusertangkas;
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dtangkas');
-					$row['tgrandtotal'] = $this->input->post('dtangkas');
-					$row['tjenis']		= 6;
+					$row['tharga']		= str_replace(".", "", $this->input->post('dtangkas'));
+					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dtangkas'));
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 4;
@@ -242,7 +242,7 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dtangkas');
+					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dtangkas'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -254,9 +254,9 @@ class Customer extends CI_Controller {
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cuser;
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dsdsb');
-					$row['tgrandtotal'] = $this->input->post('dsdsb');
-					$row['tjenis']		= 6;
+					$row['tharga']		= str_replace(".", "", $this->input->post('dsdsb'));
+					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dsdsb'));
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 5;
@@ -266,7 +266,7 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsdsb');
+					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dsdsb'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -367,26 +367,28 @@ class Customer extends CI_Controller {
 					$data['cbank']				= $this->input->post('bank');
 					$data['cnamarek']			= $this->input->post('nmrek');
 					$data['cnorek']				= $this->input->post('norek');
-					$data['cdepositsbo']		= $this->input->post('dsbobet');
-					$data['cdepositibc']		= $this->input->post('dibcbet');
-					$data['cdeposithorey']		= $this->input->post('dhorey4d');
-					$data['cdeposittangkas']	= $this->input->post('dtangkas');
-					$data['cdeposit']			= $this->input->post('dsdsb');
+					$data['cdepositsbo']		= str_replace(",", "", $this->input->post('dsbobet'));
+					$data['cdepositibc']		= str_replace(",", "", $this->input->post('dibcbet'));
+					$data['cdeposithorey']		= str_replace(",", "", $this->input->post('dhorey4d'));
+					$data['cdeposittangkas']	= str_replace(",", "", $this->input->post('dtangkas'));
+					$data['cdeposit']			= str_replace(",", "", $this->input->post('dsdsb'));
 
 			        if(!empty($_FILES['photo']['name'])) {
 			  			$data['cfoto']			= $this->upload('photo');
 			        }
 	  	 		$this->m_customer->EditCustomerAct($id, $data);	
 
-		 		if($this->input->post('dsbobet')-$this->input->post('olddsbo') != 0){		
+		 		if($this->input->post('olddsbo') != str_replace(",", "", $this->input->post('dsbobet'))){	
+		 			$dsbobet = str_replace(",", "", $this->input->post('dsbobet'));	
+			 		
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('usersbo');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dsbobet')-$this->input->post('olddsbo');
-					$row['tgrandtotal'] = $this->input->post('dsbobet')-$this->input->post('olddsbo');
-					$row['tjenis']		= 6;
+					$row['tharga']		= $dsbobet;
+					$row['tgrandtotal'] = $dsbobet;
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 1;
@@ -396,20 +398,22 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsbobet')-$this->input->post('olddsbo');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dsbobet-$this->input->post('olddsbo');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
 		 		}
-		 		if($this->input->post('dibcbet')-$this->input->post('olddibc') != 0){		
+		 		if($this->input->post('olddibc') != str_replace(",", "", $this->input->post('dibcbet'))){	
+		 			$dibcbet = str_replace(",", "", $this->input->post('dibcbet'));	
+
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('ibcbet');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dibcbet')-$this->input->post('olddibc');
-					$row['tgrandtotal'] = $this->input->post('dibcbet')-$this->input->post('olddibc');
-					$row['tjenis']		= 6;
+					$row['tharga']		= $dibcbet;
+					$row['tgrandtotal'] = $dibcbet;
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 2;
@@ -419,20 +423,22 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dibcbet')-$this->input->post('olddibc');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dibcbet-$this->input->post('olddibc');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
 		 		}
-		 		if($this->input->post('dhorey4d')-$this->input->post('olddhorey') != 0){		
+		 		if($this->input->post('olddhorey') != str_replace(",", "", $this->input->post('dhorey4d'))){	
+		 			$dibcbet = str_replace(",", "", $this->input->post('dibcbet'));	
+
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('horey4d');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dhorey4d')-$this->input->post('olddhorey');
-					$row['tgrandtotal'] = $this->input->post('dhorey4d')-$this->input->post('olddhorey');
-					$row['tjenis']		= 6;
+					$row['tharga']		= $dibcbet;
+					$row['tgrandtotal'] = $dibcbet;
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 3;
@@ -442,20 +448,22 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dhorey4d')-$this->input->post('olddhorey');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dibcbet-$this->input->post('olddhorey');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
 		 		}
-		 		if($this->input->post('dtangkas')-$this->input->post('olddtangkas') != 0){		
+		 		if($this->input->post('olddtangkas') != str_replace(",", "", $this->input->post('dtangkas'))){	
+		 			$dtangkas = str_replace(",", "", $this->input->post('dtangkas'));	
+	
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('tangkasnet');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dtangkas')-$this->input->post('olddtangkas');
-					$row['tgrandtotal'] = $this->input->post('dtangkas')-$this->input->post('olddtangkas');
-					$row['tjenis']		= 6;
+					$row['tharga']		= $dtangkas;
+					$row['tgrandtotal'] = $dtangkas;
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 4;
@@ -465,30 +473,32 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dtangkas')-$this->input->post('olddtangkas');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dtangkas-$this->input->post('olddtangkas');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
 		 		}
-		 		if($this->input->post('dsdsb')-$this->input->post('olddsdsb') != 0){		
+		 		if($this->input->post('olddsdsb') != str_replace(",", "", $this->input->post('dsdsb'))){	
+		 			$dsdsb = str_replace(",", "", $this->input->post('dsdsb'));	
+
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('sdsb');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $this->input->post('dsdsb')-$this->input->post('olddsdsb');
-					$row['tgrandtotal'] = $this->input->post('dsdsb')-$this->input->post('olddsdsb');
-					$row['tjenis']		= 6;
+					$row['tharga']		= $dsdsb;
+					$row['tgrandtotal'] = $dsdsb;
+					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
-					$row['tbrand']		= 4;
+					$row['tbrand']		= 5;
 					$row['tketerangan'] = 'Update saldo SDSB customer '.$this->input->post('sdsb');
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$this->input->post('dsdsb')-$this->input->post('olddsdsb');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dsdsb-$this->input->post('olddsdsb');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	

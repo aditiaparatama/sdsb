@@ -29,23 +29,23 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
-                                        <th>No Transaksi</th>
+                                        <th>Tanggal</th>
                                         <th>Username</th>
+                                        <!-- <th>No Transaksi</th> -->
                                         <th>Nomor Kupon</th>
                                         <th>Total</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tfoot>
-                                        <th>No Transaksi</th>
+                                        <th>Tanggal</th>
                                         <th>Username</th>
+                                        <!-- <th>No Transaksi</th> -->
                                         <th>Potongan</th>
                                         <th>Total</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -58,23 +58,23 @@
                                         }
                                     ?>
                                     <tr>
-                                        <td><?php echo $list->tnomor; ?></td>
-                                        <td><?php echo $list->cuser; ?></td>
+                                        <td><?php echo date('d F Y H:i:s', strtotime($list->tdate)); ?></td>
+                                        <!-- <td><?php echo $list->tnomor; ?></td> -->
                                         <td><?php echo $list->tkupon; ?></td>
+                                        <td><?php echo $list->cuser; ?></td>
                                         <td>Rp. <?php echo number_format($list->tgrandtotal); ?></td>
                                         <td><?php echo $status; ?></td>
-                                        <td><?php echo date('d F Y', strtotime($list->tdate)); ?></td>
-                                        <td>
+<!--                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <!-- <li><a href="<?php echo base_url('transaksi/depositkonfirmasi_act/'.$list->tnomor); ?>" class=" waves-effect waves-block">Konfirmasi deposit</a></li> -->
+                                                    <li><a href="<?php echo base_url('transaksi/depositkonfirmasi_act/'.$list->tnomor); ?>" class=" waves-effect waves-block">Konfirmasi deposit</a></li>
                                                     <li><a href="<?php echo base_url('transaksi/hapuskupon/'.$list->tkupon); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     <?php } ?>
                                 </tbody>

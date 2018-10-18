@@ -309,7 +309,7 @@ class M_transaksi extends CI_Model {
         $this->db->select('t.tnomor, t.tkupon, t.tgrandtotal, t.tstatus, t.tdate, c.cuser');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer');
-        $this->db->where('t.tjenis', 2);
+        $this->db->where('t.tjenis', 3);
         $this->db->where_in('t.tstatus', [1,2]);
 
         $data = $this->db->get()->result();
@@ -327,7 +327,7 @@ class M_transaksi extends CI_Model {
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer');
         $this->db->join($this->table[3].' as r','r.rno = t.tdari','left');
-        $this->db->where('t.tjenis', 3);
+        $this->db->where('t.tjenis', 4);
         $this->db->where_in('t.tstatus', [1,2]);
 
         $data = $this->db->get()->result();
@@ -340,7 +340,7 @@ class M_transaksi extends CI_Model {
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[4].' as b','b.bid = t.tbrand','left');
         $this->db->where('t.tnomor', $nomor);
-        $this->db->where('t.tjenis', 3);
+        $this->db->where('t.tjenis', 4);
         // $this->db->where('t.tsubjenis', 52);
 
         $data = $this->db->get()->row();

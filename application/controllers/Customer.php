@@ -57,7 +57,10 @@ class Customer extends CI_Controller {
 		redirect(base_url('login'));
 	}
 
-	
+
+
+
+
 	//halaman backend
  	public function addcustomer(){
  		if($this->session->userdata('status') != "backend"){
@@ -88,11 +91,15 @@ class Customer extends CI_Controller {
 		  	} else { 		
 				$this->load->model('m_transaksi');
 				$this->load->model('m_rekening');
+				$this->load->model('m_reportlabarugi');
 				$usersbo	 	= $this->input->post('usersbo');
 				$useribc	 	= $this->input->post('ibcbet');
 				$userhorey	 	= $this->input->post('horey4d');
 				$usertangkas 	= $this->input->post('tangkasnet');
 				$usersdsb	 	= $this->input->post('sdsb');
+				$periode		= date('Y-m-d');
+		  		$cperiode  		= array('rperiode' => $periode);		
+				$report 		= $this->m_reportlabarugi->CariLabaRugi($cperiode);
 		  		
 		  		$wheresbo 	 	= array('cusersbo' => $usersbo);
 		  		$cusersbo 	 	= $this->m_customer->CekCustomer($wheresbo)->num_rows();
@@ -174,6 +181,25 @@ class Customer extends CI_Controller {
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dsbobet'));
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dsbobet'));
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}
 	  	 		}
 
 	  	 		if($this->input->post('dibcbet') != ''){		
@@ -198,6 +224,25 @@ class Customer extends CI_Controller {
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dibcbet'));
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dibcbet'));
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}
 	  	 		}
 
 	  	 		if($this->input->post('dhorey4d') != ''){		
@@ -221,7 +266,26 @@ class Customer extends CI_Controller {
 					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dhorey4d'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
-	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	 				$this->m_rekening->UpdateSaldo($idrek, $record);
+
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dhorey4d'));
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dhorey4d'));
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 	  	 		}
 
 	  	 		if($this->input->post('dtangkas') != ''){		
@@ -246,6 +310,25 @@ class Customer extends CI_Controller {
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dtangkas'));
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dtangkas'));
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 	  	 		}
 
 	  	 		if($this->input->post('dsdsb') != ''){		
@@ -270,6 +353,25 @@ class Customer extends CI_Controller {
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
+	 				
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dsdsb'));
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dsdsb'));
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 	  	 		}
 	       		redirect(base_url().'customer/listcustomer');
 		  	}
@@ -317,11 +419,15 @@ class Customer extends CI_Controller {
 		  	} else { 	
 		  		$this->load->model('m_transaksi');
 				$this->load->model('m_rekening');
+				$this->load->model('m_reportlabarugi');
 				$usersbo	 	= $this->input->post('usersbo');
 				$useribc	 	= $this->input->post('ibcbet');
 				$userhorey	 	= $this->input->post('horey4d');
 				$usertangkas 	= $this->input->post('tangkasnet');
 				$usersdsb	 	= $this->input->post('sdsb');
+				$periode		= date('Y-m-d');
+		  		$cperiode  		= array('rperiode' => $periode);		
+				$report 		= $this->m_reportlabarugi->CariLabaRugi($cperiode);
 		  		
 		  		$wheresbo 	 	= array('cusersbo' => $usersbo);
 		  		$cusersbo 	 	= $this->m_customer->CekCustomer($wheresbo)->num_rows();
@@ -402,7 +508,27 @@ class Customer extends CI_Controller {
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
+	 				
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = $dsbobet;
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddsbo')+$dsbobet;
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 		 		}
+
 		 		if($this->input->post('olddibc') != str_replace(",", "", $this->input->post('dibcbet'))){	
 		 			$dibcbet = str_replace(",", "", $this->input->post('dibcbet'));	
 
@@ -427,17 +553,37 @@ class Customer extends CI_Controller {
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
+
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = $dibcbet;
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddibc')+$dibcbet;
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 		 		}
+
 		 		if($this->input->post('olddhorey') != str_replace(",", "", $this->input->post('dhorey4d'))){	
-		 			$dibcbet = str_replace(",", "", $this->input->post('dibcbet'));	
+		 			$dhorey4d = str_replace(",", "", $this->input->post('dhorey4d'));	
 
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('horey4d');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $dibcbet;
-					$row['tgrandtotal'] = $dibcbet;
+					$row['tharga']		= $dhorey4d;
+					$row['tgrandtotal'] = $dhorey4d;
 					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
@@ -448,11 +594,31 @@ class Customer extends CI_Controller {
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$dibcbet-$this->input->post('olddhorey');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dhorey4d-$this->input->post('olddhorey');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
+					
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = $dhorey4d;
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddhorey')+$dhorey4d;
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 		 		}
+
 		 		if($this->input->post('olddtangkas') != str_replace(",", "", $this->input->post('dtangkas'))){	
 		 			$dtangkas = str_replace(",", "", $this->input->post('dtangkas'));	
 	
@@ -477,7 +643,27 @@ class Customer extends CI_Controller {
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
+					
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = $dtangkas;
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddtangkas')+$dtangkas;
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
 		 		}
+
 		 		if($this->input->post('olddsdsb') != str_replace(",", "", $this->input->post('dsdsb'))){	
 		 			$dsdsb = str_replace(",", "", $this->input->post('dsdsb'));	
 
@@ -502,8 +688,26 @@ class Customer extends CI_Controller {
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
-		 		}
 
+					if($report == NULL){
+						$report['rperiode']		 = $periode;
+						$report['rjmhdeposit']	 = 1;
+						$report['rjmhdepositrp'] = $dsdsb;
+						$report['rstatus']		 = 1;
+						$report['rdate']		 = date('Y-m-d H:i:s');
+
+		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+					}else{
+						$jmhdeposit		= $report->rjmhdeposit+1;
+						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddsdsb')+$dsdsb;
+						
+						$periode				  = $periode;
+						$report2['rjmhdeposit']	  = $jmhdeposit;
+						$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+		  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+					}	
+		 		}
 	       		redirect(base_url().'customer/listcustomer');
 		  	}
 	    }

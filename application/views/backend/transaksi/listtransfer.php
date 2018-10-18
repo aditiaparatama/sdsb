@@ -29,24 +29,24 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
+                                        <th>Tanggal</th>
                                         <th>No Transaksi</th>
                                         <th>Username</th>
                                         <th>Sumber Dana</th>
                                         <th>Tujuan Transfer</th>
                                         <th>Nominal</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
+                                        <th>Tanggal</th>
                                         <th>No Transaksi</th>
                                         <th>Username</th>
                                         <th>Sumber Dana</th>
                                         <th>Tujuan Transfer</th>
                                         <th>Nominal</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -60,13 +60,13 @@
                                         }
                                     ?>
                                     <tr>
+                                        <td style="min-width: 180px"><?php echo date('d F Y H:i:s', strtotime($list->tdate)); ?></td>
                                         <td><?php echo $list->tnomor; ?></td>
                                         <td><?php echo $list->cuser; ?></td>
                                         <td style="min-width: 180px"><?php echo $list->tdari; ?></td>
                                         <td style="min-width: 180px"><?php echo $list->ttujuan; ?></td>
                                         <td style="min-width: 100px">Rp. <?php echo number_format($list->tgrandtotal); ?></td>
                                         <td><?php echo $status; ?></td>
-                                        <td style="min-width: 150px"><?php echo date('d F Y', strtotime($list->tdate)); ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

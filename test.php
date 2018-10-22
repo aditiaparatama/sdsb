@@ -6,6 +6,7 @@ CATATAN
 	3  = pembelian nomor
 	4  = transfer dana
 	5  = rekening
+	6  = permainan harian
 	8  = pengeluaran bulanan
 	- tjenis
 
@@ -19,6 +20,7 @@ CATATAN
 	61 = uang masuk
 	62 = uang keluar
 	63 = perubahan
+	64 = Withdraw
 	- tsubdeposit
 
 -> LabaRugi

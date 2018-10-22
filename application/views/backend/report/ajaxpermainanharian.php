@@ -1,5 +1,4 @@
-
-<div class="row clearfix">
+<div class="row clearfix" style="margin-top:-50px">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
         <div class="body table-responsive">
@@ -54,18 +53,22 @@
 				?>
                     <tr>
                         <td scope="row"><?php echo $i; ?></td>
-                        <td><?php echo $list->cemail; ?></td>
+                        <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>" target="_blank">
+                            <?php echo $list->cemail; ?>
+                        </a></td>
                         <td><?php echo $brand; ?></td>
                         <td>
                             <span <?php echo $class3; ?>><?php echo $list->twin.'</span>/<span '.$class4.'>'.$list->tlose; ?></span>
                         </td>
                         <td <?php echo $class5; ?>>
-                            <?php echo $list->tmembercomm; ?>
+                            <?php echo number_format($list->tmembercomm); ?>
                         </td>
                         <td <?php echo $class1; ?>>
-                            <?php echo $list->tbonus; ?>
+                            <?php echo number_format($list->tbonus); ?>
                         </td>
-                        <td><?php echo date('d F Y', strtotime($list->tperiode)); ?></td>
+                        <td><a href="<?php echo base_url('general/periodepermainanharian/'.$list->tperiode); ?>" target="_blank">
+                            <?php echo date('d F Y', strtotime($list->tperiode)); ?>
+                        </a></td>
                     </tr>
     			<?php $i++; $cbonus += $list->tbonus; $cwin += $list->twin; $close += $list->tlose; $cmember += $list->tmembercomm; } ?>
                 </tbody>
@@ -96,12 +99,19 @@
                         <th></th>
                         <th></th>
                         <th><span <?php echo $clas3; ?>><?php echo $cwin; ?></span>/<span <?php echo $class4; ?>><?php echo $close; ?></span></th>
-                        <th <?php echo $clas5; ?>><?php echo $cmember; ?></th>
-                        <th <?php echo $clas1; ?>><?php echo $cbonus; ?></th>
+                        <th <?php echo $clas5; ?>><?php echo number_format($cmember); ?></th>
+                        <th <?php echo $clas1; ?>><?php echo number_format($cbonus); ?></th>
                         <th></th>
                     </tr>
                 </tfoot>
             </table>
+            <form action="<?php echo base_url('general/reportpermainanharian_excel'); ?>" method="POST">
+                <input type="hidden" name="dari" value="<?php echo $dari;?>">
+                <input type="hidden" name="sampai" value="<?php echo $sampai;?>">
+                <input type="hidden" name="brand" value="<?php echo $filter;?>">
+                <input type="hidden" name="email" value="<?php echo $filter2;?>">
+                <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect pull-left">Download Excel</button>
+            </form>
         </div>
     </div>
 </div>

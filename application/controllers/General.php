@@ -225,6 +225,7 @@ class General extends CI_Controller {
 				$record['tharga']		= $total;
 				$record['tgrandtotal']	= $total;
 				$record['tjenis']		= 8;
+				$record['trekeningdari']= $saldorekening->rno;
 				$record['tsubjenis']	= 52;
 				$record['tsubdeposit'] 	= 62;
 				$record['tperiode'] 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
@@ -317,6 +318,7 @@ class General extends CI_Controller {
 			$data['gketerangan2'] 	= $this->input->post('keterangan2');
 
 			$transaksi 				= $this->input->post('nomor');
+			$record['trekeningdari']= $saldorekening->rno;
 			$record['tdari']		= $this->input->post('transfer');
 			$record['ttujuan']		= 'Pengeluaran Bulanan';
 			$record['tharga']		= $total;
@@ -392,9 +394,37 @@ class General extends CI_Controller {
 		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
 		$email 			 = $this->input->post('email');
 		$brand 	 		 = $this->input->post('brand');
-		$data['lists'] 	 = $this->m_transaksi->ReportPermainanHarian($dari,$sampai,$email,$brand);
 
-		$this->load->view('backend/report/ajaxpermainanharian', $data);
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['filter']	 = $this->input->post('brand');
+		$data['filter2'] = $this->input->post('email');
+		$data['lists'] 	 = $this->m_transaksi->ReportPermainanHarian($dari,$sampai,$email,$brand);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/report/ajaxpermainanharian', $data);
+		}
+	}
+
+	public function reportpermainanharian_excel(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_transaksi');
+		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$email 			 = $this->input->post('email');
+		$brand 	 		 = $this->input->post('brand');
+
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['lists'] 	 = $this->m_transaksi->ReportPermainanHarian($dari,$sampai,$email,$brand);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/excel/permainanharian', $data);
+		}
 	}
 
 	public function reportrekening(){
@@ -421,6 +451,17 @@ class General extends CI_Controller {
 		$this->load->view('backend/report/ajaxpermainanharian', $data);
 	}
 
+	public function periodepermainanharian($periode) {
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_transaksi');
+		$data['lists'] = $this->m_transaksi->ReportPeriodePermainanHarian($periode);
+		$data['title'] = 'Report Permainan Harian - '.BRAND;
+		$data['page']  = 'backend/report/periodepermainanharian';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
 	public function reportbiayaoperasional(){
 		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));
@@ -440,9 +481,33 @@ class General extends CI_Controller {
 	  	$this->load->model('m_general');
 		$dari 			= date('Y-m-d', strtotime($this->input->post('dari')));
 		$sampai 		= date('Y-m-d', strtotime($this->input->post('sampai')));
-		$data['lists'] 	= $this->m_general->ReportBiayaOperasional($dari,$sampai);
 
-		$this->load->view('backend/report/ajaxbiaya', $data);
+		$data['dari'] 	= $dari;
+		$data['sampai'] = $sampai;
+		$data['lists'] 	= $this->m_general->ReportBiayaOperasional($dari,$sampai);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/report/ajaxbiaya', $data);
+		}
+	}
+
+	public function reportbiaya_excel(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_general');
+		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['lists'] 	 = $this->m_general->ReportBiayaOperasional($dari,$sampai);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/excel/biaya', $data);
+		}
 	}
 
 	public function reportrugilaba(){
@@ -462,8 +527,83 @@ class General extends CI_Controller {
 	  	$this->load->model('m_reportlabarugi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
 		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
-		$data['lists'] 	 = $this->m_reportlabarugi->ReportRugiLaba($dari,$sampai);
 
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['lists'] 	 = $this->m_reportlabarugi->ReportRugiLaba($dari,$sampai);
 		$this->load->view('backend/report/ajaxrugilaba', $data);
+	}
+
+
+	public function reportrugilaba_excel(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_reportlabarugi');
+		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+
+		$data['dari'] 	 = $this->input->post('dari');
+		$data['sampai']  = $this->input->post('sampai');
+		$data['lists'] 	 = $this->m_reportlabarugi->ReportRugiLaba($dari,$sampai);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/excel/labarugi', $data);
+		}
+	}
+
+	public function detaildeposit($periode) {
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_transaksi');
+		$data['lists'] = $this->m_transaksi->ReportPeriodeDeposit($periode);
+		$data['title'] = 'Report Permainan Harian Deposit - '.BRAND;
+		$data['page']  = 'backend/report/detaildeposit';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
+	public function detailwithdraw($periode) {
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_transaksi');
+		$data['lists'] = $this->m_transaksi->ReportPeriodeWithdraw($periode);
+		$data['title'] = 'Report Permainan Harian Withdraw- '.BRAND;
+		$data['page']  = 'backend/report/detailwithdraw';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
+	public function reportcustomer(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_brand');
+		$data['brands']  = $this->m_brand->Brand();
+
+		$data['title'] = 'Report Customer - '.BRAND;
+		$data['page']  = 'backend/report/customer';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
+	public function reportcustomer_act(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_customer');
+		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$email 			 = $this->input->post('email');
+
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['filter2'] = $this->input->post('email');
+		$data['lists'] 	 = $this->m_customer->ReportCustomer($dari,$sampai,$email);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/report/ajaxcustomer', $data);
+		}
 	}
 }

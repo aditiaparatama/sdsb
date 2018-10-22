@@ -17,7 +17,7 @@
                         <form action="<?php echo base_url('transaksi/addtransaksikredit_act'); ?>" method="POST">
                         <div class="row clearfix">
                             <div class="col-sm-12">                                        
-                            	<select class="form-control show-tick" name="transfer" required onchange="getsaldo(this.value)">
+                            	<select class="form-control show-tick" name="transfer" onchange="getsaldo(this.value)" required>
 	                                <option value="<?php echo $transfer->rno; ?>" selected="selected">
 	                                    <?php echo $transfer->rno; ?> - <?php echo $transfer->rbank; ?> (<?php echo $transfer->rnama; ?>)
 	                                </option>

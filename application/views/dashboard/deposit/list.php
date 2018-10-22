@@ -52,15 +52,15 @@
                             <?php 
                                 foreach($lists as $list) { 
                                 if($list->tstatus == 2){
-                                    $status = 'Verifikasi Pembayaran';
+                                    $status = 'Verifikasi';
                                 }else if($list->tstatus == 1){
-                                    $status = 'Lunas';
+                                    $status = 'Selesai';
                                 }
                             ?>
                             <tr>
                                 <td><?php echo $list->tnomor; ?></td>
-                                <td><b><?php echo $list->tpotongan; ?>%</b></td>
-                                <td><b>Rp. <?php echo number_format($list->tgrandtotal); ?></b></td>
+                                <td><?php echo $list->tpotongan; ?>%</td>
+                                <td>Rp. <?php echo number_format($list->tgrandtotal); ?></td>
                                 <td><?php echo $status; ?></td>
                                 <td><?php echo date('d F Y', strtotime($list->tdate)); ?></td>
                             </tr>

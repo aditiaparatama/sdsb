@@ -117,16 +117,24 @@
                     <tr>
                         <td scope="row"><?php echo date('d-M-Y', strtotime($list->rperiode)); ?></td>
                         <td>
-                            <?php echo $list->rjmhdeposit; ?>
+                            <a href="<?php echo base_url('general/detaildeposit/'.$list->rperiode); ?>" target="_blank">
+                                <?php echo $list->rjmhdeposit; ?>
+                            </a>
                         </td>
                         <td>
-                            <?php echo number_format($list->rjmhdepositrp); ?>
+                            <a href="<?php echo base_url('general/detaildeposit/'.$list->rperiode); ?>" target="_blank">
+                                <?php echo number_format($list->rjmhdepositrp); ?>
+                            </a>
                         </td>
                         <td>
-                            <p class="col-red"><?php echo $list->rjmhwithdraw; ?>
+                            <a href="<?php echo base_url('general/detailwithdraw/'.$list->rperiode); ?>" target="_blank" class="col-red">
+                                <p class="col-red"><?php echo $list->rjmhwithdraw; ?>
+                            </a>
                         </td>
                         <td>
-                            <p class="col-red"><?php echo number_format($list->rjmhwithdrawrp); ?>
+                            <a href="<?php echo base_url('general/detailwithdraw/'.$list->rperiode); ?>" target="_blank" class="col-red">
+                                <p class="col-red"><?php echo number_format($list->rjmhwithdrawrp); ?>
+                            </a>
                         </td>
                         <td <?php echo $style3; ?>>
                             <?php echo number_format($list->rwinlose6); ?>
@@ -301,8 +309,12 @@
                         <th style="font-size: 15px;">Rp. <strong><?php echo number_format($cnett); ?></strong></th>
                     </tr>
                 </tfoot>
-
             </table>
+            <form action="<?php echo base_url('general/reportrugilaba_excel'); ?>" method="POST">
+                <input type="hidden" name="dari" value="<?php echo $dari;?>">
+                <input type="hidden" name="sampai" value="<?php echo $sampai;?>">
+                <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect pull-left">Download Excel</button>
+            </form>
         </div>
     </div>
 </div>

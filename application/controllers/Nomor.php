@@ -65,4 +65,31 @@ class Nomor extends CI_Controller {
 		$data['page']  = 'backend/nomor/jumlah';
 		$this->load->view('backend/nomor/jumlah', $data); 
 	}
+
+	public function jumlah2() {
+		$this->load->model('m_general');
+		$jumlah = $this->input->post("jumlah");
+
+		if($jumlah == 0 || $jumlah == ''){
+			$data['potongan'] 	= 0;
+			$data['jumlah'] 	= 0;
+ 		}else{
+			$cek = $this->m_general->CekPotongan($jumlah);
+			if($cek > 0){
+ 				$harga 				= $this->m_general->SearchHarga();
+ 				$potongan 			= $this->m_general->SearchPotongan($jumlah);
+				$total 				= $jumlah*$harga->gharga;
+				$data['potongan'] 	= $potongan->gdiskon;
+				$calculate 			= $potongan->gdiskon/100*$total;
+				$data['jumlah'] 	= $total-$calculate; 
+ 			}else{
+ 				$harga 				= $this->m_general->SearchHarga();
+				$data['potongan'] 	= 0;
+				$data['jumlah'] 	= $jumlah*$harga->gharga;
+ 			}
+		}
+
+		$data['page']  = 'backend/nomor/jumlah2';
+		$this->load->view('backend/nomor/jumlah2', $data); 
+	}
 }

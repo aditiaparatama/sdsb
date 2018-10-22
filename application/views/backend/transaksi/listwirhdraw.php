@@ -29,24 +29,24 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
-                                        <th>No Transaksi</th>
+                                        <th>Tanggal</th>
+                                        <th>Transaksi</th>
                                         <th>Username</th>
                                         <th>Sumber Dana</th>
                                         <th>Tujuan Transfer</th>
                                         <th>Nominal</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
-                                        <th>No Transaksi</th>
+                                        <th>Tanggal</th>
+                                        <th>Transaksi</th>
                                         <th>Username</th>
                                         <th>Sumber Dana</th>
                                         <th>Tujuan Transfer</th>
                                         <th>Nominal</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -55,25 +55,30 @@
                                         foreach($lists as $list) { 
                                         if($list->tstatus == 1){
                                             $status = 'Selesai';
+                                            $style  = "style='display:none'"; 
                                         }else{
                                         	$status = 'Pending';
+                                            $style  = "";
                                         }
                                     ?>
                                     <tr>
+                                        <td style="min-width: 180px"><?php echo date('d F Y H:i:s', strtotime($list->tdate)); ?></td>
                                         <td><?php echo $list->tnomor; ?></td>
-                                        <td><?php echo $list->cuser; ?></td>
+                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>">
+                                            <?php echo $list->cuser; ?>
+                                        </a></td>
                                         <td style="min-width: 180px"><?php echo $list->tdari; ?></td>
                                         <td style="min-width: 180px"><?php echo $list->ttujuan; ?></td>
                                         <td style="min-width: 100px">Rp. <?php echo number_format($list->tgrandtotal); ?></td>
                                         <td><?php echo $status; ?></td>
-                                        <td style="min-width: 150px"><?php echo date('d F Y', strtotime($list->tdate)); ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <!-- <li><a href="<?php echo base_url('transaksi/edittransfer/'.$list->tnomor); ?>" class=" waves-effect waves-block">Edit Transfer Dana</a></li> -->
+                                                    <li <?php echo $style;?>><a href="<?php echo base_url('transaksi/withdrawkonfirmasi_act/'.$list->tnomor); ?>" class=" waves-effect waves-block">Konfirmasi Withdraw Dana</a></li>
+                                                    <li><a href="<?php echo base_url('transaksi/editwithdraw/'.$list->tnomor); ?>" class=" waves-effect waves-block">Edit Withdraw Dana</a></li>
                                                     <li><a href="<?php echo base_url('transaksi/hapuswithdraw/'.$list->tnomor); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>

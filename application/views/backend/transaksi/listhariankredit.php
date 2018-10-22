@@ -49,6 +49,7 @@
                                     <tr class="bg-light-blue">
                                         <th>Tanggal</th>
                                         <th>Dari Rekening</th>
+                                        <th>Tujuan</th>
                                         <th>Username</th>
                                         <th>Nominal</th>
                                         <th>Action</th>
@@ -57,6 +58,7 @@
                                 <tfoot>
                                         <th>Tanggal</th>
                                         <th>Dari Rekening</th>
+                                        <th>Tujuan</th>
                                         <th>Username</th>
                                         <th>Nominal</th>
                                         <th>Action</th>
@@ -65,10 +67,16 @@
                                 <tbody>
                                     <?php 
                                         foreach($lists as $list) { 
+                                            if(is_numeric($list->ttujuan)){
+                                                $norek = " (Nomor Rekening)";
+                                            }else{
+                                                $norek = "";
+                                            }
                                     ?>
                                     <tr>
                                         <td><?php echo date('d F Y', strtotime($list->tperiode)); ?></td>
-                                        <td><?php echo $list->tdari.'( '.$list->rnama.' - '.$list->rbank.' )'; ?></td>
+                                        <td><?php echo $list->tdari; ?></td>
+                                        <td><?php echo $list->ttujuan.$norek; ?></td>
                                         <td><a href="<?php echo base_url('transaksi/detailtransaksi/'.$idbrand.'/'.$list->$user); ?>">
                                             <?php echo $list->$user; ?></a>
                                         </td>

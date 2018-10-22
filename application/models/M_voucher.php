@@ -20,6 +20,9 @@ class M_voucher extends CI_Model {
     }
 
 
+
+
+
     //halaman backend
     public function Voucher(){
         $this->db->select('vid, vkode, vawal, vakhir, vpotongan');

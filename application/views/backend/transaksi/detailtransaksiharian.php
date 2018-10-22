@@ -62,7 +62,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
-                                <tr>
+                                <tr class="bg-light-blue">
                                     <th>Tanggal</th>
                                     <th>No Transaksi</th>
                                     <th>Rek Penerima</th>
@@ -96,7 +96,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
-                                <tr>
+                                <tr class="bg-red">
                                     <th>Tanggal</th>
                                     <th>No Transaksi</th>
                                     <th>Dari Rekening</th>
@@ -105,11 +105,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($kredits as $kredit) {  ?>
+                                <?php 
+                                    foreach($kredits as $kredit) {  
+                                    if(is_numeric($kredit->ttujuan)){
+                                        $norek = " (Nomor Rekening)";
+                                    }else{
+                                        $norek = "";
+                                    }
+                                ?>
                                 <tr>
                                     <td><?php echo date('d F Y', strtotime($kredit->tperiode)); ?></td>
                                     <td><?php echo $kredit->tnomor; ?></td>
-                                    <td><?php echo $kredit->tdari.'( '.$kredit->rnama.' - '.$kredit->rbank.' )'; ?></td>
+                                    <td><?php echo $kredit->tdari.$norek; ?></td>
                                     <td class="col-red">Rp. <?php echo number_format($kredit->tgrandtotal); ?></td>
                                     <td><span class="label bg-red"><?php echo $kredit->tketerangan; ?></span></td>
                                 </tr>
@@ -130,7 +137,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
-                                <tr>
+                                <tr class="bg-orange">
                                     <th>Tanggal</th>
                                     <th>Win/Lose</th>
                                     <th>Comm Bonus</th>
@@ -143,7 +150,7 @@
                                     if($permainan->tbonus < 0){
                                         $class1 = 'class="col-red"';
                                     }else{
-                                        $class1 = '';
+                                        $class1 = 'class="col-red"';
                                     }
                                     if($permainan->twin < 0){
                                         $class3 = 'class="col-red"';
@@ -158,7 +165,7 @@
                                     if($permainan->tmembercomm < 0){
                                         $class5 = 'class="col-red"';
                                     }else{
-                                        $class5 = '';
+                                        $class5 = 'class="col-red"';
                                     }
                                 ?>
                                 <tr>

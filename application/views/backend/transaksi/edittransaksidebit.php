@@ -19,7 +19,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="user" class="form-control" value="<?php echo $detail->$user; ?>" required>
+                                        <input type="text" name="user" class="form-control" value="<?php echo $detail->$user; ?>" readonly>
                                         <label class="form-label">Username <?php echo $brand; ?></label>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                 <input type="hidden" name="brand" value="<?php echo $idbrand; ?>">
                                 <input type="hidden" name="nomor" value="<?php echo $detail->tnomor; ?>">
                                 <input type="hidden" name="oldnominal" value="<?php echo $detail->tgrandtotal; ?>">
-                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UPDATE</button>&nbsp;&nbsp;
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UBAH</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('transaksi/listhariandebit/'.$idbrand); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>
                         </div>

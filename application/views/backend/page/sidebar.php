@@ -146,13 +146,13 @@
                 if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 3){
             ?>
             <li class="header">REPORT</li>
-<!--             <li>
-                <a href="#">
+             <li>
+                <a href="<?php echo base_url('general/reportcustomer'); ?>">
                     <i class="material-icons col-red">donut_large</i>
                     <span>Report Customer</span>
                 </a>
             </li>
-            <li>
+<!--            <li>
                 <a href="#">
                     <i class="material-icons col-pink">donut_large</i>
                     <span>Report User</span>

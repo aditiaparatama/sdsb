@@ -174,6 +174,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Saldo awal SBOBET customer '.$customer->cusersbo;
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -217,6 +218,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Saldo awal IBCBET customer '.$customer->cuseribc;
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -260,6 +262,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Saldo awal HOREY4D customer '.$customer->cuserhorey;
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -303,6 +306,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Saldo awal TANGKASNET customer '.$customer->cusertangkas;
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -346,6 +350,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Saldo awal SDSB customer '.$customer->cuser;
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -546,6 +551,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Update saldo IBCBET customer '.$this->input->post('ibcbet');
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -591,6 +597,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Update saldo HOREY4D customer '.$this->input->post('horey4d');
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -636,6 +643,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Update saldo TANGKASNET customer '.$this->input->post('tangkasnet');
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -681,6 +689,7 @@ class Customer extends CI_Controller {
 					$row['tketerangan'] = 'Update saldo SDSB customer '.$this->input->post('sdsb');
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
+					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
@@ -758,7 +767,13 @@ class Customer extends CI_Controller {
 	}
 
 	public function caricustomer(){
+	  	$this->load->model('m_brand');
 		$username	= $this->input->post("user");
+		$brand		= 'SDSB ONLINE'; 	
+		$where  	= array('bnama' => $brand);		
+		$userbrand 	= $this->m_brand->CariBrand($where); 
+		$deposit 	= $userbrand->bfield2;
+
 		$where 		= array('cuser' => $username);
 		$data['customer'] 	= $this->m_customer->SearchCustomerUsername($where);
 		$count 				= $this->m_customer->CariCustomer($where)->num_rows();
@@ -766,10 +781,12 @@ class Customer extends CI_Controller {
 			$data['bank'] 		= '';
 			$data['rekening'] 	= '';
 			$data['norek'] 		= '';
+			$data['deposit'] 	= '';
 		}else{
 			$data['bank'] 		= $data['customer']->cbank;
 			$data['rekening'] 	= $data['customer']->cnamarek;
 			$data['norek'] 		= $data['customer']->cnorek;
+			$data['deposit'] 	= number_format($data['customer']->$deposit);
 		}
 
 		$data['page']  = 'backend/customer/search';
@@ -856,12 +873,14 @@ class Customer extends CI_Controller {
 		$count 				= $this->m_customer->CariCustomer($where2)->num_rows();
 		if($count == 0){
 			$data['bank'] 		= '';
+			$data['bank'] 		= '';
 			$data['rekening'] 	= '';
-			$data['norek'] 		= '';
+			$data['deposit'] 	= '';
 		}else{
 			$data['bank'] 		= $data['customer']->cbank;
 			$data['rekening'] 	= $data['customer']->cnamarek;
 			$data['norek'] 		= $data['customer']->cnorek;
+			$data['deposit'] 	= number_format($data['customer']->$deposit);
 		}
 
 		$data['page']  = 'backend/customer/search';

@@ -31,21 +31,17 @@
                                     <tr class="bg-light-blue">
                                         <th>Tanggal</th>
                                         <th>Username</th>
-                                        <!-- <th>No Transaksi</th> -->
                                         <th>Nomor Kupon</th>
                                         <th>Total</th>
                                         <th>Status</th>
-                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tfoot>
                                         <th>Tanggal</th>
                                         <th>Username</th>
-                                        <!-- <th>No Transaksi</th> -->
                                         <th>Potongan</th>
                                         <th>Total</th>
                                         <th>Status</th>
-                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -59,10 +55,11 @@
                                     ?>
                                     <tr>
                                         <td><?php echo date('d F Y H:i:s', strtotime($list->tdate)); ?></td>
-                                        <!-- <td><?php echo $list->tnomor; ?></td> -->
+                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>">
+                                            <?php echo $list->cuser; ?>
+                                        </a></td>
                                         <td><?php echo $list->tkupon; ?></td>
-                                        <td><?php echo $list->cuser; ?></td>
-                                        <td>Rp. <?php echo number_format($list->tgrandtotal); ?></td>
+                                        <td>Rp. <?php echo number_format($list->tharga); ?></td>
                                         <td><?php echo $status; ?></td>
 <!--                                         <td>
                                             <div class="btn-group">

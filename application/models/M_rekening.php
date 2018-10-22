@@ -114,8 +114,8 @@ class M_rekening extends CI_Model {
     public function RiwayatPengeluaranRekening($id){
         $this->db->select('r.rbank, r.rnama, r.rno, r.rsaldo, t.tnomor, t.tgrandtotal, t.tketerangan, t.ttujuan, t.tdate');
         $this->db->from($this->table[1].' as r');
-        $this->db->join($this->table[2].' as t','t.tdari = r.rno','left');
-        $this->db->where('t.tdari',$id);
+        $this->db->join($this->table[2].' as t','t.trekeningdari = r.rno','left');
+        $this->db->where('t.trekeningdari',$id);
         $this->db->where('t.tsubjenis',52);
         $this->db->order_by('t.tid', "desc");
         $this->db->group_by('t.tnomor'); 

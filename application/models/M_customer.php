@@ -6,15 +6,12 @@ class M_customer extends CI_Model {
 
     public function __construct(){
       parent::__construct();
-    }
+    }    
+
     //dashboard
     function cek_login($where){      
         return $this->db->get_where($this->table[1], $where);
     }
-
-
-
-    
 
     function data_login($email,$pass){      
         $this->db->select('cid, cnama, cemail, cfoto, cdeposit');
@@ -27,7 +24,7 @@ class M_customer extends CI_Model {
     }
 
     public function DataCustomer($id){
-        $this->db->select('cid, cnama, cuser, cdeposit, cfoto, cbank, cnamarek, cnorek, cdate');
+        $this->db->select('cid, cnama, cuser, cusersbo, cuseribc, cuserhorey, cusertangkas, cdeposit, cfoto, cbank, cnamarek, cnorek, cdate, cdeposit, cdepositsbo, cdepositibc, cdeposithorey, cdeposittangkas');
         $this->db->from($this->table[1]);
         $this->db->where('cstatus', 1);
         $this->db->where('cid', $id);
@@ -35,6 +32,58 @@ class M_customer extends CI_Model {
         $data = $this->db->get()->row();
         return $data;
     }
+
+    public function DataDepositCustomer($id){
+        $this->db->select('cuser, cusersbo, cuseribc, cuserhorey, cusertangkas, cdeposit, cdepositsbo, cdepositibc, cdeposithorey, cdeposittangkas');
+        $this->db->from($this->table[1]);
+        $this->db->where('cid', $id);
+        $this->db->where('cstatus', 1);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
+    public function EditDataCustomer($id){
+        $this->db->select('*');
+        $this->db->from($this->table[1]);
+        $this->db->where('cstatus', 1);
+        $this->db->where('cid', $id);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+    public function Deposit($id){      
+        $this->db->select('cdeposit');
+        $this->db->from($this->table[1]);
+        $this->db->where('cstatus', 1);
+        $this->db->where('cid', $id);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+    // function cek_login($where){      
+    //     return $this->db->get_where($this->table[1], $where);
+    // }
+
+    // function data_login($email,$pass){      
+    //     $this->db->select('cid, cnama, cemail, cfoto, cdeposit');
+    //     $this->db->from($this->table[1]);
+    //     $this->db->where('cemail', $email);
+    //     $this->db->where('cpass', $pass);
+
+    //     $data = $this->db->get()->row();
+    //     return $data;
+    // }
+
+    // public function DataCustomer($id){
+    //     $this->db->select('cid, cnama, cuser, cdeposit, cfoto, cbank, cnamarek, cnorek, cdate');
+    //     $this->db->from($this->table[1]);
+    //     $this->db->where('cstatus', 1);
+    //     $this->db->where('cid', $id);
+
+    //     $data = $this->db->get()->row();
+    //     return $data;
+    // }
 
 
     //halaman backend
@@ -137,5 +186,26 @@ class M_customer extends CI_Model {
         $this->db->set('cdeposit', $jumlah);
         $this->db->where('cid',$id);
         $this->db->update($this->table[1]);
+    }    
+
+    public function ReportCustomer($dari,$sampai,$email){
+        $this->db->select('*');
+        $this->db->from($this->table[1]);
+        $this->db->where('cstatus', 1);
+        if($dari != '1970-01-01'){
+            $this->db->where('cdate >=', $dari);
+        }
+        if($sampai != '1970-01-01'){
+            $this->db->where('cdate <=', $sampai);
+        }else{
+            $this->db->where('cdate <=', '2020-12-13');
+        }
+        if($email != ''){
+            $this->db->where('cemail', $email);
+        }
+
+        $data = $this->db->get()->result();
+        return $data;
     }
+
 }

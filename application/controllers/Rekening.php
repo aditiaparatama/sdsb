@@ -227,6 +227,7 @@ class Rekening extends CI_Controller {
 				$record['tdate'] 		= date('Y-m-d H:i:s');
 				
 				$record2['tnomor']		= random_string('alnum', 15);;
+				$record['trekeningdari']= $saldorekening->rno;
 				$record2['tdari']		= $transfer;
 				$record2['ttujuan']		= $penerima;
 				$record2['tharga']		= $nominal;

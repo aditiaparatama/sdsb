@@ -62,7 +62,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
-                                <tr>
+                                <tr class="bg-light-blue">
                                     <th>Transaksi</th>
                                     <th style="min-width: 120px;">Sumber Dana</th>
                                     <th style="min-width: 120px;">Nominal</th>
@@ -98,7 +98,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
-                                <tr>
+                                <tr class="bg-red">
                                     <th>Transaksi</th>
                                     <th style="min-width: 180px;">Tujuan Transfer</th>
                                     <th style="min-width: 120px;">Nominal</th>

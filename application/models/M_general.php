@@ -128,7 +128,7 @@ class M_general extends CI_Model {
     public function ReportBiayaOperasional($dari,$sampai){
         $this->db->select('gname, gdolar, grate, gharga, gketerangan, gketerangan2, gperiode');
         $this->db->from($this->table[1]);
-        $this->db->where('gstatus', 4);
+        $this->db->where('gstatus', 8);
         if($dari != '1970-01-01'){
             $this->db->where('gperiode >=', $dari);
         }

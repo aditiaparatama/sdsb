@@ -96,7 +96,7 @@ class Transaksi extends CI_Controller {
 				$record['ttujuan']		= $this->input->post('transfer');
 				$record['tharga']		= $nominal;
 				$record['tgrandtotal']	= $nominal;
-				$record['tjenis']		= 4;
+				$record['tjenis']		= 1;
 				$record['tsubjenis']	= 51;
 				$record['tbrand']		= $brand;
 				$record['tsubdeposit']	= 61;
@@ -199,15 +199,9 @@ class Transaksi extends CI_Controller {
 				$data['rsaldo'] = $tambahsaldo;
 
 				$transaksi 				= $this->input->post('nomor');
-				$record['tcustomer']	= $detacustomer->cid;
-				$record['tdari']		= $detacustomer->$cus;
 				$record['ttujuan']		= $this->input->post('transfer');
 				$record['tharga']		= $nominal;
 				$record['tgrandtotal']	= $nominal;
-				$record['tjenis']		= 4;
-				$record['tsubjenis']	= 51;
-				$record['tbrand']		= $brand;
-				$record['tsubdeposit']	= 61;
 				$record['tperiode']		= date('Y-m-d H:i:s', strtotime($this->input->post('tanggal')));
 				$record['tketerangan']	= 'Deposit dana '.$userbrand->bnama.' - '.$detacustomer->$cus;
 				$record['tstatus']		= 1;
@@ -354,11 +348,12 @@ class Transaksi extends CI_Controller {
 
 				$record['tcustomer']	= $detacustomer->cid;
 				$record['tnomor']		= random_string('alnum', 15);
-				$record['tdari']		= $this->input->post('transfer');
+				$record['trekeningdari']= $saldorekening->rno;
+				$record['tdari']		= 'DEPOSIT '.$userbrand->bnama;
 				$record['ttujuan']		= $this->input->post('norek');
 				$record['tharga']		= $nominal;
 				$record['tgrandtotal']	= $nominal;
-				$record['tjenis']		= 4;
+				$record['tjenis']		= 2;
 				$record['tsubjenis']	= 52;
 				$record['tbrand']		= $brand;
 				$record['tsubdeposit'] 	= 62;
@@ -403,10 +398,12 @@ class Transaksi extends CI_Controller {
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
 		$data['idbrand'] = $userbrand->bid;
 		$data['user'] 	 = $userbrand->bfield1;
+		$data['saldo'] 	 = $userbrand->bfield2;
 		$data['brand']	 = $userbrand->bnama;
 
  		$data['detail'] = $this->m_transaksi->DetailTransaksiHarianKredit($brand,$nomor);
 		$data['lists'] 	= $this->m_rekening->Rekening();
+  	 	$data['bank'] 	= $this->m_rekening->RekeningTransfer();
 		
 		$data['title'] = 'Edit Pengeluaran Dana Withdraw '. $data['brand'].' - '.BRAND;
  		$data['page']  = 'backend/transaksi/edittransaksikredit';
@@ -468,17 +465,9 @@ class Transaksi extends CI_Controller {
 				$data['rsaldo'] 	= $tambahsaldo;
 				
 				$transaksi 				= $this->input->post('nomor');
-				$record['tcustomer']	= $detacustomer->cid;
-				$record['tdari']		= $this->input->post('transfer');
-				$record['ttujuan']		= $this->input->post('norek');
 				$record['tharga']		= $nominal;
 				$record['tgrandtotal']	= $nominal;
-				$record['tjenis']		= 4;
-				$record['tsubjenis']	= 52;
-				$record['tbrand']		= $brand;
-				$record['tsubdeposit'] 	= 62;
 				$record['tperiode']		= date('Y-m-d H:i:s', strtotime($this->input->post('tanggal')));
-				$record['tketerangan']  = 'Withdraw dana harian '.$userbrand->bnama.' - '.$user;;
 				$record['tstatus']		= 1;
 				$record['tuser'] 		= $this->session->userdata('id');
 				$record['tdate'] 		= date('Y-m-d H:i:s');
@@ -493,7 +482,7 @@ class Transaksi extends CI_Controller {
 	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 				}else{
 					$jmhwithdraw			   = $report->rjmhwithdraw;
-					$jmhwithdrawrp			   = $report->rjmhwithdrawrp-$nominal;
+					$jmhwithdrawrp			   = $report->rjmhwithdrawrp+$nominal-$oldnominal;
 					
 					$periode				   = $periode;
 					$report2['rjmhwithdraw']   = $jmhwithdraw;
@@ -588,8 +577,8 @@ class Transaksi extends CI_Controller {
 		  		$user 	 = $this->input->post('user');
 		  		$brand 	 = $this->input->post('brand');
 		  		$sbrand  = $this->input->post('idbrand');
-		  		$comm 	 = $this->input->post('commbonus');
-		  		$referal = $this->input->post('referral');
+		  		$comm    = str_replace(".", "", $this->input->post('commbonus'));
+		  		$referal = str_replace(".", "", $this->input->post('referral'));
 				$periode = date('Y-m-d', strtotime($this->input->post('tanggal')));
 
 				$cbrand  	= array('bid' => $brand);
@@ -628,35 +617,40 @@ class Transaksi extends CI_Controller {
 		  			$tujuan 	= '';
 		  			$keterangan = 'Data Permainan Harian '.$userbrand->bnama.' - '.$user;
 		  		}
-  	 			$tambahsaldo 	= $saldorekening->rsaldo-$calcu;
+  	 			$tambahsaldo 			= $saldorekening->rsaldo-$calcu;
 
 				$record['tcustomer']	= $detacustomer->cid;
 				$record['tnomor']		= random_string('alnum', 15);
+				$record['trekeningdari']= $saldorekening->rno;
 				$record['tdari']		= $dari;
 				$record['ttujuan']		= $tujuan;
 				$record['twin']			= $this->input->post('win');
 				$record['tlose']		= $this->input->post('lose');
-				$record['tmembercomm']	= $this->input->post('commbonus');
-				$record['tbonus']		= $this->input->post('referral');
+				$record['tmembercomm']	= str_replace(".", "", $this->input->post('commbonus'));
+				$record['tbonus']		= str_replace(".", "", $this->input->post('referral'));
 				$record['tharga']		= $calcu;
 				$record['tgrandtotal']	= $calcu;
-				$record['tjenis']		= 9;
+				$record['tjenis']		= 6;
 				$record['tsubjenis']	= $subjenis;
 				$record['tbrand']		= $brand;
 				$record['tsubbrand']	= $this->input->post('idbrand');
-				$record['tketerangan']  = $keterangan;
+				$record['tsubdeposit']  = 61;
+ 				$record['tketerangan']  = $keterangan;
 				$record['tperiode']		= date('Y-m-d H:i:s', strtotime($this->input->post('tanggal')));
 				$record['tstatus']		= 1;
 				$record['tuser'] 		= $this->session->userdata('id');
 				$record['tdate'] 		= date('Y-m-d H:i:s');
+
+				$idcus 					= $detacustomer->cid;
+				$row[$depo] 			= $detacustomer->$depo+$comm+$referal;	
 
 				$rekening 				= $saldorekening->rno;
 				$data['rsaldo'] 		= $tambahsaldo;
 
 				if($report == NULL){
 					$winlose 		   = $this->input->post('win')-$this->input->post('lose');
-					$commbonus 		   = $this->input->post('commbonus');
-					$referral 		   = $this->input->post('referral');
+					$commbonus 		   = str_replace(".", "", $this->input->post('commbonus'));
+					$referral 		   = str_replace(".", "", $this->input->post('referral'));
 
 					$akumulasiwinlose  = $winlose;
 					$akumulasicomm	   = $commbonus;
@@ -675,9 +669,9 @@ class Transaksi extends CI_Controller {
 
 	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 				}else{
-					$winlose			= $this->input->post('win')-$this->input->post('lose');
-					$commbonus 		   	= $this->input->post('commbonus');
-					$referral 		   	= $this->input->post('referral');
+					$winlose		   = $this->input->post('win')-$this->input->post('lose');
+					$commbonus 		   = str_replace(".", "", $this->input->post('commbonus'));
+					$referral 		   = str_replace(".", "", $this->input->post('referral'));
 
 					$jmhwinlose		   = $report->$labarugi+$winlose;
 					$akumulasiwinlose  = $report->rtotalwinlose+$winlose;
@@ -698,6 +692,7 @@ class Transaksi extends CI_Controller {
 	
 	  	 		$this->m_transaksi->SaveTransaksi($record);	
   	 			$this->m_rekening->UpdateSaldo($rekening, $data);	
+ 				$this->m_customer->EditCustomerAct($idcus, $row);
 	       		redirect(base_url().'transaksi/listharianpermainan/'.$brand);
 		  	}
 	    }
@@ -720,7 +715,6 @@ class Transaksi extends CI_Controller {
 		}else{
 			$data['lists']   = $this->m_brand->SingleBrand($brand);
 		}
-
  		$data['detail'] = $this->m_transaksi->DetailTransaksiHarianPermainan($brand,$nomor);
 		
 		$data['title'] = 'Edit Data Permainan '. $data['brand'].' - '.BRAND;
@@ -745,8 +739,8 @@ class Transaksi extends CI_Controller {
 		  		$user 	 = $this->input->post('user');
 		  		$brand 	 = $this->input->post('brand');
 		  		$sbrand  = $this->input->post('idbrand');
-		  		$comm 	 = $this->input->post('commbonus');
-		  		$referal = $this->input->post('referral');
+		  		$comm    = str_replace(",", "", $this->input->post('commbonus'));
+		  		$referal = str_replace(",", "", $this->input->post('referral'));
 		  		$oldtotal= $this->input->post('oldtotal');
 				$periode = date('Y-m-d', strtotime($this->input->post('tanggal')));
 
@@ -789,15 +783,16 @@ class Transaksi extends CI_Controller {
   	 			$tambahsaldo 	= $saldorekening->rsaldo+$oldtotal-$calcu;
 
 				$transaksi 				= $this->input->post('nomor');
+				$record['trekeningdari']= $saldorekening->rno;
 				$record['tdari']		= $dari;
 				$record['ttujuan']		= $tujuan;
 				$record['twin']			= $this->input->post('win');
 				$record['tlose']		= $this->input->post('lose');
-				$record['tmembercomm']	= $this->input->post('commbonus');
-				$record['tbonus']		= $this->input->post('referral');
+				$record['tmembercomm']	= str_replace(",", "", $this->input->post('commbonus'));
+				$record['tbonus']		= str_replace(",", "", $this->input->post('referral'));
 				$record['tharga']		= $calcu;
 				$record['tgrandtotal']	= $calcu;
-				$record['tjenis']		= 9;
+				$record['tjenis']		= 6;
 				$record['tsubjenis']	= $subjenis;
 				$record['tbrand']		= $brand;
 				$record['tsubbrand']	= $this->input->post('idbrand');
@@ -807,13 +802,16 @@ class Transaksi extends CI_Controller {
 				$record['tuser'] 		= $this->session->userdata('id');
 				$record['tdate'] 		= date('Y-m-d H:i:s');
 
+				$idcus 					= $detacustomer->cid;
+				$row[$depo] 			= $detacustomer->$depo-$this->input->post('oldtotal')+$calcu;	
+
 				$rekening 				= $saldorekening->rno;
 				$data['rsaldo'] 		= $tambahsaldo;
 
 				if($report == NULL){
 					$winlose 		   = $this->input->post('win')-$this->input->post('lose');
-					$commbonus 		   = $this->input->post('commbonus');
-					$referral 		   = $this->input->post('referral');
+					$commbonus 		   = str_replace(",", "", $this->input->post('commbonus'));
+					$referral 		   = str_replace(",", "", $this->input->post('referral'));
 
 					$akumulasiwinlose  = $winlose;
 					$akumulasicomm	   = $commbonus;
@@ -833,8 +831,8 @@ class Transaksi extends CI_Controller {
 	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 				}else{
 					$winlose			= $this->input->post('win')-$this->input->post('lose');
-					$commbonus 		   	= $this->input->post('commbonus');
-					$referral 		   	= $this->input->post('referral');
+					$commbonus 		   	= str_replace(",", "", $this->input->post('commbonus'));
+					$referral 		   	= str_replace(",", "", $this->input->post('referral'));
 
 					$oldwinlose			= $this->input->post('oldwin')-$this->input->post('oldlose');
 					$oldcommbonus 		= $this->input->post('oldcomm');
@@ -859,6 +857,7 @@ class Transaksi extends CI_Controller {
 
 	  	 		$this->m_transaksi->UpdateTransaksi($transaksi, $record);
  				$this->m_rekening->UpdateSaldo($rekening, $data);		
+ 				$this->m_customer->EditCustomerAct($idcus, $row);
 	       		redirect(base_url().'transaksi/listharianpermainan/'.$brand);
 		  	}
 	    }
@@ -1027,6 +1026,7 @@ class Transaksi extends CI_Controller {
 				$data['tketerangan'] = 'Deposit customer sdsb '.$customer->cuser;
 				$data['tstatus']	 = 1;
 				$data['tuser'] 		 = $this->session->userdata('id');
+				$data['tperiode'] 	 = date('Y-m-d');
 				$data['tdate'] 		 = date('Y-m-d H:i:s');
 
 				$idcus 				= $customer->cid;
@@ -1067,10 +1067,14 @@ class Transaksi extends CI_Controller {
 			redirect(base_url('cmskita'));
 		}
 	  	$this->load->model('m_customer');
+	  	$this->load->model('m_reportlabarugi');
+	  	$date 	  = date('Y-m-d');
  		$transaksi  = $this->m_transaksi->DetailDeposit($nomor);
 		$where 	 	= array('cid' => $transaksi->tcustomer);
  		$customer 	= $this->m_customer->CariDataCustomer($where);
 		$rekening 	= $this->m_rekening->RekeningPenerima();
+		$cperiode   = array('rperiode' => $date);		
+		$report     = $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
 		$calcucus 	= $transaksi->tgrandtotal+$customer->cdeposit;
 		$calcurek 	= $rekening->rsaldo+$transaksi->tgrandtotal;
@@ -1083,6 +1087,26 @@ class Transaksi extends CI_Controller {
 
 		$idtran 			= $transaksi->tnomor;
 		$record['tstatus']	= 1;
+		$record['tuser']	= $this->session->userdata('id');
+
+		if($report == NULL){
+			$report['rperiode']		 = $date;
+			$report['rjmhdeposit']	 = 1;
+			$report['rjmhdepositrp'] = $transaksi->tgrandtotal;
+			$report['rstatus']		 = 1;
+			$report['rdate']		 = date('Y-m-d H:i:s');
+
+	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+		}else{
+			$jmhdeposit		= $report->rjmhdeposit+1;
+			$jmhdepositrp	= $report->rjmhdepositrp+$transaksi->tgrandtotal;
+			
+			$periode				  = $date;
+			$report2['rjmhdeposit']	  = $jmhdeposit;
+			$report2['rjmhdepositrp'] = $jmhdepositrp;
+
+	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+		}
 
  		$this->m_rekening->UpdateSaldo($idrek, $data);	
  		$this->m_customer->EditCustomerAct($idcus, $row);
@@ -1134,15 +1158,11 @@ class Transaksi extends CI_Controller {
 	  			$this->load->model('m_nomor');
 				$this->load->model('m_general');
 	  			$this->load->model('m_customer');
-	  			$this->load->model('m_reportlabarugi');
-	  			$date 	  	= date('Y-m-d');
 	  			$id 		= $this->input->post("userid");
 				$cusdepo 	= $this->input->post("deposito");
 				$jumlah 	= $this->input->post("jumlah");
 				$nomor  	= random_string('alnum', 15);
 				$rekening 	= $this->m_rekening->RekeningPenerima();
-		  		$cperiode 	= array('rperiode' => $date);		
-				$report   	= $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
 
 		  		if($jumlah == 0 || $jumlah == ''){
@@ -1156,13 +1176,14 @@ class Transaksi extends CI_Controller {
 						$calculate 	= $potongan->gdiskon/100*$total;
 						$diskon 	= $potongan->gdiskon;
 						$bruto 		= $total-$calculate; 
+						$total 		= $total-$calculate; 
 		 			}else{
 		 				$diskon 	= 0;
 		 				$harga 		= $this->m_general->SearchHarga();
 						$bruto		= $jumlah*$harga->gharga;
+		 				$total 		= $jumlah*$harga->gharga;
 		 			}
-		 			$harga	= $this->m_general->SearchHarga();
-		 			$total 	= $jumlah*$harga->gharga;
+		 			// $harga	= $this->m_general->SearchHarga();
 		  		}
 
 		  		if($cusdepo < $total){
@@ -1188,12 +1209,11 @@ class Transaksi extends CI_Controller {
 						$data['tdari'] 		= $this->input->post("user");
 						$data['ttujuan'] 	= $rekening->rno;
 						$data['tjenis'] 	= 3;
-						// $data['tsubjenis'] 	= 51;
 						$data['tsubdeposit']= 62;
 						$data['tbrand'] 	= 5;
 						$data['tketerangan']= 'Pembelian nomor kupon sdsb '.$this->input->post("user") ;
 						$data['tstatus']	= 1;
-						$data['tperiode']	= $date;
+						$data['tperiode']	= date('Y-m-d');
 						$data['tuser']		= $this->session->userdata('id');
 						$data['tdate'] 		= date('Y-m-d H:i:s');
 						$row['ncustomer']	= $id;
@@ -1211,12 +1231,11 @@ class Transaksi extends CI_Controller {
 						$data['tdari'] 		= $this->input->post("user");
 						$data['ttujuan'] 	= $rekening->rno;
 						$data['tjenis'] 	= 3;
-						// $data['tsubjenis'] 	= 51;
 						$data['tsubdeposit']= 62;
 						$data['tbrand'] 	= 5;
 						$data['tketerangan']= 'Pembelian nomor kupon sdsb '.$this->input->post("user") ;
 						$data['tstatus']	= 1;
-						$data['tperiode']	= $date;
+						$data['tperiode']	= date('Y-m-d');
 						$data['tuser']		= $this->session->userdata('id');
 						$data['tdate'] 		= date('Y-m-d H:i:s');
 						$row['ncustomer']	= $id;
@@ -1226,27 +1245,7 @@ class Transaksi extends CI_Controller {
 	  	 				$this->m_nomor->SaveNomor($row);	
 			  	 	}
 				} 
-
-				if($report == NULL){
-					$report['rperiode']		 = $date;
-					$report['rjmhdeposit']	 = 1;
-					$report['rjmhdepositrp'] = $total;
-					$report['rstatus']		 = 1;
-					$report['rdate']		 = date('Y-m-d H:i:s');
-
-	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
-				}else{
-					$jmhdeposit		= $report->rjmhdeposit+1;
-					$jmhdepositrp	= $report->rjmhdepositrp+$total;
-					
-					$periode				  = $date;
-					$report2['rjmhdeposit']	  = $jmhdeposit;
-					$report2['rjmhdepositrp'] = $jmhdepositrp;
-
-	  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
-				}
-		
- 				// $this->m_rekening->UpdateSaldo($idrek,$record);	
+			
 			  	$this->m_customer->UpdateDeposit($id,$updatedeposit);
 				redirect(base_url('transaksi/listkupon'));
 		  	}
@@ -1299,7 +1298,6 @@ class Transaksi extends CI_Controller {
 		  	} else { 	
 	  			$this->load->model('m_customer');
 	  			$this->load->model('m_brand');
-	  			$date 	  	= date('Y-m-d');
 	  			$nominal 	= str_replace(".", "", $this->input->post('nominal'));
 				$brand		= $this->input->post("brand");
 				$user	 	= $this->input->post("user");
@@ -1340,6 +1338,7 @@ class Transaksi extends CI_Controller {
 				$data['tketerangan'] = 'Transfer dana customer ke '.$this->input->post('tujuan').' - '.$customer->cuser;
 				$data['tstatus']	 = 1;
 				$data['tuser'] 		 = $this->session->userdata('id');
+				$data['tperiode'] 	 = date('Y-m-d');
 				$data['tdate'] 		 = date('Y-m-d H:i:s');
 
 				$idcus 				 = $customer->cid;
@@ -1360,7 +1359,7 @@ class Transaksi extends CI_Controller {
 		 if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));
 		}
- 		$data['detail'] = $this->m_transaksi->DetailTransferDana($nomor);
+ 		$data['detail'] = $this->m_transaksi->TransferDana($nomor);
 		$data['lists']	= $this->m_rekening->Rekening();
 		$data['brands'] = $this->m_brand->Brand();
 		
@@ -1385,17 +1384,21 @@ class Transaksi extends CI_Controller {
 		  	} else { 	
 	  			$this->load->model('m_customer');
 	  			$this->load->model('m_brand');
-	  			$nominal 	= str_replace(",", "", $this->input->post('nominal'));
-	  			$oldnominal = $this->input->post("oldnominal");
-				$brand		= $this->input->post("brand");
-				$user	 	= $this->input->post("user");
-				$tujuan	 	= $this->input->post("tujuan");
-		  		$where  	= array('bnama' => $brand);		
-		  		$cektujuan  = array('bnama' => $tujuan);		
-				$userbrand 	= $this->m_brand->CariBrand($where);
-				$tujuan 	= $this->m_brand->CariBrand($cektujuan);
-				$deposit 	= $userbrand->bfield2;			
-				$deposit2 	= $tujuan->bfield2;	
+	  			$nominal 		= str_replace(",", "", $this->input->post('nominal'));
+	  			$oldnominal 	= $this->input->post("oldnominal");
+				$brand			= $this->input->post("brand");
+				$user	 		= $this->input->post("user");
+				$tujuan	 		= $this->input->post("tujuan");
+				$oldtujuan  	= $this->input->post("oldtujuan");
+		  		$where  		= array('bnama' => $brand);		
+		  		$cektujuan  	= array('bnama' => $tujuan);	
+		  		$cekoldtujuan 	= array('bnama' => $oldtujuan);		
+				$userbrand 		= $this->m_brand->CariBrand($where);
+				$tujuan 		= $this->m_brand->CariBrand($cektujuan);
+				$oldtujuan 		= $this->m_brand->CariBrand($cekoldtujuan);
+				$deposit 		= $userbrand->bfield2;			
+				$deposit2 		= $tujuan->bfield2;			
+				$deposit3 		= $oldtujuan->bfield2;		
 
 				$where2 = array(
 				    $userbrand->bfield1 => $user
@@ -1411,8 +1414,18 @@ class Transaksi extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, deposit tidak mencukupi!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
-		  		$cuscalcu = $customer->$deposit+$oldnominal-$nominal;
-		  		$cuskirim = $customer->$deposit2-$oldnominal+$nominal;
+		  		if($tujuan != $oldtujuan){
+					$idcus 				   		= $customer->cid;
+					$old[$oldtujuan->bfield2] 	= $customer->$deposit3-$oldnominal;
+			  		$this->m_customer->EditCustomerAct($idcus,$old);
+		  		}
+		  		if($customer->$deposit2 == 0){
+		  			$cuskirim = $customer->$deposit2+$nominal;
+		  			$cuscalcu = $customer->$deposit+$oldnominal-$nominal;
+			  	}else{
+			  		$cuskirim = $customer->$deposit2-$oldnominal+$nominal;
+		  			$cuscalcu = $customer->$deposit+$oldnominal-$nominal;
+			  	}
 
 				$transaksi 				= $this->input->post('nomor');
 				$record['tdari']	 	= $this->input->post('dari');
@@ -1425,11 +1438,11 @@ class Transaksi extends CI_Controller {
 				$record['tketerangan'] 	= 'Transfer dana customer ke '.$this->input->post('tujuan').' - '.$customer->cuser;
 				$record['tstatus']	 	= 1;
 				$record['tuser'] 		= $this->session->userdata('id');
+				$record['tperiode'] 	= date('Y-m-d');
 				$record['tdate'] 		= date('Y-m-d H:i:s');
 
 				$idcus 				 	= $customer->cid;
 				$data[$deposit]  	 	= $cuscalcu;
-				// var_dump($data[$deposit]);die();
 
 				$idcus 				   	= $customer->cid;
 				$row[$tujuan->bfield2] 	= $cuskirim;
@@ -1440,6 +1453,55 @@ class Transaksi extends CI_Controller {
 	       		redirect(base_url().'transaksi/listtransfer');
 		  	}
 	    }
+	}
+
+	public function transferkonfirmasi_act($nomor){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+		$this->load->model('m_customer');
+		$this->load->model('m_brand');
+ 		$transaksi  = $this->m_transaksi->DetailTransferDana($nomor);
+		$nominal 	= $transaksi->tgrandtotal;
+  		$where  	= array('bid' => $transaksi->tbrand);		
+  		$cektujuan  = array('bnama' => $transaksi->ttujuan);	
+		$userbrand 	= $this->m_brand->CariBrand($where);
+		$tujuan 	= $this->m_brand->CariBrand($cektujuan);
+		$deposit 	= $userbrand->bfield2;		
+		$deposit2 	= $tujuan->bfield2;	
+		$user 		= $userbrand->bfield1;
+
+		$where2 = array(
+		    $userbrand->bfield1 => $transaksi->$user
+	    );
+
+  		$customer = $this->m_customer->CariDataCustomer($where2);
+  		$count 	  = $this->m_customer->CariCustomer($where2)->num_rows();	
+	  	if($count == 0){
+            $this->session->set_flashdata('warning', 'Maaf, user tidak ditemukan!');
+			redirect($_SERVER['HTTP_REFERER']);
+  		}
+  		if($customer->$deposit < $transaksi->tgrandtotal){
+            $this->session->set_flashdata('warning', 'Maaf, deposit tidak mencukupi!');
+			redirect($_SERVER['HTTP_REFERER']);
+  		}
+  		$cuscalcu = $customer->$deposit-$transaksi->tgrandtotal;
+  		$cuskirim = $customer->$deposit2+$transaksi->tgrandtotal;
+
+		$idtran 			= $transaksi->tnomor;
+		$record['tstatus']	= 1;
+		$record['tuser']	= $this->session->userdata('id');
+
+		$idcus 				= $customer->cid;
+		$record2[$deposit]  = $cuscalcu;
+
+		$idcus 				= $customer->cid;
+		$row[$deposit2] 	= $cuskirim;
+
+ 		$this->m_transaksi->UpdateTransaksi($idtran, $record);
+	  	$this->m_customer->EditCustomerAct($idcus,$record2);
+	  	$this->m_customer->EditCustomerAct($idcus,$row);
+   		redirect(base_url().'transaksi/listtransfer/');
 	}
 
  	public function hapustransfer($nomor){
@@ -1481,7 +1543,7 @@ class Transaksi extends CI_Controller {
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('brand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('user', 'user', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('nominal', 'Nominal Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('nominal', 'Nominal Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('rekening', 'Rekening Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
@@ -1489,12 +1551,16 @@ class Transaksi extends CI_Controller {
 		  	} else { 	
 	  			$this->load->model('m_customer');
 	  			$this->load->model('m_brand');
-	  			$nominal 	= $this->input->post("nominal");
+	  			$this->load->model('m_reportlabarugi');
+	  			$date 	    = date('Y-m-d');
+	  			$nominal 	= str_replace(".", "", $this->input->post('nominal'));
 				$brand		= $this->input->post("brand");
 				$user	 	= $this->input->post("user");
 		  		$where  	= array('bnama' => $brand);		
 				$userbrand 	= $this->m_brand->CariBrand($where);
 				$deposit 	= $userbrand->bfield2;		
+		  		$cperiode 	= array('rperiode' => $date);		
+				$report   	= $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
 				$where2 = array(
 				    $userbrand->bfield1 => $user
@@ -1520,17 +1586,19 @@ class Transaksi extends CI_Controller {
 
 				$data['tcustomer']	 = $customer->cid;
 				$data['tnomor']		 = random_string('alnum', 15);
+				$data['trekeningdari'] = $rekening->rno;
 				$data['tdari']	 	 = $this->input->post('dari');
 				$data['ttujuan']	 = $this->input->post('tujuan');
 				$data['tharga']		 = $nominal;
 				$data['tgrandtotal'] = $nominal;
-				$data['tjenis']		 = 7;
+				$data['tjenis']		 = 2;
 				$data['tsubjenis']	 = 52;
 				$data['tbrand']		 = $userbrand->bid;
-				$data['tsubdeposit'] = 62;
+				$data['tsubdeposit'] = 64;
 				$data['tketerangan'] = 'Withdraw dana customer '.$customer->cuser;
 				$data['tstatus']	 = 1;
 				$data['tuser'] 		 = $this->session->userdata('id');
+				$data['tperiode'] 	 = $date;
 				$data['tdate'] 		 = date('Y-m-d H:i:s');
 
 				$idrek 				 = $rekening->rno;
@@ -1539,12 +1607,211 @@ class Transaksi extends CI_Controller {
 				$idcus 				 = $customer->cid;
 				$record[$deposit]  	 = $cuscalcu;
 
+				if($report == NULL){
+					$report['rperiode']		  = $date;
+					$report['rjmhwithdraw']	  = 1;
+					$report['rjmhwithdrawrp'] = $nominal;
+					$report['rstatus']		  = 1;
+					$report['rdate']		  = date('Y-m-d H:i:s');
+
+	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+				}else{
+					$jmhwithdraw		= $report->rjmhwithdraw+1;
+					$jmhwithdrawrp		= $report->rjmhwithdrawrp+$nominal;
+					
+					$periode				   = $date;
+					$report2['rjmhwithdraw']   = $jmhwithdraw;
+					$report2['rjmhwithdrawrp'] = $jmhwithdrawrp;
+
+	  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+				}
+
 	  	 		$this->m_transaksi->SaveTransaksi($data);	
  				$this->m_rekening->UpdateSaldo($idrek,$row);	
 			  	$this->m_customer->EditCustomerAct($idcus,$record);
 	       		redirect(base_url().'transaksi/listwithdraw/');
 		  	}
 	    }
+	}
+
+	public function editwithdraw($nomor){
+		 if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+ 		$data['detail'] 	= $this->m_transaksi->DetailWithdrawDana($nomor);
+		$data['transfer'] 	= $this->m_rekening->RekeningTransfer();
+  		$where  			= array('bid' => $data['detail']->tbrand);		
+		$userbrand 			= $this->m_brand->CariBrand($where);
+		$username 			= $userbrand->bfield1;
+		$deposit 			= $userbrand->bfield2;
+		$data['user'] 		= $data['detail']->$username;
+		$data['sumber'] 	= 'DEPOSIT '.$userbrand->bnama;
+		$data['deposit'] 	= $data['detail']->$deposit+$data['detail']->tgrandtotal;
+
+		
+		$data['title'] = 'Edit Withdraw Dana - '.BRAND;
+ 		$data['page']  = 'backend/transaksi/editwithdraw';
+ 		$this->load->view('backend/thamplate', $data);
+	}
+
+	public function editwithdraw_act(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('nominal', 'Pemilik Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+				redirect($_SERVER['HTTP_REFERER']);
+		  	} else { 	
+	  			$this->load->model('m_customer');
+	  			$this->load->model('m_brand');
+	  			$this->load->model('m_reportlabarugi');
+	  			$date 	    = date('Y-m-d');
+	  			$nominal 	= str_replace(",", "", $this->input->post('nominal'));
+	  			$oldnominal = $this->input->post("oldnominal");
+				$brand		= $this->input->post("brand");
+				$user	 	= $this->input->post("user");
+		  		$where  	= array('bnama' => $brand);		
+				$userbrand 	= $this->m_brand->CariBrand($where);
+				$deposit 	= $userbrand->bfield2;		
+		  		$cperiode 	= array('rperiode' => $date);		
+				$report   	= $this->m_reportlabarugi->CariLabaRugi($cperiode);
+
+				$where2 = array(
+				    $userbrand->bfield1 => $user
+			    );
+
+				$rekening = $this->m_rekening->RekeningTransfer();
+		  		$customer = $this->m_customer->CariDataCustomer($where2);
+		  		$count 	  = $this->m_customer->CariCustomer($where2)->num_rows();	
+			  	if($count == 0){
+		            $this->session->set_flashdata('warning', 'Maaf, user tidak ditemukan!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($customer->$deposit+$oldnominal < $nominal){
+		            $this->session->set_flashdata('warning', 'Maaf, deposit tidak mencukupi!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($rekening->rsaldo < $nominal){
+		   		$this->session->set_flashdata('warning', 'Maaf, rekening saldo tidak mencukupi!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+
+		  		$cuscalcu = $customer->$deposit+$nominal-$oldnominal;
+		  		$rekcalcu = $rekening->rsaldo-$nominal+$oldnominal;
+
+				$transaksi	 		 = $this->input->post("nomor");
+				$data['tstatus']	 = 1;
+				$data['tharga']	 	 = $nominal;
+				$data['tgrandtotal'] = $nominal;
+				$data['tuser'] 		 = $this->session->userdata('id');
+				$data['tperiode'] 	 = $date;
+
+				$idcus 				 = $customer->cid;
+				$record[$deposit]  	 = str_replace("-", "", $cuscalcu);
+
+				$idrek 				 = $rekening->rno;
+				$row['rsaldo'] 		 = $rekcalcu;
+
+				if($report == NULL){
+					$report['rperiode']		  = $date;
+					$report['rjmhwithdraw']	  = 1;
+					$report['rjmhwithdrawrp'] = $nominal;
+					$report['rstatus']		  = 1;
+					$report['rdate']		  = date('Y-m-d H:i:s');
+
+	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
+				}else{
+					$jmhwithdrawrp		= $report->rjmhwithdrawrp+$nominal-$oldnominal;
+					
+					$periode				   = $date;
+					$report2['rjmhwithdrawrp'] = $jmhwithdrawrp;
+
+	  	 			$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+				}
+
+	  	 		$this->m_transaksi->UpdateTransaksi($transaksi, $data);	
+ 				$this->m_rekening->UpdateSaldo($idrek,$row);	
+			  	$this->m_customer->EditCustomerAct($idcus,$record);
+	       		redirect(base_url().'transaksi/listwithdraw');
+		  	}
+	    }
+	}
+
+	public function withdrawkonfirmasi_act($nomor){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+		$this->load->model('m_customer');
+		$this->load->model('m_brand');
+		$this->load->model('m_reportlabarugi');
+ 		$transaksi  = $this->m_transaksi->DetailWithdrawDana($nomor);
+	  	$date 	    = date('Y-m-d');
+	  	$nominal 	= $transaksi->tgrandtotal;
+		$user	 	= $this->input->post("user");
+  		$where  	= array('bnama' => $transaksi->bnama);		
+		$userbrand 	= $this->m_brand->CariBrand($where);
+		$deposit 	= $userbrand->bfield2;		
+  		$cperiode 	= array('rperiode' => $date);		
+		$report   	= $this->m_reportlabarugi->CariLabaRugi($cperiode);
+		$user 		= $userbrand->bfield1;
+
+		$where2 = array(
+		    $userbrand->bfield1 => $transaksi->$user
+	    );
+
+		$rekening = $this->m_rekening->RekeningTransfer();
+  		$customer = $this->m_customer->CariDataCustomer($where2);
+  		$count 	  = $this->m_customer->CariCustomer($where2)->num_rows();	
+	  	if($count == 0){
+            $this->session->set_flashdata('warning', 'Maaf, user tidak ditemukan!');
+			redirect($_SERVER['HTTP_REFERER']);
+  		}
+  		if($customer->$deposit < $nominal){
+            $this->session->set_flashdata('warning', 'Maaf, deposit tidak mencukupi!');
+			redirect($_SERVER['HTTP_REFERER']);
+  		}
+  		if($rekening->rsaldo < $nominal){
+   		$this->session->set_flashdata('warning', 'Maaf, rekening saldo tidak mencukupi!');
+			redirect($_SERVER['HTTP_REFERER']);
+  		}
+  		$cuscalcu = $customer->$deposit-$nominal;
+  		$rekcalcu = $rekening->rsaldo-$nominal;
+
+		$idtran	 			 = $transaksi->tnomor;
+		$data['tstatus']	 = 1;
+		$data['tuser'] 		 = $this->session->userdata('id');
+
+		$idrek 				 = $rekening->rno;
+		$row['rsaldo'] 		 = $rekcalcu;
+
+		$idcus 				 = $customer->cid;
+		$record[$deposit]  	 = $cuscalcu;
+
+		if($report == NULL){
+			$report['rperiode']		  = $date;
+			$report['rjmhwithdraw']	  = 1;
+			$report['rjmhwithdrawrp'] = $nominal;
+			$report['rstatus']		  = 1;
+			$report['rdate']		  = date('Y-m-d H:i:s');
+
+	 		$this->m_reportlabarugi->SaveLabaRugi($report);	
+		}else{
+			$jmhwithdraw		= $report->rjmhwithdraw+1;
+			$jmhwithdrawrp		= $report->rjmhwithdrawrp+$nominal;
+			
+			$periode				   = $date;
+			$report2['rjmhwithdraw']   = $jmhwithdraw;
+			$report2['rjmhwithdrawrp'] = $jmhwithdrawrp;
+
+	 		$this->m_reportlabarugi->EditRugiLaba($periode, $report2);	
+		}
+
+ 		$this->m_transaksi->UpdateTransaksi($idtran, $data);
+		$this->m_rekening->UpdateSaldo($idrek,$row);	
+	  	$this->m_customer->EditCustomerAct($idcus,$record);
+   		redirect(base_url().'transaksi/listwithdraw/');
 	}
 
  	public function hapuswithdraw($nomor){

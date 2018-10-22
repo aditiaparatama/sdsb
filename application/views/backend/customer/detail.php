@@ -160,7 +160,7 @@
                                     <th style="min-width: 120px;">Brand</th>
                                     <th style="min-width: 120px;">Nominal</th>
                                     <th>Keterangan</th>
-                                    <th style="min-width: 200px;">Date</th>
+                                    <th style="min-width: 130px;">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,7 +172,7 @@
                                     <td><?php echo $data->bnama; ?></td>
                                     <td>Rp. <?php echo number_format($data->tgrandtotal); ?></td>
                                     <td><span class="label bg-blue-grey"><?php echo $data->tketerangan; ?></span></td>
-                                    <td><?php echo date('d F Y H:i:s', strtotime($data->tdate)); ?></td>
+                                    <td><?php echo date('d F Y', strtotime($data->tperiode)); ?></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
@@ -196,7 +196,7 @@
                                     <th style="min-width: 120px;">Brand</th>
                                     <th style="min-width: 120px;">Nominal</th>
                                     <th>Keterangan</th>
-                                    <th style="min-width: 200px;">Date</th>
+                                    <th style="min-width: 130px;">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -208,7 +208,7 @@
                                         <td><?php echo $row->bnama; ?></td>
                                         <td class="col-red">Rp. <?php echo number_format($row->tgrandtotal); ?></td>
                                         <td><span class="label bg-red"><?php echo $row->tketerangan; ?></span></td>
-                                        <td><?php echo date('d F Y H:i:s', strtotime($row->tdate)); ?></td>
+                                        <td><?php echo date('d F Y', strtotime($row->tperiode)); ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

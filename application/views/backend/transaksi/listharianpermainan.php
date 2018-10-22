@@ -66,7 +66,7 @@
                                         if($list->tbonus < 0){
                                             $class1 = 'class="col-red"';
                                         }else{
-                                            $class1 = '';
+                                            $class1 = 'class="col-red"';
                                         }
                                         if($list->twin < 0){
                                             $class3 = 'class="col-red"';
@@ -81,7 +81,7 @@
                                         if($list->tmembercomm < 0){
                                             $class5 = 'class="col-red"';
                                         }else{
-                                            $class5 = '';
+                                            $class5 = 'class="col-red"';
                                         }
                                     ?>
                                     <tr>
@@ -93,10 +93,10 @@
                                         	<span <?php echo $class3; ?>><?php echo $list->twin.'</span>/<span '.$class4.'>'.$list->tlose; ?></span>
                                         </td>
                                         <td <?php echo $class5; ?>>
-                                        	<?php echo $list->tmembercomm; ?>
+                                        	Rp. <?php echo number_format($list->tmembercomm); ?>
                                         </td>
                                         <td <?php echo $class1; ?>>
-                                            <?php echo $list->tbonus; ?>
+                                            Rp. <?php echo number_format($list->tbonus); ?>
                                         </td>
                                         <td>
                                             <div class="btn-group">

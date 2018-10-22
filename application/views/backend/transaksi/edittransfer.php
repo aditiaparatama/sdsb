@@ -67,7 +67,8 @@
                                 <input type="hidden" name="cid" value="<?php echo $detail->cid; ?>">
                                 <input type="hidden" name="nomor" value="<?php echo $detail->tnomor; ?>">
                                 <input type="hidden" name="oldnominal" value="<?php echo $detail->tgrandtotal; ?>">
-                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UPDATE</button>&nbsp;&nbsp;
+                                <input type="hidden" name="oldtujuan" value="<?php echo $detail->ttujuan; ?>">
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UBAH</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('transaksi/listtransfer'); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>
                         </div>

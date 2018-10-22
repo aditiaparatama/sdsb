@@ -21,7 +21,7 @@
 	                                <?php
 	                                  foreach ($lists as $list) { 
 	                                ?>
-                                    <option value="<?php echo $list->rno; ?>" <?php if($detail->tdari==$list->rno) echo 'selected="selected"'?>>
+                                    <option value="<?php echo $list->rno; ?>" <?php if($bank->rno==$list->rno) echo 'selected="selected"'?>>
                                     	<?php echo $list->rno; ?> - <?php echo $list->rbank; ?> (<?php echo $list->rnama; ?>)
                                     </option>
 	                                <?php } ?>
@@ -30,7 +30,7 @@
                             <div class="col-sm-12" id="saldo">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="saldo" class="form-control" value="Rp. <?php echo number_format($detail->rsaldo); ?>" readonly>
+                                        <input type="text" name="saldo" class="form-control" value="Rp. <?php echo number_format($bank->rsaldo); ?>" readonly>
                                         <label class="form-label">Saldo</label>
                                     </div>
                                 </div>
@@ -44,6 +44,14 @@
                                 </div>
                             </div>
                             <div id="customer">
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" name="daribank" class="form-control" value="<?php echo number_format($detail->$saldo); ?>" readonly>
+                                        <label class="form-label">Deposit</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -88,7 +96,7 @@
                                 <input type="hidden" name="brand" value="<?php echo $idbrand; ?>">
                                 <input type="hidden" name="nomor" value="<?php echo $detail->tnomor; ?>">
                                 <input type="hidden" name="oldnominal" value="<?php echo $detail->tgrandtotal; ?>">
-                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UPDATE</button>&nbsp;&nbsp;
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UBAH</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('transaksi/listhariankredit/'.$idbrand); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>
                         </div>

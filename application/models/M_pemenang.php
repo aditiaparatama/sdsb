@@ -10,11 +10,10 @@ class M_pemenang extends CI_Model {
 
     //backend
     public function PemenangHome($limit) {
-        $this->db->select('p.pnomor, c.cnama');
-        $this->db->from($this->table[1].' as p');
-        $this->db->join($this->table[2].' as c','c.Cid = p.pcustomer','left');
-        $this->db->where('p.pstatus', 1);
-        $this->db->group_by('p.pperiode'); 
+        $this->db->select('pnomor, pperiode');
+        $this->db->from($this->table[1]);
+        $this->db->where('pstatus', 1);
+        $this->db->group_by('pperiode'); 
         $this->db->limit($limit);
 
         $data = $this->db->get()->result();

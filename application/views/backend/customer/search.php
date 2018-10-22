@@ -1,6 +1,14 @@
 <div class="col-sm-12">
     <div class="form-group form-float">
         <div class="form-line">
+            <input type="text" name="deposit" class="form-control" value="<?php echo $deposit; ?>" readonly>
+            <label class="form-label">Deposit</label>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="form-group form-float">
+        <div class="form-line">
             <input type="text" name="daribank" class="form-control" value="<?php echo $bank; ?>" readonly>
             <label class="form-label">Bank</label>
         </div>

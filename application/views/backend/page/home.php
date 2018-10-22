@@ -115,7 +115,7 @@
                         <ul class="dashboard-stat-list">
                             <?php foreach($pemenanglist as $pemenang) { ?>
                             <li>
-                                <?php echo $pemenang->cnama; ?>
+                                <?php echo date('d F Y', strtotime($pemenang->pperiode)); ?>
                                 <span class="pull-right">
                                    <?php echo $pemenang->pnomor; ?>
                                 </span>

@@ -23,6 +23,7 @@ class General extends CI_Controller {
 		$data['latestkupon'] 	= $this->m_transaksi->TransaksiKupon(5);
 		$data['transfers'] 		= $this->m_transaksi->TransferHome(5);
 		$data['deposits'] 		= $this->m_transaksi->DepositHome(5);
+
 		$data['title'] = 'Halaman Administrator - '.BRAND;
 		$data['page']  = 'backend/page/home';
 		$this->load->view('backend/thamplate', $data);
@@ -86,14 +87,16 @@ class General extends CI_Controller {
 			redirect(base_url('cmskita'));
 		}
 		if (isset($_POST['submit'])) {
-			$this->form_validation->set_rules('jumlah', 'Jumlah Potongan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('jmhdari', 'Mininal Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('jmhsampai', 'Maksimal Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('potongan', 'Potongan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			if($this->form_validation->run() == false){
             	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect(base_url().'general/addpotongan');
 		  	} else { 		
 				$data['gname']  	= 'Potongan Pembelian';
-				$data['gqty']  		= $this->input->post('jumlah');
+				$data['gqtydari']  	= $this->input->post('jmhdari');
+				$data['gqtysampai'] = $this->input->post('jmhsampai');
 				$data['gdiskon'] 	= $this->input->post('potongan');
 				$data['gstatus'] 	= 2;
 				$data['gdate'] 		= date('Y-m-d H:i:s');
@@ -122,7 +125,8 @@ class General extends CI_Controller {
 			redirect(base_url('cmskita'));
 		}
 		if (isset($_POST['submit'])) {
-			$this->form_validation->set_rules('jumlah', 'Jumlah Potongan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('jmhdari', 'Minimal Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('jmhsampai', 'Maksimal Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('potongan', 'Potongan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			if($this->form_validation->run() == false){
             	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
@@ -131,7 +135,8 @@ class General extends CI_Controller {
 				$id	  = $this->input->post('id_potongan');
 				$data = array(
 					'gname'  	=> 'Potongan Pembelian',
-					'gqty'		=> $this->input->post('jumlah'),
+					'gqtydari'	=> $this->input->post('jmhdari'),
+					'gqtysampai'=> $this->input->post('jmhsampai'),
 					'gdiskon' 	=> $this->input->post('potongan')
 				);
 
@@ -604,6 +609,38 @@ class General extends CI_Controller {
 			$this->load->view('backend/report/ajaxkosong', $data);
 		}else{
 			$this->load->view('backend/report/ajaxcustomer', $data);
+		}
+	}
+
+	public function reportdetailcustomer(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_brand');
+		$data['brands']  = $this->m_brand->Brand();
+
+		$data['title'] = 'Report Detail Customer - '.BRAND;
+		$data['page']  = 'backend/report/detailcustomer';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
+	public function reportdetailcustomer_act(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_transaksi');
+		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$email 			 = $this->input->post('email');
+
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['filter2'] = $this->input->post('email');
+		$data['lists'] 	 = $this->m_transaksi->ReportDetailCustomer($dari,$sampai,$email);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/report/ajaxdetailcustomer', $data);
 		}
 	}
 }

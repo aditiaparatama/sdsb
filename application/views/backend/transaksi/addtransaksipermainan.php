@@ -39,19 +39,19 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" id="win" name="win" value="0" class="form-control" onchange="getwin()">
-                                        <label class="form-label">Win</label>
+                                        <input type="number" name="win" value="0" class="form-control" required>
+                                        <label class="form-label">Win/Lose</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" id="lose" name="lose" value="0" class="form-control" onchange="getlose()">
                                         <label class="form-label">Lose</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -71,7 +71,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal" class="datepicker form-control" placeholder="Tanggal" required>
+                                        <input type="text" name="tanggal" class="datepicker form-control" placeholder="Tanggal" value="<?php echo date('l d F Y', strtotime($tanggal)); ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -103,13 +103,13 @@
 <script src="<?php echo URL_ASSETS; ?>js/backend/admin.js"></script>
 <script src="<?php echo URL_ASSETS; ?>js/backend/pages/forms/basic-form-elements.js"></script>
 <script>
-function getwin(){
-    $("#lose").attr('readonly', 'readonly');
-};
+// function getwin(){
+//     $("#lose").attr('readonly', 'readonly');
+// };
 
-function getlose(){
-    $("#win").attr('readonly', 'readonly');
-};
+// function getlose(){
+//     $("#win").attr('readonly', 'readonly');
+// };
 
 function tandaPemisahTitik(b){
     var _minus = false;

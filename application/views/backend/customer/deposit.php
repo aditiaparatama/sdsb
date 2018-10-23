@@ -31,7 +31,7 @@
                                     <tr class="bg-light-blue">
                                         <th>Nama</th>
                                         <th>Deposit SBOBET</th>
-                                        <th>Deposit IBCBET</th>
+                                        <th>Deposit MAXBET</th>
                                         <th>Deposit HOREY4D</th>
                                         <th>Deposit TANGKASNET</th>
                                         <th>Deposit SDSB</th>
@@ -39,7 +39,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $sbo=0; $ibc=0; $horey=0; $tangkas=0; $sdsb=0;
+                                        $sbo=0; $max=0; $horey=0; $tangkas=0; $sdsb=0;
                                         foreach($lists as $list) { 
                                     ?>
                                     <tr>
@@ -47,14 +47,14 @@
                                             <?php echo $list->cnama; ?>
                                         </a></td>
                                         <td>Rp. <?php echo number_format($list->cdepositsbo); ?></td>
-                                        <td>Rp. <?php echo number_format($list->cdepositibc); ?></td>
+                                        <td>Rp. <?php echo number_format($list->cdepositmax); ?></td>
                                         <td>Rp. <?php echo number_format($list->cdeposithorey); ?></td>
                                         <td>Rp. <?php echo number_format($list->cdeposittangkas); ?></td>
                                         <td>Rp. <?php echo number_format($list->cdeposit); ?></td>
                                     </tr>
                                     <?php
                                         $sbo += $list->cdepositsbo; 
-                                        $ibc += $list->cdepositibc; 
+                                        $max += $list->cdepositmax; 
                                         $horey += $list->cdeposithorey; 
                                         $tangkas += $list->cdeposittangkas; 
                                         $sdsb += $list->cdeposit; 
@@ -64,7 +64,7 @@
                                     <tr>
                                         <th></th>
                                         <th>Rp. <?php echo number_format($sbo); ?></th>
-                                        <th>Rp. <?php echo number_format($ibc); ?></th>
+                                        <th>Rp. <?php echo number_format($max); ?></th>
                                         <th>Rp. <?php echo number_format($horey); ?></th>
                                         <th>Rp. <?php echo number_format($tangkas); ?></th>
                                         <th>Rp. <?php echo number_format($sdsb); ?></th>

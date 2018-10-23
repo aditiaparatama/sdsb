@@ -57,7 +57,7 @@
                         <a href="<?php echo base_url('transaksi/listhariandebit/1'); ?>"><span>SBOBET</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('transaksi/listhariandebit/2'); ?>"><span>IBCBET</span></a>
+                        <a href="<?php echo base_url('transaksi/listhariandebit/2'); ?>"><span>MAXBET</span></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('transaksi/listhariandebit/3'); ?>"><span>HOREY4D</span></a>
@@ -132,7 +132,7 @@
                         <a href="<?php echo base_url('general/harga'); ?>">Harga Kupon</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('brand/listsubbrand'); ?>">List Sub Brand</a>
+                        <a href="<?php echo base_url('brand/listsubbrand'); ?>">List Brand</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('general/potonganpembelian'); ?>">Potongan Pembelian</a>
@@ -146,10 +146,16 @@
                 if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 3){
             ?>
             <li class="header">REPORT</li>
-             <li>
+            <li>
                 <a href="<?php echo base_url('general/reportcustomer'); ?>">
                     <i class="material-icons col-red">donut_large</i>
                     <span>Report Customer</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('general/reportdetailcustomer'); ?>">
+                    <i class="material-icons col-red">donut_large</i>
+                    <span>Report Detail Customer</span>
                 </a>
             </li>
 <!--            <li>

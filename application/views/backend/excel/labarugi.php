@@ -26,7 +26,7 @@ header("Cache-Control: private", false);
         <td colspan="2">SBOBET(ain5858)</td>
         <td colspan="2">SBOBET(ehoki9)</td>
         <td colspan="2">SBOBET(ajc92)</td>
-        <td colspan="2">IBCBET</td>
+        <td colspan="2">MAXBET</td>
         <td colspan="2">HOREY4D</td>
         <td colspan="2">TANGKASNET</td>
         <td colspan="2">SDSB ONLINE</td>

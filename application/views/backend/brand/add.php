@@ -14,21 +14,37 @@
                             <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
                         </h2><br>
 
-                        <form action="<?php echo base_url('brand/addbrand_act'); ?>" method="POST">
+                        <form action="<?php echo base_url('brand/addbrand_act'); ?>" method="POST" enctype="multipart/form-data">
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <select class="form-control show-tick" name="brand" required>
                                     <option>- PILIH BRAND -</option>
+                                    <option value="0">PARENT</option>
                                     <?php foreach ($brands as $brand) {?>
                                         <option value="<?php echo $brand->bid; ?>"><?php echo $brand->bnama; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" style="margin-top: 25px;">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" name="subbrand" class="form-control" required>
                                         <label class="form-label">SubBrand</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" name="url" class="form-control">
+                                        <label class="form-label">URL</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="file" id="photo" name="photo" class="file" accept="image/jpg, image/jpeg, image/png">
                                     </div>
                                 </div>
                             </div>

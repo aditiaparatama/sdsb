@@ -68,15 +68,12 @@
                                         }else{
                                             $class1 = 'class="col-red"';
                                         }
-                                        if($list->twin < 0){
+                                        if($list->twin == 0){
                                             $class3 = 'class="col-red"';
+                                            $win    = $list->tlose;
                                         }else{
                                             $class3 = '';
-                                        }
-                                        if($list->tlose < 0){
-                                            $class4 = 'class="col-red"';
-                                        }else{
-                                            $class4 = 'class="col-red"';
+                                            $win    = $list->twin;
                                         }
                                         if($list->tmembercomm < 0){
                                             $class5 = 'class="col-red"';
@@ -89,8 +86,8 @@
                                         <td><a href="<?php echo base_url('transaksi/detailtransaksi/'.$idbrand.'/'.$list->$user); ?>">
                                             <?php echo $list->$user; ?></a>
                                         </td>
-                                        <td>
-                                        	<span <?php echo $class3; ?>><?php echo $list->twin.'</span>/<span '.$class4.'>'.$list->tlose; ?></span>
+                                        <td <?php echo $class3; ?>>
+                                            <?php echo $win; ?>
                                         </td>
                                         <td <?php echo $class5; ?>>
                                         	Rp. <?php echo number_format($list->tmembercomm); ?>

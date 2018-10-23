@@ -12,24 +12,26 @@ CREATE TABLE `brand` (
   `bparent` tinyint(1) DEFAULT NULL,
   `bchild` tinyint(1) DEFAULT NULL,
   `buser` tinyint(1) DEFAULT NULL,
+  `burl` varchar(100) DEFAULT NULL,
   `bfield1` varchar(100) DEFAULT NULL,
   `bfield2` varchar(100) DEFAULT NULL,
   `bfield3` varchar(100) DEFAULT NULL,
+  `bfoto` varchar(100) DEFAULT NULL,
   `bstatus` tinyint(1) DEFAULT NULL,
   `bdate` datetime NOT NULL,
   PRIMARY KEY (`bid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `brand` (`bid`, `bnama`, `bparent`, `bchild`, `buser`, `bfield1`, `bfield2`, `bfield3`, `bstatus`, `bdate`) VALUES
-(1,	'SBOBET',	1,	0,	1,	'cusersbo',	'cdepositsbo',	'rwinlose1',	1,	'2018-10-11 22:31:55'),
-(2,	'IBCBET',	1,	0,	1,	'cuseribc',	'cdepositibc',	'rwinlose2',	1,	'2018-10-11 22:32:10'),
-(3,	'HOREY4D',	1,	0,	1,	'cuserhorey',	'cdeposithorey',	'rwinlose3',	1,	'2018-10-11 22:32:32'),
-(4,	'TANGKASNET',	1,	0,	1,	'cusertangkas',	'cdeposittangkas',	'rwinlose4',	1,	'2018-10-11 22:32:46'),
-(5,	'SDSB ONLINE',	1,	0,	1,	'cuser',	'cdeposit',	'rwinlose5',	1,	'2018-10-12 10:32:59'),
-(6,	'gvip58',	0,	1,	1,	'cusersbo',	'cdepositsbo',	'rwinlose6',	1,	'2018-10-13 00:40:47'),
-(7,	'ain5858',	0,	1,	1,	'cusersbo',	'cdepositsbo',	'rwinlose7',	1,	'2018-10-13 00:41:34'),
-(8,	'ehoki9',	0,	1,	1,	'cusersbo',	'cdepositsbo',	'rwinlose8',	1,	'2018-10-13 00:42:03'),
-(9,	'ajc92',	0,	1,	1,	'cusersbo',	'cdepositsbo',	'rwinlose9',	1,	'2018-10-13 00:42:28');
+INSERT INTO `brand` (`bid`, `bnama`, `bparent`, `bchild`, `buser`, `burl`, `bfield1`, `bfield2`, `bfield3`, `bfoto`, `bstatus`, `bdate`) VALUES
+(1,	'SBOBET',	1,	0,	1,	'http://google.com',	'cusersbo',	'cdepositsbo',	'rwinlose1',	'1540309814.png',	1,	'2018-10-23 17:50:14'),
+(2,	'MAXBET',	1,	0,	1,	'http://google.com',	'cuseribc',	'cdepositibc',	'rwinlose2',	'1540309877.jpeg',	1,	'2018-10-23 17:51:17'),
+(3,	'HOREY4D',	1,	0,	1,	'http://google.com',	'cuserhorey',	'cdeposithorey',	'rwinlose3',	'1540309888.jpeg',	1,	'2018-10-23 17:51:28'),
+(4,	'TANGKASNET',	1,	0,	1,	'http://google.com',	'cusertangkas',	'cdeposittangkas',	'rwinlose4',	'1540309909.jpeg',	1,	'2018-10-23 17:51:49'),
+(5,	'SDSB ONLINE',	1,	0,	1,	'http://google.com',	'cuser',	'cdeposit',	'rwinlose5',	'1540309925.jpeg',	1,	'2018-10-23 17:52:05'),
+(6,	'gvip58',	0,	1,	1,	'http://sobet1.com',	'cusersbo',	'cdepositsbo',	'rwinlose6',	'1540207103.jpeg',	1,	'2018-10-22 13:18:23'),
+(7,	'ain5858',	0,	1,	1,	NULL,	'cusersbo',	'cdepositsbo',	'rwinlose7',	NULL,	1,	'2018-10-13 00:41:34'),
+(8,	'ehoki9',	0,	1,	1,	NULL,	'cusersbo',	'cdepositsbo',	'rwinlose8',	NULL,	1,	'2018-10-13 00:42:03'),
+(9,	'ajc92',	0,	1,	1,	NULL,	'cusersbo',	'cdepositsbo',	'rwinlose9',	NULL,	1,	'2018-10-13 00:42:28');
 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
@@ -37,7 +39,7 @@ CREATE TABLE `customer` (
   `cnama` varchar(100) NOT NULL,
   `cuser` varchar(100) DEFAULT NULL,
   `cusersbo` varchar(100) DEFAULT NULL,
-  `cuseribc` varchar(100) DEFAULT NULL,
+  `cusermax` varchar(100) DEFAULT NULL,
   `cuserhorey` varchar(100) DEFAULT NULL,
   `cusertangkas` varchar(100) DEFAULT NULL,
   `cemail` varchar(100) DEFAULT NULL,
@@ -49,7 +51,7 @@ CREATE TABLE `customer` (
   `cnorek` varchar(50) DEFAULT NULL,
   `cdeposit` int(15) DEFAULT NULL,
   `cdepositsbo` int(15) DEFAULT NULL,
-  `cdepositibc` int(15) DEFAULT NULL,
+  `cdepositmax` int(15) DEFAULT NULL,
   `cdeposithorey` int(15) DEFAULT NULL,
   `cdeposittangkas` int(15) DEFAULT NULL,
   `cfoto` varchar(100) DEFAULT NULL,
@@ -59,8 +61,8 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `customer` (`cid`, `cnama`, `cuser`, `cusersbo`, `cuseribc`, `cuserhorey`, `cusertangkas`, `cemail`, `cpass`, `ctlp`, `calamat`, `cbank`, `cnamarek`, `cnorek`, `cdeposit`, `cdepositsbo`, `cdepositibc`, `cdeposithorey`, `cdeposittangkas`, `cfoto`, `cterbaca`, `cstatus`, `cdate`) VALUES
-(1,	'Ujang Gonzales',	'ujang5',	'ujang1',	'',	'uajng3',	'',	'ujanggonzales123@gmail.com',	'202cb962ac59075b964b07152d234b70',	'08563537563',	'Jl. Beringin Utara No. 15 Rt:06/07',	'BCA',	'Ujang Gonzales',	'101241242443',	330000,	0,	0,	0,	0,	'1540172306.jpeg',	1,	1,	'2018-10-22 03:38:26');
+INSERT INTO `customer` (`cid`, `cnama`, `cuser`, `cusersbo`, `cusermax`, `cuserhorey`, `cusertangkas`, `cemail`, `cpass`, `ctlp`, `calamat`, `cbank`, `cnamarek`, `cnorek`, `cdeposit`, `cdepositsbo`, `cdepositmax`, `cdeposithorey`, `cdeposittangkas`, `cfoto`, `cterbaca`, `cstatus`, `cdate`) VALUES
+(1,	'Ujang Gonzales',	'ujang5',	'ujang1',	'',	'uajng3',	'',	'ujanggonzales123@gmail.com',	'202cb962ac59075b964b07152d234b70',	'08563537563',	'Jl. Beringin Utara No. 15 Rt:06/07',	'BCA',	'Ujang Gonzales',	'101241242443',	5075300,	206000,	0,	3000,	0,	'1540196136.jpeg',	1,	1,	'2018-10-22 03:38:26');
 
 DROP TABLE IF EXISTS `general`;
 CREATE TABLE `general` (
@@ -71,7 +73,8 @@ CREATE TABLE `general` (
   `gharga` int(12) DEFAULT NULL,
   `gpotongan` tinyint(5) DEFAULT NULL,
   `gdiskon` tinyint(5) DEFAULT NULL,
-  `gqty` tinyint(5) DEFAULT NULL,
+  `gqtydari` int(5) DEFAULT NULL,
+  `gqtysampai` int(5) DEFAULT NULL,
   `gketerangan` varchar(255) DEFAULT NULL,
   `gketerangan2` varchar(255) DEFAULT NULL,
   `gperiode` date DEFAULT NULL,
@@ -81,10 +84,13 @@ CREATE TABLE `general` (
   PRIMARY KEY (`gid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `general` (`gid`, `gname`, `gdolar`, `grate`, `gharga`, `gpotongan`, `gdiskon`, `gqty`, `gketerangan`, `gketerangan2`, `gperiode`, `gbrand`, `gstatus`, `gdate`) VALUES
-(1,	'Harga Kupon',	NULL,	NULL,	250000,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1,	'2018-10-22 08:34:19'),
-(2,	'Potongan Pembelian',	NULL,	NULL,	NULL,	NULL,	10,	2,	NULL,	NULL,	NULL,	NULL,	2,	'2018-10-22 03:35:10'),
-(3,	'Transport',	3,	15000,	45000,	NULL,	NULL,	NULL,	'Ini adalah keterangan biaya transport',	'biaya transport karyawan',	'2018-10-22',	NULL,	8,	'2018-10-22 03:53:10');
+INSERT INTO `general` (`gid`, `gname`, `gdolar`, `grate`, `gharga`, `gpotongan`, `gdiskon`, `gqtydari`, `gqtysampai`, `gketerangan`, `gketerangan2`, `gperiode`, `gbrand`, `gstatus`, `gdate`) VALUES
+(1,	'Harga Kupon',	NULL,	NULL,	250000,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1,	'2018-10-22 08:34:19'),
+(2,	'Potongan Pembelian',	NULL,	NULL,	NULL,	NULL,	5,	2,	5,	NULL,	NULL,	NULL,	NULL,	2,	'2018-10-22 03:35:10'),
+(3,	'Transport',	3,	15000,	45000,	NULL,	NULL,	NULL,	NULL,	'Ini adalah keterangan biaya transport',	'biaya transport karyawan',	'2018-10-22',	NULL,	8,	'2018-10-22 03:53:10'),
+(4,	'Potongan Pembelian',	NULL,	NULL,	NULL,	NULL,	10,	6,	10,	NULL,	NULL,	NULL,	NULL,	2,	'2018-10-22 10:22:59'),
+(5,	'Uang Makan',	3,	15000,	45000,	NULL,	NULL,	NULL,	NULL,	'ini uang makan',	'uang makan',	'2018-10-22',	NULL,	8,	'2018-10-22 10:26:25'),
+(6,	'Potongan Pembelian',	NULL,	NULL,	NULL,	NULL,	15,	11,	15,	NULL,	NULL,	NULL,	NULL,	2,	'2018-10-22 16:29:34');
 
 DROP TABLE IF EXISTS `nomor`;
 CREATE TABLE `nomor` (
@@ -98,7 +104,16 @@ CREATE TABLE `nomor` (
 INSERT INTO `nomor` (`nid`, `ncustomer`, `nnomor`, `nperiode`) VALUES
 (1,	1,	'728063',	'2018-10-22'),
 (2,	1,	'049625',	'2018-10-22'),
-(3,	1,	'806213',	'2018-10-22');
+(3,	1,	'806213',	'2018-10-22'),
+(4,	1,	'579036',	'2018-10-22'),
+(5,	1,	'810263',	'2018-10-22'),
+(6,	NULL,	'031694',	'2018-10-22'),
+(7,	NULL,	'054391',	'2018-10-22'),
+(8,	NULL,	'892345',	'2018-10-22'),
+(9,	NULL,	'578091',	'2018-10-22'),
+(10,	NULL,	'915648',	'2018-10-22'),
+(11,	1,	'079216',	'2018-10-22'),
+(12,	1,	'823741',	'2018-10-22');
 
 DROP TABLE IF EXISTS `pemenang`;
 CREATE TABLE `pemenang` (
@@ -113,6 +128,13 @@ CREATE TABLE `pemenang` (
   PRIMARY KEY (`pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `pemenang` (`pid`, `pperiode`, `pnomor`, `pcustomer`, `porder`, `pbrand`, `pstatus`, `pdate`) VALUES
+(1,	'2018-10-22',	'049625',	1,	1,	NULL,	1,	'2018-10-22 10:29:27'),
+(2,	'2018-10-22',	'031694',	0,	2,	NULL,	1,	'2018-10-22 10:29:27'),
+(3,	'2018-10-22',	'054391',	0,	3,	NULL,	1,	'2018-10-22 10:29:27'),
+(4,	'2018-10-22',	'892345',	0,	4,	NULL,	1,	'2018-10-22 10:29:28'),
+(5,	'2018-10-22',	'578091',	0,	5,	NULL,	1,	'2018-10-22 10:29:28'),
+(6,	'2018-10-22',	'915648',	0,	6,	NULL,	1,	'2018-10-22 10:29:28');
 
 DROP TABLE IF EXISTS `rekening`;
 CREATE TABLE `rekening` (
@@ -128,8 +150,8 @@ CREATE TABLE `rekening` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `rekening` (`rid`, `rbank`, `rnama`, `rno`, `rsaldo`, `rjenis`, `rstatus`, `rdate`) VALUES
-(1,	'BCA',	'SDSB Online',	'112324324355',	4365000,	2,	1,	'2018-10-22 03:35:49'),
-(2,	'Mandiri',	'Mike Mohede',	'103252353666',	2000000,	1,	1,	'2018-10-22 03:36:15');
+(1,	'BCA',	'SDSB Online',	'112324324355',	3880700,	2,	1,	'2018-10-22 03:35:49'),
+(2,	'Mandiri',	'Mike Mohede',	'103252353666',	8300000,	1,	1,	'2018-10-22 03:36:15');
 
 DROP TABLE IF EXISTS `reportlabarugi`;
 CREATE TABLE `reportlabarugi` (
@@ -165,7 +187,7 @@ CREATE TABLE `reportlabarugi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `reportlabarugi` (`reportid`, `rperiode`, `rjmhdeposit`, `rjmhdepositrp`, `rjmhwithdraw`, `rjmhwithdrawrp`, `rwinlose1`, `rwinlose2`, `rwinlose3`, `rwinlose4`, `rwinlose5`, `rwinlose6`, `rwinlose7`, `rwinlose8`, `rwinlose9`, `rwinlose10`, `rwinlose11`, `rwinlose12`, `rwinlose13`, `rwinlose14`, `rwinlose15`, `rtotalwinlose`, `rcommbonus`, `rreferralbonus`, `rwinlosegross`, `rbiayaoperasional`, `rstatus`, `rdate`) VALUES
-(1,	'2018-10-22',	2,	1500000,	1,	500000,	0,	0,	0,	0,	1000000,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1000000,	10000,	20000,	970000,	45000,	1,	'2018-10-22 03:38:26'),
+(1,	'2018-10-22',	6,	7800000,	3,	930000,	0,	0,	-5000,	0,	992000,	0,	0,	1000000,	0,	0,	0,	0,	0,	0,	0,	1987000,	12100,	27200,	1947700,	90000,	1,	'2018-10-22 03:38:26'),
 (2,	'2018-10-21',	0,	0,	0,	0,	0,	0,	0,	0,	300000,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	300000,	50000,	10000,	240000,	0,	1,	'2018-10-22 03:51:28');
 
 DROP TABLE IF EXISTS `transaksi`;
@@ -212,7 +234,22 @@ INSERT INTO `transaksi` (`tid`, `tcustomer`, `tnomor`, `tkupon`, `tvoucher`, `tp
 (9,	1,	'eEn5HphtcU7KuCr',	'0',	NULL,	0,	'112324324355',	'112324324355',	'Pengeluaran Bonus',	300000,	0,	50000,	10000,	0,	60000,	60000,	6,	52,	61,	5,	5,	0,	'Data pengeluaran bonus SDSB ONLINE - SDSB ONLINE',	1,	'2018-10-21',	1,	'2018-10-22 03:51:28'),
 (10,	NULL,	'aJxfGRvDjh1ytEd',	'0',	NULL,	0,	'112324324355',	'112324324355',	'Pengeluaran Bulanan',	0,	0,	0,	0,	0,	45000,	45000,	8,	52,	62,	0,	NULL,	0,	'Pengeluaran bulanan Transport',	1,	'2018-10-22',	1,	'2018-10-22 03:53:10'),
 (11,	1,	'1SWQYKjCRl3VJsL',	'806213',	NULL,	0,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	250000,	250000,	3,	0,	62,	5,	NULL,	0,	'Pembelian nomor kupon sdsb ujang5',	1,	'2018-10-22',	1,	'2018-10-22 04:01:43'),
-(12,	1,	'elOfAN1EygdLpBr',	'0',	NULL,	0,	NULL,	'Deposit SDSB ONLINE',	'SBOBET',	0,	0,	0,	0,	0,	200000,	200000,	4,	0,	62,	5,	NULL,	0,	'Transfer dana customer ke SBOBET - ujang5',	2,	'2018-10-22',	1,	'2018-10-22 07:40:27');
+(12,	1,	'elOfAN1EygdLpBr',	'0',	NULL,	0,	NULL,	'Deposit SDSB ONLINE',	'SBOBET',	0,	0,	0,	0,	0,	200000,	200000,	4,	0,	62,	5,	NULL,	0,	'Transfer dana customer ke SBOBET - ujang5',	2,	'2018-10-22',	1,	'2018-10-22 07:40:27'),
+(13,	1,	'u1Z3TL2jHGOoa9x',	'0',	'',	0,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	300000,	300000,	1,	51,	61,	5,	NULL,	0,	'Deposit customer SDSB Online ujang5',	1,	'2018-10-22',	1,	'2018-10-22 10:11:08'),
+(14,	1,	'wMkF1PCgqeL8csu',	'0',	NULL,	0,	NULL,	'Deposit SDSB ONLINE',	'101241242443',	0,	0,	0,	0,	0,	130000,	130000,	2,	52,	62,	5,	NULL,	0,	'Withdraw customer SDSB Online ujang5',	1,	'2018-10-22',	1,	'2018-10-22 10:18:30'),
+(15,	1,	'rF0d2ivzT5EAK9m',	'579036',	NULL,	0,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	450000,	450000,	3,	0,	62,	5,	NULL,	0,	'Pembelian nomor kupon sdsbujang5',	1,	'2018-10-22',	NULL,	'2018-10-22 10:20:06'),
+(16,	1,	'm7o3cX1T90KZiMA',	'810263',	NULL,	0,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	450000,	450000,	3,	0,	62,	5,	NULL,	0,	'Pembelian nomor kupon sdsbujang5',	1,	'2018-10-22',	NULL,	'2018-10-22 10:20:07'),
+(17,	NULL,	'FU3l4Qxd0TCgVwH',	'0',	NULL,	0,	'112324324355',	'112324324355',	'Pengeluaran Bulanan',	0,	0,	0,	0,	0,	45000,	45000,	8,	52,	62,	0,	NULL,	0,	'Pengeluaran bulanan Uang Makan',	1,	'2018-10-22',	1,	'2018-10-22 10:26:25'),
+(18,	1,	'b8AZwINvag39rpX',	'0',	NULL,	0,	NULL,	'ujang1',	'103252353666',	0,	0,	0,	0,	0,	500000,	500000,	1,	51,	61,	1,	NULL,	0,	'Deposit dana SBOBET - ujang1',	1,	'2018-10-22',	1,	'2018-10-22 10:33:57'),
+(19,	1,	'JP6R3cnqx5Xi7LE',	'0',	NULL,	0,	'112324324355',	'DEPOSIT SBOBET',	'101241242443',	0,	0,	0,	0,	0,	300000,	300000,	2,	52,	62,	1,	NULL,	0,	'Withdraw dana harian  - ujang1',	1,	'2018-10-22',	1,	'2018-10-22 10:34:42'),
+(20,	1,	's6VjgDO4XKAHrmW',	'0',	NULL,	0,	'112324324355',	'112324324355',	'Pengeluaran Bonus',	1000000,	0,	1000,	5000,	0,	6000,	6000,	6,	52,	61,	1,	8,	0,	'Data pengeluaran bonus ehoki9 - SBOBET',	1,	'2018-10-22',	1,	'2018-10-22 10:36:13'),
+(21,	1,	'xEQ713gy5w4v80a',	'0',	NULL,	0,	'112324324355',	'112324324355',	'Pengeluaran Bonus',	0,	5000,	1000,	2000,	0,	3000,	3000,	6,	52,	61,	3,	3,	0,	'Data pengeluaran bonus HOREY4D - HOREY4D',	1,	'2018-10-22',	1,	'2018-10-22 10:43:18'),
+(22,	1,	'jmPfKwb54svRT6G',	'0',	'',	0,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	500000,	500000,	1,	51,	61,	5,	NULL,	0,	'Deposit customer SDSB Online ujang5',	1,	'2018-10-22',	1,	'2018-10-22 11:51:44'),
+(23,	1,	'SfAZbHrDEq7c2IW',	'0',	NULL,	0,	NULL,	'Deposit SDSB ONLINE',	'MAXBET',	0,	0,	0,	0,	0,	300000,	300000,	4,	0,	62,	5,	NULL,	0,	'Transfer dana customer ke MAXBET - ujang5',	2,	'2018-10-22',	1,	'2018-10-22 11:53:52'),
+(24,	1,	'HQyMSqXuUp5ar0k',	'0',	'',	0,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	5000000,	5000000,	1,	51,	61,	5,	NULL,	0,	'Deposit customer sdsb ujang5',	1,	'2018-10-22',	1,	'2018-10-22 16:30:49'),
+(25,	1,	'JwfYElHI4Ba5btD',	'079216',	NULL,	5,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	475000,	475000,	3,	0,	62,	5,	NULL,	0,	'Pembelian nomor kupon sdsb ujang5',	1,	'2018-10-22',	1,	'2018-10-22 17:47:23'),
+(26,	1,	'JwfYElHI4Ba5btD',	'823741',	NULL,	5,	NULL,	'ujang5',	'103252353666',	0,	0,	0,	0,	0,	475000,	475000,	3,	0,	62,	5,	NULL,	0,	'Pembelian nomor kupon sdsb ujang5',	1,	'2018-10-22',	1,	'2018-10-22 17:47:23'),
+(27,	1,	'a49TchG2kstKqVO',	'0',	NULL,	0,	'112324324355',	'112324324355',	'Pengeluaran Bonus',	0,	-3000,	100,	200,	0,	300,	300,	6,	52,	61,	5,	5,	0,	'Data pengeluaran bonus SDSB ONLINE - SDSB ONLINE',	1,	'2018-10-22',	1,	'2018-10-23 19:25:47');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -247,4 +284,4 @@ CREATE TABLE `voucher` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-10-22 05:44:44
+-- 2018-10-23 17:38:31

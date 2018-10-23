@@ -41,7 +41,7 @@
                         <table class="table table-striped table-bordered table-hover order-column" id="">
                             <thead>
                                 <tr>
-                                    <th>ID Deposit</th>
+                                    <th>ID Transaksi</th>
                                     <th>Potongan</th>
                                     <th>Grand Total</th>    
                                     <th>Status</th>

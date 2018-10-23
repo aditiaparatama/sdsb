@@ -8,8 +8,8 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            List Group Brand
-                            <small>Daftar group brand yang aktif
+                            List Brand
+                            <small>Daftar brand yang aktif
                                 <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
                             </small>
                         </h2>
@@ -19,7 +19,7 @@
                                     <i class="material-icons">more_vert</i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('brand/addbrand'); ?>">SubBrand Baru</a></li>
+                                    <li><a href="<?php echo base_url('brand/addbrand'); ?>">Brand Baru</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -29,12 +29,14 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
+                                        <th>#</th>
                                         <th>Brand</th>
                                         <th>SubBrand</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
+                                        <th>#</th>
                                         <th>Brand</th>
                                         <th>SubBrand</th>
                                         <th>Action</th>
@@ -42,22 +44,44 @@
                                 </tfoot>
                                 <tbody>
                                     <?php 
+                                        $pg = 1;
                                         foreach($lists as $list) { 
                                         if($list->bchild == 1){
                                             $child = 'SBOBET';
+                                            $subchild = $list->bnama;
                                         }else if($list->bchild == 2){
-                                            $child = 'IBCBET';
+                                            $child = 'MAXBET';
+                                            $subchild = $list->bnama;
                                         }else if($list->bchild == 3){
                                             $child = 'HOREY4D';
+                                            $subchild = $list->bnama;
                                         }else if($list->bchild == 4){
                                             $child = 'TANGKASNET';
+                                            $subchild = $list->bnama;
                                         }else if($list->bchild == 5){
                                             $child = 'SDSB ONLINE';
+                                            $subchild = $list->bnama;
+                                        }else if($list->bid == 1){
+                                            $child = 'SBOBET';
+                                            $subchild = '-';
+                                        }else if($list->bid == 2){
+                                            $child = 'MAXBET';
+                                            $subchild = '-';
+                                        }else if($list->bid == 3){
+                                            $child = 'HOREY4D';
+                                            $subchild = '-';
+                                        }else if($list->bid == 4){
+                                            $child = 'TANGKASNET';
+                                            $subchild = '-';
+                                        }else if($list->bid == 5){
+                                            $child = 'SDSB ONLINE';
+                                            $subchild = '-';
                                         }
                                     ?>
                                     <tr>
+                                        <td><?php echo $pg; ?></td>
                                         <td><?php echo $child; ?></td>
-                                        <td><?php echo $list->bnama; ?></td>
+                                        <td><?php echo $subchild; ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -70,7 +94,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <?php } ?>
+                                    <?php $pg++; } ?>
                                 </tbody>
                             </table>
                         </div>

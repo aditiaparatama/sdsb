@@ -13,7 +13,7 @@ class M_brand extends CI_Model {
         return $this->db->get_where($this->table[1], $where);
     }
     public function Brand(){
-        $this->db->select('bid, bnama');
+        $this->db->select('bid, bnama, burl, bfoto');
         $this->db->from($this->table[1]);
         $this->db->where('bstatus', 1);
         $this->db->where('bparent', 1);
@@ -56,7 +56,6 @@ class M_brand extends CI_Model {
         $this->db->select('bid, bnama, bchild');
         $this->db->from($this->table[1]);
         $this->db->where('bstatus', 1);
-        $this->db->where('bparent', 0);
 
         $data = $this->db->get()->result();
         return $data;

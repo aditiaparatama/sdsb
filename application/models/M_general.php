@@ -24,7 +24,7 @@ class M_general extends CI_Model {
     }
 
     public function PotonganPembelian(){
-        $this->db->select('gid, gdiskon, gqty, gstatus');
+        $this->db->select('gid, gdiskon, gqtydari, gqtysampai, gstatus');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 2);
 
@@ -33,7 +33,7 @@ class M_general extends CI_Model {
     }
 
     public function DetailPotongan($id){
-        $this->db->select('gid, gdiskon, gqty');
+        $this->db->select('gid, gdiskon, gqtydari, gqtysampai');
         $this->db->from($this->table[1]);
         $this->db->where('gid', $id);
 
@@ -100,7 +100,7 @@ class M_general extends CI_Model {
         $this->db->select('gdiskon');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 2);
-        $this->db->where('gqty', $jumlah);
+        $this->db->where('gqtysampai >=',$jumlah);
 
         $data = $this->db->get()->num_rows();
         return $data;    
@@ -116,10 +116,10 @@ class M_general extends CI_Model {
     }
 
     public function SearchPotongan($jumlah){
-        $this->db->select('gdiskon, gqty');
+        $this->db->select('gdiskon, gqtydari, gqtysampai');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 2);
-        $this->db->where('gqty', $jumlah);
+        $this->db->where('gqtysampai >=',$jumlah);
 
         $data = $this->db->get()->row();
         return $data;

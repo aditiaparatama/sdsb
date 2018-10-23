@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-	  	$this->load->model(array('m_customer','m_transaksi'));
+	  	$this->load->model(array('m_customer','m_transaksi','m_brand'));
 		$this->load->helper('string');
 		$this->load->library('upload');
 
@@ -19,6 +19,7 @@ class Dashboard extends CI_Controller {
 			redirect(base_url('login'));
 		}
 		$customer 			= $this->session->userdata('id');
+	  	$data['brand']		= $this->m_brand->Brand();
 	  	$data['customer']	= $this->m_customer->DataCustomer($customer);
 
 		$data['title'] = 'Halaman Dashboard - '.BRAND;
@@ -204,8 +205,8 @@ class Dashboard extends CI_Controller {
 
 		if($dari == 'SBOBET'){
 			$data['deposit']  	= $data['customer']->cdepositsbo;
-		}else if($dari == 'IBCBET'){
-			$data['deposit']  	= $data['customer']->cdepositibc;
+		}else if($dari == 'MAXBET'){
+			$data['deposit']  	= $data['customer']->cdepositmax;
 		}else if($dari == 'HOREY4D'){
 			$data['deposit']  	= $data['customer']->cdeposithorey;
 		}else if($dari == 'TANGKASNET'){

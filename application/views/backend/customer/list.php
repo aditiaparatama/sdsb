@@ -31,7 +31,7 @@
                                     <tr class="bg-light-blue">
                                         <th>Nama</th>
                                         <th>User SBOBET</th>
-                                        <th>User IBCBET</th>
+                                        <th>User MAXBET</th>
                                         <th>User HOREY4D</th>
                                         <th>User TANGKASNET</th>
                                         <th>User SDSB</th>
@@ -41,7 +41,7 @@
                                 <tfoot>
                                         <th>Nama</th>
                                         <th>User SBOBET</th>
-                                        <th>User IBCBET</th>
+                                        <th>User MAXBET</th>
                                         <th>User HOREY4D</th>
                                         <th>User TANGKASNET</th>
                                         <th>User SDSB</th>
@@ -56,7 +56,7 @@
                                             <?php echo $list->cnama; ?>
                                         </a></td>
                                         <td><?php echo $list->cusersbo; ?></td>
-                                        <td><?php echo $list->cuseribc; ?></td>
+                                        <td><?php echo $list->cusermax; ?></td>
                                         <td><?php echo $list->cuserhorey; ?></td>
                                         <td><?php echo $list->cusertangkas; ?></td>
                                         <td><?php echo $list->cuser; ?></td>

@@ -15,7 +15,7 @@
                         <th style="min-width: 120px;">SBOBET(ain5858)</th>
                         <th style="min-width: 120px;">SBOBET(ehoki9)</th>
                         <th style="min-width: 120px;">SBOBET(ajc92)</th>
-                        <th style="min-width: 120px;">IBCBET</th>
+                        <th style="min-width: 120px;">MAXBET</th>
                         <th style="min-width: 120px;">HOREY4D</th>
                         <th style="min-width: 120px;">TANGKASNET</th>
                         <th style="min-width: 120px;">SDSB ONLINE</th>

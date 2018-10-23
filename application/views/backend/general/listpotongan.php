@@ -28,13 +28,15 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
-                                        <th>Jumlah Pembelian Kupon</th>
+                                        <th>Minimal Pembelian Kupon</th>
+                                        <th>Maksimal Pembelian Kupon</th>
                                         <th>Potongan Pembelian (%)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
-                                        <th>Jumlah Pembelian Kupon</th>
+                                        <th>Minimal Pembelian Kupon</th>
+                                        <th>Maksimal Pembelian Kupon</th>
                                         <th>Potongan Pembelian (%)</th>
                                         <th>Action</th>
                                     </tr>
@@ -42,7 +44,8 @@
                                 <tbody>
                                     <?php foreach($lists as $list) { ?>
                                     <tr>
-                                        <td><?php echo $list->gqty; ?></td>
+                                        <td><?php echo $list->gqtydari; ?></td>
+                                        <td><?php echo $list->gqtysampai; ?></td>
                                         <td><?php echo $list->gdiskon; ?>%</td>
                                         <td>
                                             <div class="btn-group">

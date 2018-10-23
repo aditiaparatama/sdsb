@@ -38,19 +38,19 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" id="win" name="win" class="form-control" value="<?php echo $detail->twin; ?>">
-                                        <label class="form-label">Win</label>
+                                        <input type="number" name="win" class="form-control" value="<?php echo $win; ?>">
+                                        <label class="form-label">Win/Lose</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="number" id="lose" name="lose" class="form-control" value="<?php echo $detail->tlose; ?>">
                                         <label class="form-label">Lose</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -80,8 +80,7 @@
                                 <input type="hidden" name="oldtotal" value="<?php echo $detail->tmembercomm+$detail->tbonus; ?>">
                                 <input type="hidden" name="oldcomm" value="<?php echo $detail->tmembercomm; ?>">
                                 <input type="hidden" name="oldreferral" value="<?php echo $detail->tbonus; ?>">
-                                <input type="hidden" name="oldwin" value="<?php echo $detail->twin; ?>">
-                                <input type="hidden" name="oldlose" value="<?php echo $detail->tlose; ?>">
+                                <input type="hidden" name="oldwin" value="<?php echo $win; ?>">
                                 <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UBAH</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('transaksi/listharianpermainan/'.$idbrand); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>

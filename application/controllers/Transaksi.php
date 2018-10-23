@@ -545,9 +545,9 @@ class Transaksi extends CI_Controller {
 		$cntbrand  		 = array('bstatus' => 1, 'bchild' => $id);	
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
 		$countbrand 	 = $this->m_brand->CBrand($cntbrand)->num_rows();
+		$data['tanggal'] = date('Y-m-d',strtotime(date('Y-m-d') . "-1 days"));
 		$data['idbrand'] = $userbrand->bid;
 		$data['brand']	 = $userbrand->bnama;
-
 
 		if($countbrand > 0){
 			$data['lists']   = $this->m_brand->GroupBrand($id);
@@ -567,13 +567,15 @@ class Transaksi extends CI_Controller {
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('idbrand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('user', 'Username', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('tanggal', 'Date', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('win', 'Win/Lose', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('tanggal', 'Tanggal', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect($_SERVER['HTTP_REFERER']);
 		  	} else { 	
 	  			$this->load->model('m_customer');
 	  			$this->load->model('m_reportlabarugi');
+		  		$win  	 = $this->input->post('win');
 		  		$user 	 = $this->input->post('user');
 		  		$brand 	 = $this->input->post('brand');
 		  		$sbrand  = $this->input->post('idbrand');
@@ -604,6 +606,13 @@ class Transaksi extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, saldo rekening tidak cukup!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
+		  		if($win < 0){
+		  			$datawin 	= 0;
+		  			$datalose 	= $win;
+		  		}else{
+		  			$datawin 	= $win;
+		  			$datalose 	= 0;
+		  		}
 		  		if($calcu != 0){
 		  			$calcu 		= $calcu;
 		  			$subjenis 	= 52;
@@ -624,8 +633,8 @@ class Transaksi extends CI_Controller {
 				$record['trekeningdari']= $saldorekening->rno;
 				$record['tdari']		= $dari;
 				$record['ttujuan']		= $tujuan;
-				$record['twin']			= $this->input->post('win');
-				$record['tlose']		= $this->input->post('lose');
+				$record['twin']			= $datawin;
+				$record['tlose']		= $datalose;
 				$record['tmembercomm']	= str_replace(".", "", $this->input->post('commbonus'));
 				$record['tbonus']		= str_replace(".", "", $this->input->post('referral'));
 				$record['tharga']		= $calcu;
@@ -648,7 +657,7 @@ class Transaksi extends CI_Controller {
 				$data['rsaldo'] 		= $tambahsaldo;
 
 				if($report == NULL){
-					$winlose 		   = $this->input->post('win')-$this->input->post('lose');
+					$winlose 		   = $win;
 					$commbonus 		   = str_replace(".", "", $this->input->post('commbonus'));
 					$referral 		   = str_replace(".", "", $this->input->post('referral'));
 
@@ -669,7 +678,7 @@ class Transaksi extends CI_Controller {
 
 	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 				}else{
-					$winlose		   = $this->input->post('win')-$this->input->post('lose');
+					$winlose		   = $win;
 					$commbonus 		   = str_replace(".", "", $this->input->post('commbonus'));
 					$referral 		   = str_replace(".", "", $this->input->post('referral'));
 
@@ -717,6 +726,12 @@ class Transaksi extends CI_Controller {
 		}
  		$data['detail'] = $this->m_transaksi->DetailTransaksiHarianPermainan($brand,$nomor);
 		
+		if($data['detail']->twin == 0){
+			$data['win'] = $data['detail']->tlose;
+		}else{
+			$data['win'] = $data['detail']->twin;
+		}
+
 		$data['title'] = 'Edit Data Permainan '. $data['brand'].' - '.BRAND;
  		$data['page']  = 'backend/transaksi/edittransaksipermainan';
  		$this->load->view('backend/thamplate', $data);
@@ -729,13 +744,15 @@ class Transaksi extends CI_Controller {
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('idbrand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('user', 'Username', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('tanggal', 'Date', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('win', 'Win/Lose', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('tanggal', 'Tanggal', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
 				redirect($_SERVER['HTTP_REFERER']);
 		  	} else { 	
 	  			$this->load->model('m_customer');
 	  			$this->load->model('m_reportlabarugi');
+		  		$win  	 = $this->input->post('win');
 		  		$user 	 = $this->input->post('user');
 		  		$brand 	 = $this->input->post('brand');
 		  		$sbrand  = $this->input->post('idbrand');
@@ -767,6 +784,13 @@ class Transaksi extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, saldo rekening tidak cukup!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
+		  		if($win < 0){
+		  			$datawin 	= 0;
+		  			$datalose 	= $win;
+		  		}else{
+		  			$datawin 	= $win;
+		  			$datalose 	= 0;
+		  		}
 		  		if($calcu != 0){
 		  			$calcu 		= $calcu;
 		  			$subjenis 	= 52;
@@ -786,8 +810,8 @@ class Transaksi extends CI_Controller {
 				$record['trekeningdari']= $saldorekening->rno;
 				$record['tdari']		= $dari;
 				$record['ttujuan']		= $tujuan;
-				$record['twin']			= $this->input->post('win');
-				$record['tlose']		= $this->input->post('lose');
+				$record['twin']			= $datawin;
+				$record['tlose']		= $datalose;
 				$record['tmembercomm']	= str_replace(",", "", $this->input->post('commbonus'));
 				$record['tbonus']		= str_replace(",", "", $this->input->post('referral'));
 				$record['tharga']		= $calcu;
@@ -809,7 +833,7 @@ class Transaksi extends CI_Controller {
 				$data['rsaldo'] 		= $tambahsaldo;
 
 				if($report == NULL){
-					$winlose 		   = $this->input->post('win')-$this->input->post('lose');
+					$winlose		   = $win;
 					$commbonus 		   = str_replace(",", "", $this->input->post('commbonus'));
 					$referral 		   = str_replace(",", "", $this->input->post('referral'));
 
@@ -830,11 +854,11 @@ class Transaksi extends CI_Controller {
 
 	  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 				}else{
-					$winlose			= $this->input->post('win')-$this->input->post('lose');
+					$winlose		    = $win;
 					$commbonus 		   	= str_replace(",", "", $this->input->post('commbonus'));
 					$referral 		   	= str_replace(",", "", $this->input->post('referral'));
 
-					$oldwinlose			= $this->input->post('oldwin')-$this->input->post('oldlose');
+					$oldwinlose			= $this->input->post('oldwin');
 					$oldcommbonus 		= $this->input->post('oldcomm');
 					$oldreferral 		= $this->input->post('oldreferral');
 
@@ -1163,7 +1187,6 @@ class Transaksi extends CI_Controller {
 				$jumlah 	= $this->input->post("jumlah");
 				$nomor  	= random_string('alnum', 15);
 				$rekening 	= $this->m_rekening->RekeningPenerima();
-
 
 		  		if($jumlah == 0 || $jumlah == ''){
 					$total = 0;

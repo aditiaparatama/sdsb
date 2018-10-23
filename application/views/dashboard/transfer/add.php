@@ -62,7 +62,7 @@
                                                     <option>- TRANSFER DARI -</option>
                                                     <option value="DEPOSIT">DEPOSIT</option>
                                                     <option value="SBOBET">SBOBET</option>
-                                                    <option value="IBCBET">IBCBET</option>
+                                                    <option value="MAXBET">MAXBET</option>
                                                     <option value="HOREY4D">HOREY4D</option>
                                                     <option value="TANGKASNET">TANGKASNET</option>
                                                 </select>
@@ -77,7 +77,7 @@
                                                     <option>- TUJUAN TRANSFER -</option>
                                                     <option value="REKENING PRIBADI">REKENING PRIBADI</option>
                                                     <option value="SBOBET">SBOBET</option>
-                                                    <option value="IBCBET">IBCBET</option>
+                                                    <option value="MAXBET">MAXBET</option>
                                                     <option value="HOREY4D">HOREY4D</option>
                                                     <option value="TANGKASNET">TANGKASNET</option>
                                                 </select>

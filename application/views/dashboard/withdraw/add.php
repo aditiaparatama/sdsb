@@ -18,7 +18,7 @@
                                 <div class="portlet-title">
                                     <div class="caption font-red-sunglo">
                                         <i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span class="caption-subject bold uppercase"> Transfer Dana Baru </span>
+                                        <span class="caption-subject bold uppercase"> Withdraw/Transfer Dana Baru </span>
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
@@ -28,15 +28,15 @@
                                             <div class="row">
                                                 <div class="col-md-12"> 
                                                     <div class="form-group">
-                                                        <label for="" class="col-md-3 control-label">Dari*</label>
+                                                        <label for="" class="col-md-3 control-label">Sumber Dana*</label>
                                                         <div class="col-md-9">
                                                         <select class="form-control" id="dari" name="dari" onchange="getdeposit()" required>
-                                                            <option>- Pilih Deposit -</option>
-                                                            <option value="SBOBET">Deposit SBOBET</option>
-                                                            <option value="IBCBET">Deposit IBCBET</option>
-                                                            <option value="HOREY4D">Deposit HOREY4D</option>
-                                                            <option value="TANGKASNET">Deposit TANGKASNET</option>
-                                                            <option value="SDSB ONLINE">Deposit SDSB Online</option>
+                                                            <option>- Pilih Sumber Dana -</option>
+                                                            <option value="SBOBET">SBOBET</option>
+                                                            <option value="MAXBET">MAXBET</option>
+                                                            <option value="HOREY4D">HOREY4D</option>
+                                                            <option value="TANGKASNET">TANGKASNET</option>
+                                                            <option value="SDSB ONLINE">SDSB Online</option>
                                                         </select>
                                                         </div>
                                                     </div>
@@ -44,12 +44,12 @@
                                                 <div id="customer"></div>
                                                 <div class="col-md-12"> 
                                                     <div class="form-group">
-                                                        <label for="" class="col-md-3 control-label">Tujuan*</label>
+                                                        <label for="" class="col-md-3 control-label">Tujuan Transfer*</label>
                                                         <div class="col-md-9">
                                                         <select class="form-control" name="tujuan" required>
                                                             <option>- Tujuan Transfer -</option>
                                                             <option value="SBOBET">SBOBET</option>
-                                                            <option value="IBCBET">IBCBET</option>
+                                                            <option value="MAXBET">MAXBET</option>
                                                             <option value="HOREY4D">HOREY4D</option>
                                                             <option value="TANGKASNET">TANGKASNET</option>
                                                             <option value="SDSB ONLINE">SDSB Online</option>

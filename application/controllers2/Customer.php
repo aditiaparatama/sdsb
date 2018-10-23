@@ -100,11 +100,11 @@ class Customer extends CI_Controller {
 			$this->form_validation->set_rules('nmrek', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('norek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('usersbo', 'Username SBOBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('ibcbet', 'Username IBCBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('ibcbet', 'Username MAXBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('horey4d', 'Username Horey', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tangkasnet', 'Username Tangkas', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('dsbobet', 'Deposit SBOBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('dibcbet', 'Deposit IBCBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('dibcbet', 'Deposit MAXBET', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('dhorey4d', 'Deposit Horey', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('dtangkas', 'Deposit Tangkas', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			if($this->form_validation->run() == false){

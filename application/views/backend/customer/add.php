@@ -127,16 +127,16 @@
                             <div class="col-sm-6">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="ibcbet" class="form-control">
-                                        <label class="form-label">Username IBCBET</label>
+                                        <input type="text" name="maxbet" class="form-control">
+                                        <label class="form-label">Username MAXBET</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="dibcbet" class="form-control" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);">
-                                        <label class="form-label">Deposit IBCBET</label>
+                                        <input type="text" name="dmaxbet" class="form-control" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);">
+                                        <label class="form-label">Deposit MAXBET</label>
                                     </div>
                                 </div>
                             </div>

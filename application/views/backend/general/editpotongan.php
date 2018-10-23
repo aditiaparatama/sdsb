@@ -16,8 +16,16 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="jumlah" class="form-control" value="<?php echo $detail->gqty; ?>" reqired>
-                                        <label class="form-label">Jumlah Pembelian Kupon</label>
+                                        <input type="number" name="jmhdari" class="form-control" value="<?php echo $detail->gqtydari; ?>" reqired>
+                                        <label class="form-label">Minimal Pembelian Kupon</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" name="jmhsampai" class="form-control" value="<?php echo $detail->gqtysampai; ?>" reqired>
+                                        <label class="form-label">Maksimal Pembelian Kupon</label>
                                     </div>
                                 </div>
                             </div>

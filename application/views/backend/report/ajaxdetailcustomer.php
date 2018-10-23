@@ -4,24 +4,15 @@
         <div class="body table-responsive">
             <table class="table table-hover">
                 <thead>
-                    <tr class="bg-light-blue">
-                        <th style="min-width: 150px;">Nama</th>
+                    <tr class="bg-light-blue">                        
                         <th style="min-width: 120px;">Email</th>
-                        <th>Telepon</th>
-                        <th style="min-width: 180px;">Alamat</th>
-                        <th>Bank</th>
-                        <th style="min-width: 120px;">Nama Rekening</th>
-                        <th>No Rekening</th>
-                        <th style="min-width: 120px;">User SBOBET</th>
-                        <th style="min-width: 120px;">User MAXBET</th>
-                        <th style="min-width: 120px;">User HOREY4D</th>
-                        <th style="min-width: 160px;">User TANGKASNET	</th>
-                        <th style="min-width: 160px;">User SDSB ONLINE</th>
-                        <th style="min-width: 140px;">Deposit SBOBET</th>
-                        <th style="min-width: 140px;">Deposit MAXBET</th>
-                        <th style="min-width: 140px;">Deposit HOREY4D</th>
-                        <th style="min-width: 180px;">Deposit TANGKASNET</th>
-                        <th style="min-width: 160px;">Deposit SDSB ONLINE</th>
+                        <th style="min-width: 120px;">Deposit</th>
+                        <th style="min-width: 120px;">Withdraw</th>
+                        <th style="min-width: 120px;">SBOBET</th>
+                        <th style="min-width: 120px;">MAXBET</th>
+                        <th style="min-width: 120px;">HOREY4D</th>
+                        <th style="min-width: 160px;">TANGKASNET</th>
+                        <th style="min-width: 160px;">Balance</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,18 +21,7 @@
 					foreach($lists as $list) {   
 				?>
                     <tr>
-                        <td><?php echo $list->cnama; ?></td>
                         <td><?php echo $list->cemail; ?></td>
-                        <td><?php echo $list->ctlp; ?></td>
-                        <td><?php echo $list->calamat; ?></td>
-                        <td><?php echo $list->cbank; ?></td>
-                        <td><?php echo $list->cnamarek; ?></td>
-                        <td><?php echo $list->cnorek; ?></td>
-                        <td><?php echo $list->cusersbo; ?></td>
-                        <td><?php echo $list->cusermax; ?></td>
-                        <td><?php echo $list->cuserhorey; ?></td>
-                        <td><?php echo $list->cusertangkas; ?></td>
-                        <td><?php echo $list->cuser; ?></td>
                         <td>Rp. <?php echo number_format($list->cdepositsbo); ?></td>
                         <td>Rp. <?php echo number_format($list->cdepositmax); ?></td>
                         <td>Rp. <?php echo number_format($list->cdeposithorey); ?></td>
@@ -51,17 +31,6 @@
     			<?php $cdepo1 += $list->cdepositsbo; $cdepo2 += $list->cdepositmax; $cdepo3 += $list->cdeposithorey; $cdepo4 += $list->cdeposittangkas; $cdepo5 += $list->cdeposit; } ?>
                 </tbody>
                 <tfoot class="bg-grey">
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
                         <th></th>
                         <th>Rp. <?php echo number_format($cdepo1); ?></th>
                         <th>Rp. <?php echo number_format($cdepo2); ?></th>

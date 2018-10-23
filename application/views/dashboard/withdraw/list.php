@@ -18,7 +18,7 @@
                             <div class="portlet-title">
                                 <div class="caption font-red-sunglo">
                                     <i class="fa fa-tasks" aria-hidden="true"></i>
-                                    <span class="caption-subject bold uppercase"> List Transfer Dana</span>
+                                    <span class="caption-subject bold uppercase"> List Withdraw/Transfer Dana</span>
                                 </div>
                             </div>
                             <div class="portlet-body form">
@@ -27,7 +27,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="btn-group">
-                                                <a class="btn sbold green" href="<?php echo base_url('dashboard/addtransfer'); ?>"> TRANSFER DANA BARU
+                                                <a class="btn sbold green" href="<?php echo base_url('dashboard/addtransfer'); ?>"> WITHDRAW/TRANSFER DANA BARU
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>
@@ -38,7 +38,7 @@
                                 <table class="table table-striped table-bordered table-hover order-column" id="">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>ID Transaksi</th>
                                             <th>Dari</th>
                                             <th>Tujuan</th>
                                             <th>Nominal</th>

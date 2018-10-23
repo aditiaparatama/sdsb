@@ -43,18 +43,6 @@ class M_transaksi extends CI_Model {
         $data = $this->db->get()->result();
         return $data;
     }
-    //     public function ListDeposit($id){
-    //     $this->db->select('t.tnomor, t.tpotongan, t.tgrandtotal, t.tstatus, t.tperiode, t.tdate, c.cnama, c.cdeposit');
-    //     $this->db->from($this->table[1].' as t');
-    //     $this->db->join($this->table[2].' as c','c.cid = t.tcustomer');
-    //     $this->db->where('t.tcustomer',$id);
-    //     $this->db->where('t.tjenis', 1);
-    //     $this->db->where('t.tbrand', 5);
-    //     $this->db->where_in('t.tstatus', [1,2]);
-
-    //     $data = $this->db->get()->result();
-    //     return $data;
-    // }
 
 
 
@@ -212,7 +200,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function ListTransaksiHarianDebit($id){
-        $this->db->select('t.tnomor, t.tgrandtotal, t.ttujuan, t.tketerangan, t.tsubjenis, t.tperiode, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cuser, r.rnama, r.rbank');
+        $this->db->select('t.tnomor, t.tgrandtotal, t.ttujuan, t.tketerangan, t.tsubjenis, t.tperiode, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cuser, r.rnama, r.rbank');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[3].' as r','r.rno = t.ttujuan','left');
@@ -227,7 +215,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function ListTransaksiHarianKredit($id){
-        $this->db->select('t.tnomor, t.tgrandtotal, t.tdari, t.ttujuan, t.tketerangan, t.tsubjenis, t.tperiode, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cuser, r.rnama, r.rbank');
+        $this->db->select('t.tnomor, t.tgrandtotal, t.tdari, t.ttujuan, t.tketerangan, t.tsubjenis, t.tperiode, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cuser, r.rnama, r.rbank');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[3].' as r','r.rno = t.tdari','left');
@@ -241,7 +229,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function ListTransaksiHarianPermainan($id){
-        $this->db->select('t.tnomor, t.tbonus, t.tbonus2, t.twin, t.tlose, t.tmembercomm, t.tperiode, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cuser');
+        $this->db->select('t.tnomor, t.tbonus, t.tbonus2, t.twin, t.tlose, t.tmembercomm, t.tperiode, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cuser');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->where('t.tbrand', $id);
@@ -255,7 +243,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function DetailTransaksiHarianDebit($id,$nomor){
-        $this->db->select('t.tnomor, t.tgrandtotal, t.ttujuan, t.tketerangan, t.tperiode, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cuser, r.rnama, r.rbank');
+        $this->db->select('t.tnomor, t.tgrandtotal, t.ttujuan, t.tketerangan, t.tperiode, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cuser, r.rnama, r.rbank');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[3].' as r','r.rno = t.ttujuan','left');
@@ -269,7 +257,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function DetailTransaksiHarianKredit($id,$nomor){
-        $this->db->select('t.tnomor, t.tgrandtotal, t.tdari, t.ttujuan, t.tketerangan, t.tperiode, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cuser, c.cdeposit, c.cdepositsbo, c.cdepositibc, c.cdeposithorey, c.cdeposittangkas, c.cbank, c.cnamarek, c.cnorek, r.rnama, r.rbank, r.rsaldo');
+        $this->db->select('t.tnomor, t.tgrandtotal, t.tdari, t.ttujuan, t.tketerangan, t.tperiode, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cuser, c.cdeposit, c.cdepositsbo, c.cdepositmax, c.cdeposithorey, c.cdeposittangkas, c.cbank, c.cnamarek, c.cnorek, r.rnama, r.rbank, r.rsaldo');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[3].' as r','r.rno = t.tdari','left');
@@ -283,7 +271,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function DetailTransaksiHarianPermainan($id,$nomor){
-        $this->db->select('t.tnomor, t.tgrandtotal, t.tbonus, t.tbonus2, t.twin, tsubbrand, t.tlose, t.tmembercomm, t.tperiode, t.tperiode, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cuser');
+        $this->db->select('t.tnomor, t.tgrandtotal, t.tbonus, t.tbonus2, t.twin, tsubbrand, t.tlose, t.tmembercomm, t.tperiode, t.tperiode, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cuser');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->where('t.tbrand', $id);
@@ -375,7 +363,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function DetailTransferDana($nomor){
-        $this->db->select('t.tid, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tstatus, t.tbrand, t.tdate, c.cuser, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cid, c.cdeposit, b.bnama');
+        $this->db->select('t.tid, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tstatus, t.tbrand, t.tdate, c.cuser, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cid, c.cdeposit, b.bnama');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[4].' as b','b.bid = t.tbrand','left');
@@ -405,7 +393,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function DetailWithdrawDana($nomor){
-        $this->db->select('t.tid, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tstatus, t.tbrand, t.tdate, c.cuser, c.cusersbo, c.cuseribc, c.cuserhorey, c.cusertangkas, c.cid, c.cdeposit, c.cdepositsbo, c.cdepositibc, c.cdeposithorey, c.cdeposittangkas, c.cnorek, b.bnama');
+        $this->db->select('t.tid, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tstatus, t.tbrand, t.tdate, c.cuser, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cid, c.cdeposit, c.cdepositsbo, c.cdepositmax, c.cdeposithorey, c.cdeposittangkas, c.cnorek, b.bnama');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[4].' as b','b.bid = t.tbrand','left');
@@ -491,6 +479,28 @@ class M_transaksi extends CI_Model {
         $this->db->group_by('t.tnomor'); 
         if($periode != '1970-01-01'){
             $this->db->where('t.tperiode', $periode);
+        }
+
+        $data = $this->db->get()->result();
+        return $data;
+    }
+
+    public function ReportDetailCustomer($dari,$sampai,$email){
+        $this->db->select('t.tnomor, t.tgrandtotal, t.tperiode, t.tbrand, c.cemail, c.cdeposit, c.cdepositsbo, c.cdepositmax, c.cdeposithorey, c.cdeposittangkas');
+        $this->db->from($this->table[1].' as t');
+        $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
+        $this->db->where('tstatus', 1);
+        $this->db->where_in('t.tstatus', [1,2,6]);
+        if($dari != '1970-01-01'){
+            $this->db->where('t.tperiode >=', $dari);
+        }
+        if($sampai != '1970-01-01'){
+            $this->db->where('t.tperiode <=', $sampai);
+        }else{
+            $this->db->where('t.tperiode <=', '2020-12-13');
+        }
+        if($email != ''){
+            $this->db->where('cemail', $email);
         }
 
         $data = $this->db->get()->result();

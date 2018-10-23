@@ -48,7 +48,7 @@
                                             if($list->tbrand == 1){
                                                 $brand = 'SBOBET';
                                             }else if($list->tbrand == 2){
-                                                $brand = 'IBCBET';
+                                                $brand = 'MAXBET';
                                             }else if($list->tbrand == 3){
                                                 $brand = 'HOREY4D';
                                             }else if($list->tbrand == 4){

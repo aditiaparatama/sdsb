@@ -30,8 +30,8 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="list-inline">
-                          <li><strong>Username IBCBET</strong></li>
-                          <li style="margin-left: 42px;">: <?php echo $detail->cuseribc; ?></li>
+                          <li><strong>Username MAXBET</strong></li>
+                          <li style="margin-left: 42px;">: <?php echo $detail->cusermax; ?></li>
                         </ul>
                     </div>
                     <div class="col-md-6">
@@ -106,8 +106,8 @@
                     <i class="material-icons">attach_money</i>
                 </div>
                 <div class="content">
-                    <div class="text">DEPOSIT IBCBET</div>
-                    <div class="number" style="font-size: 20px;margin-top: 4px;">Rp. <?php echo number_format($detail->cdepositibc); ?></div>
+                    <div class="text">DEPOSIT MAXBET</div>
+                    <div class="number" style="font-size: 20px;margin-top: 4px;">Rp. <?php echo number_format($detail->cdepositmax); ?></div>
                 </div>
             </div>
         </div>

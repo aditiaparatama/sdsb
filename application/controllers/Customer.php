@@ -93,7 +93,7 @@ class Customer extends CI_Controller {
 				$this->load->model('m_rekening');
 				$this->load->model('m_reportlabarugi');
 				$usersbo	 	= $this->input->post('usersbo');
-				$useribc	 	= $this->input->post('ibcbet');
+				$usermax	 	= $this->input->post('maxbet');
 				$userhorey	 	= $this->input->post('horey4d');
 				$usertangkas 	= $this->input->post('tangkasnet');
 				$usersdsb	 	= $this->input->post('sdsb');
@@ -103,8 +103,8 @@ class Customer extends CI_Controller {
 		  		
 		  		$wheresbo 	 	= array('cusersbo' => $usersbo);
 		  		$cusersbo 	 	= $this->m_customer->CekCustomer($wheresbo)->num_rows();
-		  		$whereibc 	 	= array('cuseribc' => $useribc);
-		  		$cuseribc 	 	= $this->m_customer->CekCustomer($whereibc)->num_rows();
+		  		$wheremax 	 	= array('cusermax' => $usermax);
+		  		$cusermax 	 	= $this->m_customer->CekCustomer($wheremax)->num_rows();
 		  		$wherehorey  	= array('cuserhorey' => $usersbo);
 		  		$cuserhorey 	= $this->m_customer->CekCustomer($wherehorey)->num_rows();
 		  		$wheretangkas 	= array('cusertangkas' => $usersbo);
@@ -115,8 +115,8 @@ class Customer extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, user SBOBET sudah terpakai!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
-		  		if($cuseribc > 0 ){
-		            $this->session->set_flashdata('warning', 'Maaf, user IBCBET sudah terpakai!');
+		  		if($cusermax > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user MAXBET sudah terpakai!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
 		  		if($cuserhorey > 0 ){
@@ -135,7 +135,7 @@ class Customer extends CI_Controller {
 					$data['cnama']				= $this->input->post('nama');
 					$data['cuser'] 				= $this->input->post('sdsb');
 					$data['cusersbo']			= $this->input->post('usersbo');
-					$data['cuseribc']			= $this->input->post('ibcbet');
+					$data['cusermax']			= $this->input->post('maxbet');
 					$data['cuserhorey']			= $this->input->post('horey4d');
 					$data['cusertangkas']		= $this->input->post('tangkasnet');
 					$data['cemail']				= $this->input->post('email');
@@ -147,7 +147,7 @@ class Customer extends CI_Controller {
 					$data['cnorek']				= $this->input->post('norek');
 					$data['cdeposit']			= str_replace(".", "", $this->input->post('dsdsb'));
 					$data['cdepositsbo']		= str_replace(".", "", $this->input->post('dsbobet'));
-					$data['cdepositibc']		= str_replace(".", "", $this->input->post('dibcbet'));
+					$data['cdepositmax']		= str_replace(".", "", $this->input->post('dmaxbet'));
 					$data['cdeposithorey']		= str_replace(".", "", $this->input->post('dhorey4d'));
 					$data['cdeposittangkas']	= str_replace(".", "", $this->input->post('dtangkas'));
 					$data['cterbaca']			= 1;
@@ -203,26 +203,26 @@ class Customer extends CI_Controller {
 					}
 	  	 		}
 
-	  	 		if($this->input->post('dibcbet') != ''){		
+	  	 		if($this->input->post('dmaxbet') != ''){		
 	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $customer->cid;
 					$row['tnomor']		= random_string('alnum', 15);
-					$row['tdari']		= $customer->cuseribc;
+					$row['tdari']		= $customer->cusermax;
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= str_replace(".", "", $this->input->post('dibcbet'));
-					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dibcbet'));
+					$row['tharga']		= str_replace(".", "", $this->input->post('dmaxbet'));
+					$row['tgrandtotal'] = str_replace(".", "", $this->input->post('dmaxbet'));
 					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 2;
-					$row['tketerangan'] = 'Saldo awal IBCBET customer '.$customer->cuseribc;
+					$row['tketerangan'] = 'Saldo awal MAXBET customer '.$customer->cusermax;
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
 					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dibcbet'));
+					$record['rsaldo'] 	= $rekening->rsaldo+str_replace(".", "", $this->input->post('dmaxbet'));
 	  	 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 	 				$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -230,14 +230,14 @@ class Customer extends CI_Controller {
 					if($report == NULL){
 						$report['rperiode']		 = $periode;
 						$report['rjmhdeposit']	 = 1;
-						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dibcbet'));
+						$report['rjmhdepositrp'] = str_replace(".", "", $this->input->post('dmaxbet'));
 						$report['rstatus']		 = 1;
 						$report['rdate']		 = date('Y-m-d H:i:s');
 
 		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 					}else{
 						$jmhdeposit		= $report->rjmhdeposit+1;
-						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dibcbet'));
+						$jmhdepositrp	= $report->rjmhdepositrp+str_replace(".", "", $this->input->post('dmaxbet'));
 						
 						$periode				  = $periode;
 						$report2['rjmhdeposit']	  = $jmhdeposit;
@@ -426,7 +426,7 @@ class Customer extends CI_Controller {
 				$this->load->model('m_rekening');
 				$this->load->model('m_reportlabarugi');
 				$usersbo	 	= $this->input->post('usersbo');
-				$useribc	 	= $this->input->post('ibcbet');
+				$usermax	 	= $this->input->post('maxbet');
 				$userhorey	 	= $this->input->post('horey4d');
 				$usertangkas 	= $this->input->post('tangkasnet');
 				$usersdsb	 	= $this->input->post('sdsb');
@@ -436,8 +436,8 @@ class Customer extends CI_Controller {
 		  		
 		  		$wheresbo 	 	= array('cusersbo' => $usersbo);
 		  		$cusersbo 	 	= $this->m_customer->CekCustomer($wheresbo)->num_rows();
-		  		$whereibc 	 	= array('cuseribc' => $useribc);
-		  		$cuseribc 	 	= $this->m_customer->CekCustomer($whereibc)->num_rows();
+		  		$wheremax 	 	= array('cusermax' => $usermax);
+		  		$cusermax 	 	= $this->m_customer->CekCustomer($wheremax)->num_rows();
 		  		$wherehorey  	= array('cuserhorey' => $usersbo);
 		  		$cuserhorey 	= $this->m_customer->CekCustomer($wherehorey)->num_rows();
 		  		$wheretangkas 	= array('cusertangkas' => $usersbo);
@@ -448,8 +448,8 @@ class Customer extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, user SBOBET sudah terpakai!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
-		  		if($cuseribc > 1 ){
-		            $this->session->set_flashdata('warning', 'Maaf, user IBCBET sudah terpakai!');
+		  		if($cusermax > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, user MAXBET sudah terpakai!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
 		  		if($cuserhorey > 1 ){
@@ -469,7 +469,7 @@ class Customer extends CI_Controller {
 					$data['cemail']				= $this->input->post('email');
 					$data['cuser'] 				= $this->input->post('sdsb');
 					$data['cusersbo']			= $this->input->post('usersbo');
-					$data['cuseribc']			= $this->input->post('ibcbet');
+					$data['cusermax']			= $this->input->post('maxbet');
 					$data['cuserhorey']			= $this->input->post('horey4d');
 					$data['cusertangkas']		= $this->input->post('tangkasnet');
 					$data['cpass'] 				= md5($this->input->post('pass'));
@@ -479,7 +479,7 @@ class Customer extends CI_Controller {
 					$data['cnamarek']			= $this->input->post('nmrek');
 					$data['cnorek']				= $this->input->post('norek');
 					$data['cdepositsbo']		= str_replace(",", "", $this->input->post('dsbobet'));
-					$data['cdepositibc']		= str_replace(",", "", $this->input->post('dibcbet'));
+					$data['cdepositmax']		= str_replace(",", "", $this->input->post('dmaxbet'));
 					$data['cdeposithorey']		= str_replace(",", "", $this->input->post('dhorey4d'));
 					$data['cdeposittangkas']	= str_replace(",", "", $this->input->post('dtangkas'));
 					$data['cdeposit']			= str_replace(",", "", $this->input->post('dsdsb'));
@@ -534,28 +534,28 @@ class Customer extends CI_Controller {
 					}	
 		 		}
 
-		 		if($this->input->post('olddibc') != str_replace(",", "", $this->input->post('dibcbet'))){	
-		 			$dibcbet = str_replace(",", "", $this->input->post('dibcbet'));	
+		 		if($this->input->post('olddmax') != str_replace(",", "", $this->input->post('dmaxbet'))){	
+		 			$dmaxbet = str_replace(",", "", $this->input->post('dmaxbet'));	
 
 			 		$rekening 			= $this->m_rekening->RekeningPenerima();
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
-					$row['tdari']		= $this->input->post('ibcbet');
+					$row['tdari']		= $this->input->post('maxbet');
 					$row['ttujuan']	 	= $rekening->rno;
-					$row['tharga']		= $dibcbet;
-					$row['tgrandtotal'] = $dibcbet;
+					$row['tharga']		= $dmaxbet;
+					$row['tgrandtotal'] = $dmaxbet;
 					$row['tjenis']		= 1;
 					$row['tsubjenis']	= 51;
 					$row['tsubdeposit']	= 61;
 					$row['tbrand']		= 2;
-					$row['tketerangan'] = 'Update saldo IBCBET customer '.$this->input->post('ibcbet');
+					$row['tketerangan'] = 'Update saldo MAXBET customer '.$this->input->post('maxbet');
 					$row['tstatus']	 	= 1;
 					$row['tuser'] 		= $this->session->userdata('id');
 					$row['tperiode'] 	= date('Y-m-d');
 					$row['tdate'] 		= date('Y-m-d H:i:s');
 					
 					$idrek 				= $rekening->rno;
-					$record['rsaldo'] 	= $rekening->rsaldo+$dibcbet-$this->input->post('olddibc');
+					$record['rsaldo'] 	= $rekening->rsaldo+$dmaxbet-$this->input->post('olddmax');
 			 		
 		  	 		$this->m_transaksi->SaveTransaksi($row);
 					$this->m_rekening->UpdateSaldo($idrek, $record);	
@@ -563,14 +563,14 @@ class Customer extends CI_Controller {
 					if($report == NULL){
 						$report['rperiode']		 = $periode;
 						$report['rjmhdeposit']	 = 1;
-						$report['rjmhdepositrp'] = $dibcbet;
+						$report['rjmhdepositrp'] = $dmaxbet;
 						$report['rstatus']		 = 1;
 						$report['rdate']		 = date('Y-m-d H:i:s');
 
 		  	 			$this->m_reportlabarugi->SaveLabaRugi($report);	
 					}else{
 						$jmhdeposit		= $report->rjmhdeposit+1;
-						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddibc')+$dibcbet;
+						$jmhdepositrp	= $report->rjmhdepositrp-$this->input->post('olddmax')+$dmaxbet;
 						
 						$periode				  = $periode;
 						$report2['rjmhdeposit']	  = $jmhdeposit;

@@ -92,8 +92,8 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="ibcbet" value="<?php echo $detail->cuseribc; ?>">
-                                <label class="form-label">Username IBCBET</label>
+                                <input type="text" class="form-control" name="maxbet" value="<?php echo $detail->cusermax; ?>">
+                                <label class="form-label">Username MAXBET</label>
                             </div>
                         </div>
                         <div class="form-group form-float">
@@ -124,8 +124,8 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="dibcbet" value="<?php echo number_format($detail->cdepositibc); ?>" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" >
-                                <label class="form-label">Deposit IBCBET</label>
+                                <input type="text" class="form-control" name="dmaxbet" value="<?php echo number_format($detail->cdepositmax); ?>" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" >
+                                <label class="form-label">Deposit MAXBET</label>
                             </div>
                         </div>
                         <div class="form-group form-float">
@@ -151,7 +151,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="hidden" name="idcus" value="<?php echo $detail->cid; ?>">
                 <input type="hidden" name="olddsbo" value="<?php echo $detail->cdepositsbo; ?>">
-                <input type="hidden" name="olddibc" value="<?php echo $detail->cdepositibc; ?>">
+                <input type="hidden" name="olddmax" value="<?php echo $detail->cdepositmax; ?>">
                 <input type="hidden" name="olddhorey" value="<?php echo $detail->cdeposithorey; ?>">
                 <input type="hidden" name="olddtangkas" value="<?php echo $detail->cdeposittangkas; ?>">
                 <input type="hidden" name="olddsdsb" value="<?php echo $detail->cdeposit; ?>">

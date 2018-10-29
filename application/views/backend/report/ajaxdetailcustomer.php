@@ -6,37 +6,72 @@
                 <thead>
                     <tr class="bg-light-blue">                        
                         <th style="min-width: 120px;">Email</th>
+                        <th style="min-width: 120px;">Brand</th>
                         <th style="min-width: 120px;">Deposit</th>
+                        <th style="min-width: 120px;">Win/Lose</th>
                         <th style="min-width: 120px;">Withdraw</th>
-                        <th style="min-width: 120px;">SBOBET</th>
-                        <th style="min-width: 120px;">MAXBET</th>
-                        <th style="min-width: 120px;">HOREY4D</th>
-                        <th style="min-width: 160px;">TANGKASNET</th>
-                        <th style="min-width: 160px;">Balance</th>
+                        <th style="min-width: 120px;">Balance</th>
                     </tr>
                 </thead>
                 <tbody>
 				<?php 
-			    	$cdepo1=0; $cdepo2=0; $cdepo3=0; $cdepo4=0; $cdepo5=0;
 					foreach($lists as $list) {   
+                        if($list->rdbrand == 1){
+                            $brand   = 'SBOBET';
+                            $deposit = $list->cdepositsbo; 
+                        }else if($list->rdbrand == 2){
+                            $brand   = 'MAXBET';
+                            $deposit = $list->cdepositmax; 
+                        }else if($list->rdbrand == 3){
+                            $brand   = 'HOREY4D';
+                            $deposit = $list->cdeposithorey; 
+                        }else if($list->rdbrand == 4){
+                            $brand   = 'TANGKASNET';
+                            $deposit = $list->cdeposittangkas; 
+                        }else if($list->rdbrand == 5){
+                            $brand   = 'SDSB ONLINE';
+                            $deposit = $list->cdeposit; 
+                        }
+
+
+                        if($list->rddeposit < 0){
+                            $class3 = 'class="col-red"';
+                        }else{
+                            $class3 = '';
+                        }
+                        if($list->rdwinlose < 0){
+                            $class4 = 'class="col-red"';
+                        }else{
+                            $class4 = '';
+                        }
+                        if($list->rdwithdraw < 0){
+                            $class5 = 'class="col-red"';
+                        }else{
+                            $class5 = 'class="col-red"';
+                        }
+                        if($deposit < 0){
+                            $class6 = 'class="col-red"';
+                        }else{
+                            $class6 = '';
+                        }
 				?>
                     <tr>
                         <td><?php echo $list->cemail; ?></td>
-                        <td>Rp. <?php echo number_format($list->cdepositsbo); ?></td>
-                        <td>Rp. <?php echo number_format($list->cdepositmax); ?></td>
-                        <td>Rp. <?php echo number_format($list->cdeposithorey); ?></td>
-                        <td>Rp. <?php echo number_format($list->cdeposittangkas); ?></td>
-                        <td>Rp. <?php echo number_format($list->cdeposit); ?></td>
+                        <td><?php echo $brand; ?></td>
+                        <td <?php echo $class3; ?>>Rp. <?php echo number_format($list->rddeposit); ?></td>
+                        <td <?php echo $class4; ?>>Rp. <?php echo number_format($list->rdwinlose); ?></td>
+                        <td <?php echo $class5; ?>>Rp. <?php echo number_format($list->rdwithdraw); ?></td>
+                        <td <?php echo $class6; ?>>Rp. <?php echo number_format($deposit); ?></td>
                     </tr>
-    			<?php $cdepo1 += $list->cdepositsbo; $cdepo2 += $list->cdepositmax; $cdepo3 += $list->cdeposithorey; $cdepo4 += $list->cdeposittangkas; $cdepo5 += $list->cdeposit; } ?>
+    			<?php } ?>
                 </tbody>
                 <tfoot class="bg-grey">
                         <th></th>
-                        <th>Rp. <?php echo number_format($cdepo1); ?></th>
-                        <th>Rp. <?php echo number_format($cdepo2); ?></th>
-                        <th>Rp. <?php echo number_format($cdepo3); ?></th>
-                        <th>Rp. <?php echo number_format($cdepo4); ?></th>
-                        <th>Rp. <?php echo number_format($cdepo5); ?></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>

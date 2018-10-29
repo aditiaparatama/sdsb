@@ -628,15 +628,19 @@ class General extends CI_Controller {
 		if($this->session->userdata('status') != "backend"){
 		   redirect(base_url('cmskita'));
 		}
-	  	$this->load->model('m_transaksi');
-		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
-		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+	  	$this->load->model('m_detailcustomer');
+		// $dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		// $sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$brand 			 = $this->input->post('brand');
 		$email 			 = $this->input->post('email');
 
-		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
-		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		// $data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		// $data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['brand'] 	 = $this->input->post('brand');
 		$data['filter2'] = $this->input->post('email');
-		$data['lists'] 	 = $this->m_transaksi->ReportDetailCustomer($dari,$sampai,$email);
+		// $data['lists'] 	 = $this->m_detailcustomer->ReportDetailCustomer($dari,$sampai,$email);
+		$data['lists'] 	 = $this->m_detailcustomer->ReportDetailCustomer($email,$brand);
+
 		if($data['lists'] == NULL){
 			$this->load->view('backend/report/ajaxkosong', $data);
 		}else{

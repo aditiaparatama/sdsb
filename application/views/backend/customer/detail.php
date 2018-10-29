@@ -146,7 +146,7 @@
         </div>
 
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header">
                     <h2><p class="col-default">DEPOSIT</p></h2>
@@ -156,7 +156,6 @@
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
                                 <tr>
-                                    <th>Transaksi</th>
                                     <th style="min-width: 120px;">Brand</th>
                                     <th style="min-width: 120px;">Nominal</th>
                                     <th>Keterangan</th>
@@ -166,11 +165,15 @@
                             <tbody>
                                 <?php 
                                     foreach($deposit as $data) { 
+                                        if($data->tbonus2 != 0){
+                                            $bonus2 = ' + Rp. '.number_format($data->tbonus2).' (Win/Lose)';
+                                        }else{
+                                            $bonus2 = '';
+                                        }
                                 ?>
                                 <tr>
-                                    <td><?php echo $data->tnomor; ?></td>
                                     <td><?php echo $data->bnama; ?></td>
-                                    <td>Rp. <?php echo number_format($data->tgrandtotal); ?></td>
+                                    <td>Rp. <?php echo number_format($data->tgrandtotal).$bonus2; ?></td>
                                     <td><span class="label bg-blue-grey"><?php echo $data->tketerangan; ?></span></td>
                                     <td><?php echo date('d F Y', strtotime($data->tperiode)); ?></td>
                                 </tr>
@@ -182,7 +185,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header">
                     <h2><p class="col-red">WITHDRAW</p></h2>
@@ -192,7 +195,6 @@
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
                                 <tr>
-                                    <th>Transaksi</th>
                                     <th style="min-width: 120px;">Brand</th>
                                     <th style="min-width: 120px;">Nominal</th>
                                     <th>Keterangan</th>
@@ -204,7 +206,6 @@
                                     foreach($withdraw as $row) { 
                                 ?>
                                     <tr>
-                                        <td><?php echo $row->tnomor; ?></td>
                                         <td><?php echo $row->bnama; ?></td>
                                         <td class="col-red">Rp. <?php echo number_format($row->tgrandtotal); ?></td>
                                         <td><span class="label bg-red"><?php echo $row->tketerangan; ?></span></td>

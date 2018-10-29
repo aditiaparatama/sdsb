@@ -14,7 +14,7 @@
                             <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
                         </h2><br>
                         <div class="row clearfix">
-                            <div class="col-sm-3">
+<!--                             <div class="col-sm-3">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" id="dari" name="dari" class="datepicker form-control" placeholder="Dari" required>
@@ -27,8 +27,20 @@
                                         <input type="text" id="sampai" name="sampai" class="datepicker form-control" placeholder="Sampai" required>
                                     </div>
                                 </div>
+                            </div> -->
+                            <div class="col-sm-3">                                       
+                                <select class="form-control show-tick" id="brand" name="brand" required>
+                                    <option value="">- PILIH BRAND -</option>
+                                    <?php
+                                      foreach ($brands as $brand) { 
+                                    ?>
+                                    <option value="<?php echo $brand->bid; ?>">
+                                        <?php echo $brand->bnama; ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="email" class="form-control" id="email" name="email" placeholder="email">
@@ -51,14 +63,13 @@
 
 <script>
 function GetCari(){
-  var dari      = $('#dari').val();
-  var sampai    = $('#sampai').val();
+  var brand     = $('#brand').val();
   var email     = $('#email').val();
 
   $.ajax({
   type: "POST",
   url: "<?php echo base_url('general/reportdetailcustomer_act'); ?>",
-  data: {dari:dari,sampai:sampai,email:email}
+  data: {brand:brand,email:email}
   }).done(function( result ) {
   $("#hasilreport").html( result );       
   });

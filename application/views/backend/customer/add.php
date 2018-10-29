@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="body">
                         <h2 class="card-inside-title">
-                            Tambah Customer
+                            Customer Baru
                             <small>Tambah customer baru 
                             <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
                         </h2><br>

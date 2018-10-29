@@ -152,10 +152,12 @@
                                     }else{
                                         $class1 = 'class="col-red"';
                                     }
-                                    if($permainan->twin < 0){
+                                    if($permainan->twin == 0){
                                         $class3 = 'class="col-red"';
+                                        $win    = $permainan->tlose;
                                     }else{
                                         $class3 = '';
+                                        $win    = $permainan->twin;
                                     }
                                     if($permainan->tlose < 0){
                                         $class4 = 'class="col-red"';
@@ -170,14 +172,14 @@
                                 ?>
                                 <tr>
                                     <td><?php echo date('d F Y', strtotime($permainan->tperiode)); ?></td>
-                                    <td>
-                                        <span <?php echo $class3; ?>><?php echo $permainan->twin.'</span>/<span '.$class4.'>'.$permainan->tlose; ?></span>
+                                    <td <?php echo $class3; ?>>
+                                        <?php echo number_format($permainan->twin); ?>
                                     </td>
                                     <td <?php echo $class5; ?>>
-                                        <?php echo $permainan->tmembercomm; ?>
+                                        Rp. <?php echo number_format($permainan->tmembercomm); ?>
                                     </td>
                                     <td <?php echo $class1; ?>>
-                                        <?php echo $permainan->tbonus; ?>
+                                        Rp. <?php echo number_format($permainan->tbonus); ?>
                                     </td>
                                 </tr>
                                 <?php } ?>

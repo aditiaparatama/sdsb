@@ -67,7 +67,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" name="saldo" class="form-control" value="Rp. <?php echo number_format($transfer->rsaldo); ?>" readonly>
-                                        <label class="form-label">Saldo</label>
+                                        <label class="form-label">Saldo Rekening</label>
                                     </div>
                                 </div>
                             </div>

@@ -47,7 +47,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="daribank" class="form-control" value="<?php echo number_format($detail->$saldo); ?>" readonly>
+                                        <input type="text" name="daribank" class="form-control" value="<?php echo number_format($detail->$saldo+$detail->tgrandtotal); ?>" readonly>
                                         <label class="form-label">Deposit</label>
                                     </div>
                                 </div>

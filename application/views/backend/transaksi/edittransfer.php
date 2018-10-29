@@ -18,7 +18,7 @@
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <select class="form-control show-tick" id="brand" name="brand" readonly>
-                                        <option value="<?php echo $detail->bnama; ?>" selected="selected">DEPOSIT <?php echo $detail->bnama; ?></option>
+                                        <option value="<?php echo $detail->tdari; ?>" selected="selected"><?php echo $detail->tdari; ?></option>
                                 </select>
                             </div>
                             <div class="col-sm-12">

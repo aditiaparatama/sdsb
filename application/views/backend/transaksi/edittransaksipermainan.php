@@ -81,6 +81,7 @@
                                 <input type="hidden" name="oldcomm" value="<?php echo $detail->tmembercomm; ?>">
                                 <input type="hidden" name="oldreferral" value="<?php echo $detail->tbonus; ?>">
                                 <input type="hidden" name="oldwin" value="<?php echo $win; ?>">
+                                <input type="hidden" name="oldbonus2" value="<?php echo $detail->tbonus2; ?>">
                                 <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UBAH</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('transaksi/listharianpermainan/'.$idbrand); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>

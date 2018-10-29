@@ -87,7 +87,7 @@
                                             <?php echo $list->$user; ?></a>
                                         </td>
                                         <td <?php echo $class3; ?>>
-                                            <?php echo $win; ?>
+                                            <?php echo number_format($win); ?>
                                         </td>
                                         <td <?php echo $class5; ?>>
                                         	Rp. <?php echo number_format($list->tmembercomm); ?>

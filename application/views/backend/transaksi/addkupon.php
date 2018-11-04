@@ -28,7 +28,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" name="deposit" class="form-control" required>
-                                        <label class="form-label">Deposit User</label>
+                                        <label class="form-label">Saldo Deposit</label>
                                     </div>
                                 </div>
                             </div>

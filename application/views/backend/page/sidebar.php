@@ -11,7 +11,7 @@
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
                     <li><a href="#"><i class="material-icons">person</i>Profile</a></li>
-                    <li><a href="<?php echo base_url('auth/logout'); ?>"><i class="material-icons">input</i>Sign Out</a></li>
+                    <li><a href="<?php echo base_url('user/logout'); ?>"><i class="material-icons">input</i>Sign Out</a></li>
                 </ul>
             </div>
         </div>
@@ -130,6 +130,9 @@
                 <ul class="ml-menu">
                     <li>
                         <a href="<?php echo base_url('general/harga'); ?>">Harga Kupon</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('general/periode'); ?>">Periode Kupon</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('brand/listsubbrand'); ?>">List Brand</a>

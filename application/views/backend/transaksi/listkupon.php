@@ -61,7 +61,7 @@
                                         <td><?php echo $list->tkupon; ?></td>
                                         <td>Rp. <?php echo number_format($list->tharga); ?></td>
                                         <td><?php echo $status; ?></td>
-<!--                                         <td>
+                                        <!-- <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>

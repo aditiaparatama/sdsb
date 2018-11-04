@@ -64,6 +64,9 @@
                                         <td><?php echo $list->rbank; ?></td>
                                         <td><?php echo $keterangan; ?></td>
                                         <td>
+                                        <?php 
+                                            if ($this->session->userdata('role') == 1){
+                                        ?>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
@@ -73,6 +76,7 @@
                                                     <li><a href="<?php echo base_url('rekening/hapusrekening/'.$list->rno); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
+                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>

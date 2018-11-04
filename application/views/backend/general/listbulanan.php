@@ -48,6 +48,9 @@
                                         <td>Rp. <?php echo number_format($list->gharga); ?></td>
                                         <td><?php echo date('F Y', strtotime($list->gperiode)); ?></td>
                                         <td>
+                                        <?php 
+                                            if ($this->session->userdata('role') == 1){
+                                        ?>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
@@ -57,6 +60,7 @@
                                                     <li><a href="<?php echo base_url('general/hapuspengeluaran/'.$list->gid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
+                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>

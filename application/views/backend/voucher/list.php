@@ -50,6 +50,9 @@
                                         <td><?php echo date('d F Y', strtotime($list->vakhir)); ?></td>
                                         <td><?php echo $list->vpotongan; ?>%</td>
                                         <td>
+                                        <?php 
+                                            if ($this->session->userdata('role') == 1){
+                                        ?>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
@@ -59,6 +62,7 @@
                                                     <li><a href="<?php echo base_url('voucher/hapusvoucher/'.$list->vid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
+                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>

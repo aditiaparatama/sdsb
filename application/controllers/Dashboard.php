@@ -239,7 +239,6 @@ class Dashboard extends CI_Controller {
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tlp', 'Telepon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
 			$this->form_validation->set_rules('alamat', 'Alamat', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -252,7 +251,6 @@ class Dashboard extends CI_Controller {
 				$id					= $this->session->userdata('id');
 				$data['cnama']		= $this->input->post('nama');
 				$data['cemail']		= $this->input->post('email');
-				$data['cpass'] 		= md5($this->input->post('pass'));
 				$data['calamat'] 	= $this->input->post('alamat');
 				$data['ctlp'] 		= $this->input->post('tlp');
 				$data['cbank'] 		= $this->input->post('bank');
@@ -268,7 +266,37 @@ class Dashboard extends CI_Controller {
 	    }
  	}
 
+	public function updatepassword(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		$id = $this->session->userdata('id');
+	  	$data['customer']	= $this->m_customer->DataCustomer($id);
 
+ 		$data['title'] = 'Edit Password - '.BRAND;
+ 		$data['page']  = 'dashboard/profile/editpassword';
+ 		$this->load->view('dashboard/thamplate', $data);
+	}
+
+	public function updatepassword_act(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('kpass', 'Konfirmasi Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+		        $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+				redirect($_SERVER['HTTP_REFERER']);
+		  	} else { 		
+				$id					= $this->session->userdata('id');
+				$data['cpass'] 		= md5($this->input->post('pass'));
+
+	  	 		$this->m_customer->EditCustomerAct($id, $data);	
+				redirect(base_url('login'));
+		  	}
+	    }
+ 	}
 
 	public function list(){
  		if($this->session->userdata('status') != "user"){

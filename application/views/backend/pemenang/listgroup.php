@@ -45,6 +45,9 @@
                                         <td>Pemenang <?php echo $list->porder; ?></td>
                                         <td><b><?php echo $list->cnama; ?></b></td>
                                         <td>
+                                        <?php 
+                                            if ($this->session->userdata('role') == 1){
+                                        ?>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
@@ -54,6 +57,7 @@
                                                     <!-- <li><a href="<?php echo base_url('pemenang/hapuspemenang/'.$list->id_pemenang); ?>" class=" waves-effect waves-block">Hapus</a></li> -->
                                                 </ul>
                                             </div>
+                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>

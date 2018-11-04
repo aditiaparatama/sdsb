@@ -44,14 +44,6 @@
                                                 </div>
                                                 <div class="col-md-12"> 
                                                     <div class="form-group">
-                                                        <label for="" class="col-md-3 control-label">Password*</label>
-                                                        <div class="col-md-9">
-                                                            <input type="password" class="form-control" placeholder="Password" name="pass" required> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12"> 
-                                                    <div class="form-group">
                                                         <label for="" class="col-md-3 control-label">Telepon*</label>
                                                         <div class="col-md-9">
                                                             <input type="number" class="form-control" placeholder="Telepon" name="tlp" value="<?php echo $detail->ctlp; ?>" required> 

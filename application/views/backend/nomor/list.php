@@ -37,6 +37,9 @@
                                         <td><?php echo $list->nnomor; ?></td>
                                         <td><?php echo $list->cnama; ?></td>
                                         <td>
+                                        <?php 
+                                            if ($this->session->userdata('role') == 1){
+                                        ?>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
@@ -45,6 +48,7 @@
                                                     <li><a href="<?php echo base_url('nomor/hapusnomor/'.$list->nid); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
+                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>

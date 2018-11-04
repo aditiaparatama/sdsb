@@ -82,6 +82,9 @@
                                         </td>
                                         <td class="col-red">Rp. <?php echo number_format($list->tgrandtotal); ?></td>
                                         <td>
+                                        <?php 
+                                            if ($this->session->userdata('role') == 1){
+                                        ?>
                                             <div class="btn-group">
                                                 <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 <i class="material-icons">more_vert</i>
@@ -91,6 +94,7 @@
                                                     <li><a href="<?php echo base_url('transaksi/hapustransaksikredit/'.$idbrand.'/'.$list->tnomor); ?>" class=" waves-effect waves-block">Hapus</a></li>
                                                 </ul>
                                             </div>
+                                        <?php } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>

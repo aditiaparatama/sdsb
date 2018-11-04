@@ -15,6 +15,7 @@
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
+                        <li><a href="<?php echo base_url('dashboard/updatepassword'); ?>"><i class="fa fa-lock"></i> Update Password </a></li>
                         <li><a href="<?php echo base_url('auth/logoutdashboard'); ?>"><i class="fa fa-sign-out"></i> Log Out </a></li>
                     </ul>
                 </li>

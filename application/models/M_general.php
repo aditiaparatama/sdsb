@@ -18,8 +18,22 @@ class M_general extends CI_Model {
         return $data;
     }
 
+    public function Periode(){
+        $this->db->select('gperiodedari, gperiodesampai');
+        $this->db->from($this->table[1]);
+        $this->db->where('gstatus', 9);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
     public function SaveHarga($id,$data) {
         $this->db->where('gid',$id);
+        $this->db->update('general',$data);
+    }
+
+    public function SavePeriode($id,$data) {
+        $this->db->where('gstatus',$id);
         $this->db->update('general',$data);
     }
 
@@ -100,7 +114,7 @@ class M_general extends CI_Model {
         $this->db->select('gdiskon');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 2);
-        $this->db->where('gqtysampai >=',$jumlah);
+        $this->db->where('gqtydari <=',$jumlah);
 
         $data = $this->db->get()->num_rows();
         return $data;    
@@ -119,7 +133,7 @@ class M_general extends CI_Model {
         $this->db->select('gdiskon, gqtydari, gqtysampai');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 2);
-        $this->db->where('gqtysampai >=',$jumlah);
+        $this->db->where('gqtydari <=',$jumlah);
 
         $data = $this->db->get()->row();
         return $data;

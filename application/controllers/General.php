@@ -41,6 +41,44 @@ class General extends CI_Controller {
 		$this->load->view('backend/thamplate', $data); 
  	}
 
+	public function periode(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_general');
+		$data['lists'] = $this->m_general->Periode();
+		// var_dump($data['lists']);die();
+
+		$data['title'] = 'List Periode Kupon - '.BRAND;
+		$data['page']  = 'backend/general/periode';
+		$this->load->view('backend/thamplate', $data); 
+ 	}
+
+ 	public function periode_act(){
+ 		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('periode1', 'Periode Awal', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('periode2', 'Periode Akhir', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+            	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+				redirect(base_url().'general/periode');
+		  	} else { 		
+				$id 					= 9;
+				$data['gname'] 			= 'Periode Kupon';
+				$data['gperiodedari'] 	= date('Y-m-d', strtotime($this->input->post('periode1')));
+				$data['gperiodesampai'] = date('Y-m-d', strtotime($this->input->post('periode2')));
+				$data['gbrand'] 		= 'SDSB Online';
+				$data['gdate'] 			= date('Y-m-d H:i:s');
+				
+	  			$this->load->model('m_general');
+	  	 		$this->m_general->SavePeriode($id, $data);	
+	       		redirect(base_url().'general/periode');
+		  	}
+	    }
+ 	}
+
  	public function harga_act(){
  		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));
@@ -60,6 +98,7 @@ class General extends CI_Controller {
 		  	}
 	    }
  	}
+
 	public function potonganpembelian(){
 		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('cmskita'));

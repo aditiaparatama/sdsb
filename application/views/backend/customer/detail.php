@@ -188,7 +188,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="header">
-                    <h2><p class="col-red">WITHDRAW</p></h2>
+                    <h2><p class="col-red">TRANSAKSI</p></h2>
                 </div>
                 <div class="body">
                     <div class="table-responsive">

@@ -1521,7 +1521,6 @@ class Transaksi extends CI_Controller {
 						$bruto		= $jumlah*$harga->gharga;
 		 				$total 		= $jumlah*$harga->gharga;
 		 			}
-		 			// $harga	= $this->m_general->SearchHarga();
 		  		}
 
 		  		if($cusdepo < $total){

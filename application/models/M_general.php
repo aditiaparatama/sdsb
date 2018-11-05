@@ -74,7 +74,7 @@ class M_general extends CI_Model {
     }
 
     public function PengeluaranBulanan(){
-        $this->db->select('gid, gname, gharga, gperiode');
+        $this->db->select('gid, gname, gharga, gperiodeawal');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 8);
 
@@ -83,7 +83,7 @@ class M_general extends CI_Model {
     }
 
     public function DetailPengeluaran($id){
-        $this->db->select('g.gid, g.gname, g.gdolar, g.grate, g.gharga, g.gketerangan, g.gketerangan2, g.gperiode, g.gdate, t.tnomor');
+        $this->db->select('g.gid, g.gname, g.gdolar, g.grate, g.gharga, g.gketerangan, g.gketerangan2, g.gperiodeawal, g.gdate, t.tnomor');
         $this->db->from($this->table[1].' as g');
         $this->db->join($this->table[2].' as t','t.tdate = g.gdate','left');
         $this->db->where('gid', $id);
@@ -149,16 +149,16 @@ class M_general extends CI_Model {
     }
     
     public function ReportBiayaOperasional($dari,$sampai){
-        $this->db->select('gname, gdolar, grate, gharga, gketerangan, gketerangan2, gperiode');
+        $this->db->select('gname, gdolar, grate, gharga, gketerangan, gketerangan2, gperiodeawal');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 8);
         if($dari != '1970-01-01'){
-            $this->db->where('gperiode >=', $dari);
+            $this->db->where('gperiodeawal >=', $dari);
         }
         if($sampai != '1970-01-01'){
-            $this->db->where('gperiode <=', $sampai);
+            $this->db->where('gperiodeawal <=', $sampai);
         }else{
-            $this->db->where('gperiode <=', '2020-12-13');
+            $this->db->where('gperiodeawal <=', '2020-12-13');
         }
 
         $data = $this->db->get()->result();

@@ -256,7 +256,7 @@ class General extends CI_Controller {
 				$data['gdolar'] 		= $harga;
 				$data['grate'] 			= $rate;
 				$data['gharga'] 		= $total;
-				$data['gperiode'] 		= date('Y-m-d', strtotime($this->input->post('tanggal')));
+				$data['gperiodeawal'] 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
 				$data['gketerangan'] 	= $this->input->post('keterangan');
 				$data['gketerangan2'] 	= $this->input->post('keterangan2');
 				$data['gstatus'] 		= 8;
@@ -336,7 +336,6 @@ class General extends CI_Controller {
   			$this->load->model('m_rekening');
   			$this->load->model('m_transaksi');
   			$this->load->model('m_reportlabarugi');
-
 	  		$harga 			= str_replace(",", "", $this->input->post('harga'));
 	  		$rate 			= str_replace(",", "", $this->input->post('rate'));
   	 		$saldorekening 	= $this->m_rekening->DetailRekening($this->input->post('transfer'));
@@ -356,7 +355,7 @@ class General extends CI_Controller {
 			$data['gdolar'] 		= $harga;
 			$data['grate'] 			= $rate;
 			$data['gharga'] 		= $total;
-			$data['gperiode'] 		= date('Y-m-d', strtotime($this->input->post('tanggal')));
+			$data['gperiodeawal'] 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
 			$data['gketerangan'] 	= $this->input->post('keterangan');
 			$data['gketerangan2'] 	= $this->input->post('keterangan2');
 
@@ -369,7 +368,7 @@ class General extends CI_Controller {
 			$record['tjenis']		= 8;
 			$record['tsubjenis']	= 52;
 			$record['tsubdeposit'] 	= 62;
-			$record['tperiode'] 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+			$record['gperiodeawal'] = date('Y-m-d', strtotime($this->input->post('tanggal')));
 			$record['tketerangan']  = 'Pengeluaran Bulanan'.' - Biaya '.$this->input->post('pengeluaran');
 			$record['tuser'] 		= $this->session->userdata('id');
 
@@ -683,6 +682,54 @@ class General extends CI_Controller {
 			$this->load->view('backend/report/ajaxkosong', $data);
 		}else{
 			$this->load->view('backend/report/ajaxdetailcustomer', $data);
+		}
+	}
+
+	public function reportkupon(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_brand');
+		$data['brands']  = $this->m_brand->Brand();
+
+		$data['title'] = 'Report Pembelian Kupon; - '.BRAND;
+		$data['page']  = 'backend/report/kupon';
+		$this->load->view('backend/thamplate', $data); 
+	}
+
+	public function reportkupon_act(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_transaksi');
+		$dari 			= date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		= date('Y-m-d', strtotime($this->input->post('sampai')));
+
+		$data['dari'] 	= $dari;
+		$data['sampai'] = $sampai;
+		$data['lists'] 	= $this->m_transaksi->ReportKupon($dari,$sampai);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/report/ajaxkupon', $data);
+		}
+	}
+
+	public function reportkupon_excel(){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('cmskita'));
+		}
+	  	$this->load->model('m_general');
+		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
+
+		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
+		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
+		$data['lists'] 	 = $this->m_general->ReportBiayaOperasional($dari,$sampai);
+		if($data['lists'] == NULL){
+			$this->load->view('backend/report/ajaxkosong', $data);
+		}else{
+			$this->load->view('backend/excel/biaya', $data);
 		}
 	}
 }

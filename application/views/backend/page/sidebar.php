@@ -209,13 +209,13 @@
                     <span>Report Rugi/Laba</span>
                 </a>
             </li>
-<!--             <li>
-                <a href="<?php echo base_url('general/penerimaan'); ?>">
+            <li>
+                <a href="<?php echo base_url('general/reportkupon'); ?>">
                     <i class="material-icons col-amber">donut_large</i>
-                    <span>Penerimaan Dana</span>
+                    <span>Report Pembelian Kupon</span>
                 </a>
             </li>
-            <li>
+<!--            <li>
                 <a href="<?php echo base_url('general/pengeluaran'); ?>">
                     <i class="material-icons col-orange">donut_large</i>
                     <span>Pengeluaran Dana</span>

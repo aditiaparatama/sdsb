@@ -46,7 +46,7 @@
                                     <tr>
                                         <td><?php echo $list->gname; ?></td>
                                         <td>Rp. <?php echo number_format($list->gharga); ?></td>
-                                        <td><?php echo date('F Y', strtotime($list->gperiode)); ?></td>
+                                        <td><?php echo date('F Y', strtotime($list->gperiodeawal)); ?></td>
                                         <td>
                                         <?php 
                                             if ($this->session->userdata('role') == 1){

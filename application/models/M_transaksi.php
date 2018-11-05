@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_transaksi extends CI_Model {
-    protected $table = array('1' => 'transaksi','2' => 'customer','3' => 'rekening', '4' => 'brand');
+    protected $table = array('1' => 'transaksi','2' => 'customer','3' => 'rekening', '4' => 'brand', '5' => 'nomor');
 
     public function __construct(){
       parent::__construct();
@@ -504,6 +504,25 @@ class M_transaksi extends CI_Model {
         $this->db->group_by('t.tnomor'); 
         if($periode != '1970-01-01'){
             $this->db->where('t.tperiode', $periode);
+        }
+
+        $data = $this->db->get()->result();
+        return $data;
+    }
+
+    public function ReportKupon($dari,$sampai){
+        $this->db->select('t.tkupon, t.tharga, t.tperiode, c.cuser, n.nperiode');
+        $this->db->from($this->table[1].' as t');
+        $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
+        $this->db->join($this->table[5].' as n','n.nnomor = t.tkupon','left');
+        $this->db->where('tjenis', 3);
+        if($dari != '1970-01-01'){
+            $this->db->where('nperiode >=', $dari);
+        }
+        if($sampai != '1970-01-01'){
+            $this->db->where('nperiode <=', $sampai);
+        }else{
+            $this->db->where('nperiode <=', '2020-12-13');
         }
 
         $data = $this->db->get()->result();

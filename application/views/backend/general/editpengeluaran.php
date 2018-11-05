@@ -73,7 +73,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal" class="datepicker form-control" placeholder="Periode" value="<?php echo date('l d F Y', strtotime($detail->gperiode)); ?>" required>
+                                        <input type="text" name="tanggal" class="datepicker form-control" placeholder="Periode" value="<?php echo date('l d F Y', strtotime($detail->gperiodeawal)); ?>" required>
                                     </div>
                                 </div>
                             </div>

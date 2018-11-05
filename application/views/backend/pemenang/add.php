@@ -16,7 +16,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal" class="datepicker form-control" placeholder="Tanggal" required>
+                                        <input type="text" name="tanggal" class="datepicker form-control" placeholder="Periode" required>
                                     </div>
                                 </div>
                             </div>

@@ -31,10 +31,11 @@ class M_nomor extends CI_Model {
 		$this->db->delete($this->table[1]);
 	}
 
-    public function CountNomor($nomor) {
+    public function CountNomor($nomor, $periode) {
         $this->db->select('nnomor');
         $this->db->from($this->table[1]);
         $this->db->where('nnomor', $nomor);
+        $this->db->where('nperiode', $periode);
 
         $data = $this->db->get()->num_rows();
         return $data;

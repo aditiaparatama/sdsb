@@ -18,14 +18,14 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="periode1" class="datepicker form-control" placeholder="Awal Periode" value="<?php echo date('l d F Y', strtotime($lists->gperiodedari)); ?>" required>
+                                        <input type="text" name="periode1" class="datepicker form-control" placeholder="Awal Periode" value="<?php echo date('l d F Y', strtotime($lists->gperiodeawal)); ?>" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="periode2" class="datepicker form-control" placeholder="Akhir Periode" value="<?php echo date('l d F Y', strtotime($lists->gperiodesampai)); ?>" required>
+                                        <input type="text" name="periode2" class="datepicker form-control" placeholder="Akhir Periode" value="<?php echo date('l d F Y', strtotime($lists->gperiodeakhir)); ?>" required>
                                     </div>
                                 </div>
                             </div>

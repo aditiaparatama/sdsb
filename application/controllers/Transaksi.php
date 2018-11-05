@@ -1497,11 +1497,13 @@ class Transaksi extends CI_Controller {
 	  			$this->load->model('m_nomor');
 				$this->load->model('m_general');
 	  			$this->load->model('m_customer');
+	  			$date 		= date('Y-m-d');
 	  			$id 		= $this->input->post("userid");
 				$cusdepo 	= $this->input->post("deposito");
 				$jumlah 	= $this->input->post("jumlah");
 				$nomor  	= random_string('alnum', 15);
 				$rekening 	= $this->m_rekening->RekeningPenerima();
+				$periode 	= $this->m_general->SearchPeriode();
 
 		  		if($jumlah == 0 || $jumlah == ''){
 					$total = 0;
@@ -1523,6 +1525,11 @@ class Transaksi extends CI_Controller {
 		 			}
 		  		}
 
+				if($periode->gperiodeakhir <= $date){
+		        	$this->session->set_flashdata('warning', 'Maaf, periode kupon sudah habis!');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+
 		  		if($cusdepo < $total){
 		        	$this->session->set_flashdata('warning', 'Maaf, Jumlah deposit kurang!');
 					redirect($_SERVER['HTTP_REFERER']);
@@ -1534,7 +1541,7 @@ class Transaksi extends CI_Controller {
 				
 				for ($x = 1; $x <= $jumlah; $x++){
 					$voucher 	= random_string('numeric', 6);
-			  		$count 		= $this->m_nomor->CountNomor($voucher);
+			  		$count 		= $this->m_nomor->CountNomor($voucher, $periode->gperiodeawal);
 			  		if($count > 0){
 						$voucher1 			= random_string('numeric', 6);
 						$data['tcustomer']	= $id;
@@ -1550,12 +1557,12 @@ class Transaksi extends CI_Controller {
 						$data['tbrand'] 	= 5;
 						$data['tketerangan']= 'Pembelian nomor kupon sdsb '.$this->input->post("user") ;
 						$data['tstatus']	= 1;
-						$data['tperiode']	= date('Y-m-d');
+						$data['tperiode']	= $periode->gperiodeawal;
 						$data['tuser']		= $this->session->userdata('id');
 						$data['tdate'] 		= date('Y-m-d H:i:s');
 						$row['ncustomer']	= $id;
 						$row['nnomor']		= $voucher1;
-						$row['nperiode']	= date('Y-m-d H:i:s');
+						$row['nperiode']	= $periode->gperiodeawal;
 	  	 				$this->m_transaksi->SaveTransaksi($data);
 	  	 				$this->m_nomor->SaveNomor($row);	
 			  		}else{
@@ -1572,12 +1579,12 @@ class Transaksi extends CI_Controller {
 						$data['tbrand'] 	= 5;
 						$data['tketerangan']= 'Pembelian nomor kupon sdsb '.$this->input->post("user") ;
 						$data['tstatus']	= 1;
-						$data['tperiode']	= date('Y-m-d');
+						$data['tperiode']	= $periode->gperiodeawal;
 						$data['tuser']		= $this->session->userdata('id');
 						$data['tdate'] 		= date('Y-m-d H:i:s');
 						$row['ncustomer']	= $id;
 						$row['nnomor']		= $voucher;
-						$row['nperiode']	= date('Y-m-d H:i:s');
+						$row['nperiode']	= $periode->gperiodeawal;
 	  	 				$this->m_transaksi->SaveTransaksi($data);
 	  	 				$this->m_nomor->SaveNomor($row);	
 			  	 	}

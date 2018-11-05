@@ -47,7 +47,6 @@ class General extends CI_Controller {
 		}
 	  	$this->load->model('m_general');
 		$data['lists'] = $this->m_general->Periode();
-		// var_dump($data['lists']);die();
 
 		$data['title'] = 'List Periode Kupon - '.BRAND;
 		$data['page']  = 'backend/general/periode';
@@ -67,8 +66,8 @@ class General extends CI_Controller {
 		  	} else { 		
 				$id 					= 9;
 				$data['gname'] 			= 'Periode Kupon';
-				$data['gperiodedari'] 	= date('Y-m-d', strtotime($this->input->post('periode1')));
-				$data['gperiodesampai'] = date('Y-m-d', strtotime($this->input->post('periode2')));
+				$data['gperiodeawal'] 	= date('Y-m-d', strtotime($this->input->post('periode1')));
+				$data['gperiodeakhir']  = date('Y-m-d', strtotime($this->input->post('periode2')));
 				$data['gbrand'] 		= 'SDSB Online';
 				$data['gdate'] 			= date('Y-m-d H:i:s');
 				

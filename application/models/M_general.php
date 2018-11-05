@@ -19,7 +19,7 @@ class M_general extends CI_Model {
     }
 
     public function Periode(){
-        $this->db->select('gperiodedari, gperiodesampai');
+        $this->db->select('gperiodeawal, gperiodeakhir');
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 9);
 
@@ -134,6 +134,15 @@ class M_general extends CI_Model {
         $this->db->from($this->table[1]);
         $this->db->where('gstatus', 2);
         $this->db->where('gqtydari <=',$jumlah);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
+    public function SearchPeriode(){
+        $this->db->select('gperiodeawal, gperiodeakhir');
+        $this->db->from($this->table[1]);
+        $this->db->where('gstatus', 9);
 
         $data = $this->db->get()->row();
         return $data;

@@ -56,6 +56,31 @@
                             </div>
                         </div>
                         </div>
+
+                        <div class="col-md-12"> 
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">Bank Penerima</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="bankp" value="<?php echo $rekening->rbank; ?>" readonly> 
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-12"> 
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">pemilik Rekening Penerima</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="pemilikp" value="<?php echo $rekening->rnama; ?>" readonly> 
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-12"> 
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">Nomor Rekening Penerima</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="nomorp" value="<?php echo $rekening->rno; ?>" readonly> 
+                            </div>
+                        </div>
+                        </div>
                         
                         <div class="col-md-12" style="margin-top:15px;"> 
                         <div class="form-group">

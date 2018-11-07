@@ -54,7 +54,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="number" name="tlp" class="form-control" required>
+                                        <input type="number" name="tlp" class="form-control">
                                         <label class="form-label">Telepon</label>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                             <div class="col-sm-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <textarea cols="30" rows="3" name="alamat" class="form-control no-resize" required aria-required="true"></textarea>
+                                    <textarea cols="30" rows="3" name="alamat" class="form-control no-resize" aria-required="true"></textarea>
                                     <label class="form-label">Alamat</label>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="file" id="photo" name="photo" class="file" accept="image/jpg, image/jpeg, image/png" required>
+                                        <input type="file" id="photo" name="photo" class="file" accept="image/jpg, image/jpeg, image/png">
                                     </div>
                                 </div>
                             </div>

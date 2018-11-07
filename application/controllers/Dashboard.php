@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-	  	$this->load->model(array('m_customer','m_transaksi','m_brand'));
+	  	$this->load->model(array('m_customer','m_transaksi','m_brand','m_rekening','m_pesan'));
 		$this->load->helper('string');
 		$this->load->library('upload');
 
@@ -46,10 +46,101 @@ class Dashboard extends CI_Controller {
 		}
 		$id 				= $this->session->userdata('id');
 		$data['customer'] 	= $this->m_customer->DataCustomer($id);
+		$data['rekening'] 	= $this->m_rekening->CariRekening($data['customer']->cbank);
 
 		$data['title'] = 'Tambah Deposit - '.BRAND;
 		$data['page']  = 'dashboard/deposit/add';
 		$this->load->view('dashboard/thamplate', $data); 
+ 	}
+
+	public function pesan(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		$id 				= $this->session->userdata('id');
+		$data['lists'] 		= $this->m_pesan->ListPesan($id);
+	  	$data['customer']	= $this->m_customer->DataCustomer($id);
+
+		$data['title'] = 'List Deposit - '.BRAND;
+		$data['page']  = 'dashboard/pesan/list';
+		$this->load->view('dashboard/thamplate', $data); 
+ 	}
+
+ 	public function addpesan(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		$id			  	 	= $this->session->userdata('id');
+	  	$data['customer']	= $this->m_customer->DataCustomer($id);
+
+		$data['title'] = 'Pesan Baru - '.BRAND;
+		$data['page']  = 'dashboard/pesan/add';
+		$this->load->view('dashboard/thamplate', $data); 
+ 	}
+
+ 	public function detailpesan(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		$id			  	 	= $this->session->userdata('id');
+	  	$data['customer']	= $this->m_customer->DataCustomer($id);
+		$data['lists'] 		= $this->m_pesan->DetailPesan($id);
+		$data['pesan'] 		= $this->m_pesan->DetailPesan1($id);
+
+		$data['title'] = 'Detail Pesan - '.BRAND;
+		$data['page']  = 'dashboard/pesan/detail';
+		$this->load->view('dashboard/thamplate', $data); 
+ 	}
+
+ 	public function addpesan_act(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('title', 'Title', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('pesan', 'Pesan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+		        $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+				redirect($_SERVER['HTTP_REFERER']);
+		  	} else { 		
+
+				$data['ptitle']	 	= $this->input->post('title');
+				$data['ppesan']		= $this->input->post('pesan');
+				$data['puser']	 	= $this->session->userdata('id');
+				$data['padmin']	 	= 0;
+				$data['pstatus']	= 1;
+				$data['pterbaca']	= 1;
+				$data['pdate']	 	= date('Y-m-d H:i:s');
+				
+	  	 		$this->m_pesan->SavePesan($data);	
+	       		redirect(base_url().'dashboard/pesan/');
+		  	}
+	    }
+ 	}
+
+ 	public function balaspesan_act(){
+ 		if($this->session->userdata('status') != "user"){
+			redirect(base_url('login'));
+		}
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('pesan', 'Pesan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+		        $this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+				redirect($_SERVER['HTTP_REFERER']);
+		  	} else { 		
+
+				$data['ptitle']	 	= $this->input->post('title');
+				$data['ppesan']		= $this->input->post('pesan');
+				$data['puser']	 	= $this->session->userdata('id');
+				$data['padmin']	 	= 0;
+				$data['pstatus']	= 1;
+				$data['pterbaca']	= 1;
+				$data['pdate']	 	= date('Y-m-d H:i:s');
+				
+	  	 		$this->m_pesan->SavePesan($data);	
+				redirect($_SERVER['HTTP_REFERER']);
+		  	}
+	    }
  	}
 
  	public function adddeposit_act(){
@@ -67,7 +158,6 @@ class Dashboard extends CI_Controller {
 					$id			= $this->session->userdata('id');
 					$customer 	= $this->m_customer->DataCustomer($id);
 		  			$deposit 	= str_replace(".", "", $this->input->post('deposit'));
-					$rekening 	= $this->m_rekening->RekeningPenerima();
 
 			  		if($this->input->post('voucher') != ''){
 		  				$date 	 = date('Y-m-d');
@@ -90,7 +180,7 @@ class Dashboard extends CI_Controller {
 				$data['tnomor']		 = random_string('alnum', 15);
 				$data['tvoucher']	 = $this->input->post('voucher');
 				$data['tdari']	 	 = $customer->cuser;
-				$data['ttujuan']	 = $rekening->rno;
+				$data['ttujuan']	 = $this->input->post('nomorp');
 				$data['tpotongan']	 = $potongan;
 				$data['tharga']		 = $total;
 				$data['tgrandtotal'] = $total;

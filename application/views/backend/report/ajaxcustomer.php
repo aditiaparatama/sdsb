@@ -8,7 +8,7 @@
                         <th style="min-width: 150px;">Nama</th>
                         <th style="min-width: 120px;">Email</th>
                         <th>Telepon</th>
-                        <th style="min-width: 180px;">Alamat</th>
+                        <th style="min-width: 250px;">Alamat</th>
                         <th>Bank</th>
                         <th style="min-width: 120px;">Nama Rekening</th>
                         <th>No Rekening</th>

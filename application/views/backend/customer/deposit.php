@@ -13,16 +13,9 @@
                                 <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
                             </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('customer/addcustomer'); ?>">Customer Baru</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="<?php echo base_url('customer/addcustomer'); ?>" type="button" class="btn bg-orange waves-effect pull-right" style="color:#fff;margin-top: -4%;">
+                            <i class="material-icons">add_box</i><span>Customer Baru</span>
+                        </a>
                     </div>
                     <div class="body">
                         <div class="table-responsive">

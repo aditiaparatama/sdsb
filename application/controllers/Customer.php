@@ -80,8 +80,8 @@ class Customer extends CI_Controller {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('tlp', 'Telepon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('alamat', 'Alamat', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('tlp', 'Telepon', 'htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('nmrek', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('norek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -98,6 +98,7 @@ class Customer extends CI_Controller {
 				$userhorey	 	= $this->input->post('horey4d');
 				$usertangkas 	= $this->input->post('tangkasnet');
 				$usersdsb	 	= $this->input->post('sdsb');
+				$useremail	 	= $this->input->post('email');
 		  		
 		  		if($usersbo != ''){
 		  			$wheresbo 	 	= array('cusersbo' => $usersbo);
@@ -108,16 +109,20 @@ class Customer extends CI_Controller {
 			  		$cusermax 	 	= $this->m_customer->CekCustomer($wheremax)->num_rows();
 			  	}
 		  		if($userhorey != ''){
-			  		$wherehorey  	= array('cuserhorey' => $usersbo);
+			  		$wherehorey  	= array('cuserhorey' => $userhorey);
 			  		$cuserhorey 	= $this->m_customer->CekCustomer($wherehorey)->num_rows();
 			  	}
 		  		if($usertangkas != ''){
-			  		$wheretangkas 	= array('cusertangkas' => $usersbo);
+			  		$wheretangkas 	= array('cusertangkas' => $usertangkas);
 			  		$cusertangkas 	= $this->m_customer->CekCustomer($wheretangkas)->num_rows();
 			  	}
 		  		if($usersdsb != ''){
-			  		$wheresdsb 	 	= array('cuser' => $usersbo);
+			  		$wheresdsb 	 	= array('cuser' => $usersdsb);
 			  		$cusersdsb 	 	= $this->m_customer->CekCustomer($wheresdsb)->num_rows();
+			  	}
+		  		if($useremail != ''){
+			  		$whereemail 	= array('cemail' => $useremail);
+			  		$cuseremail 	= $this->m_customer->CekCustomer($whereemail)->num_rows();
 			  	}
 
 		  		if($cusersbo > 0 ){
@@ -138,6 +143,10 @@ class Customer extends CI_Controller {
 		  		}
 		  		if($cusersdsb > 0 ){
 		            $this->session->set_flashdata('warning', 'Maaf, user SDSB sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+		  		if($cuseremail > 0 ){
+		            $this->session->set_flashdata('warning', 'Maaf, email sudah terpakai!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
 
@@ -598,6 +607,7 @@ class Customer extends CI_Controller {
 				$userhorey	 	= $this->input->post('horey4d');
 				$usertangkas 	= $this->input->post('tangkasnet');
 				$usersdsb	 	= $this->input->post('sdsb');
+				$useremail	 	= $this->input->post('email');
 
 				if($usersbo != ''){
 		  			$wheresbo 	 	= array('cusersbo' => $usersbo);
@@ -608,16 +618,20 @@ class Customer extends CI_Controller {
 			  		$cusermax 	 	= $this->m_customer->CekCustomer($wheremax)->num_rows();
 			  	}
 		  		if($userhorey != ''){
-			  		$wherehorey  	= array('cuserhorey' => $usersbo);
+			  		$wherehorey  	= array('cuserhorey' => $userhorey);
 			  		$cuserhorey 	= $this->m_customer->CekCustomer($wherehorey)->num_rows();
 			  	}
 		  		if($usertangkas != ''){
-			  		$wheretangkas 	= array('cusertangkas' => $usersbo);
+			  		$wheretangkas 	= array('cusertangkas' => $usertangkas);
 			  		$cusertangkas 	= $this->m_customer->CekCustomer($wheretangkas)->num_rows();
 			  	}
 		  		if($usersdsb != ''){
-			  		$wheresdsb 	 	= array('cuser' => $usersbo);
+			  		$wheresdsb 	 	= array('cuser' => $usersdsb);
 			  		$cusersdsb 	 	= $this->m_customer->CekCustomer($wheresdsb)->num_rows();
+			  	}
+		  		if($useremail != ''){
+			  		$whereemail 	= array('cemail' => $useremail);
+			  		$cuseremail 	= $this->m_customer->CekCustomer($whereemail)->num_rows();
 			  	}
 
 		  		if($cusersbo > 1 ){
@@ -640,6 +654,11 @@ class Customer extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, user SDSB sudah terpakai!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
+		  		if($cuseremail > 1 ){
+		            $this->session->set_flashdata('warning', 'Maaf, email sudah terpakai!');
+					redirect($_SERVER['HTTP_REFERER']);
+		  		}
+
 					$id	  						= $this->input->post('idcus');
 					$data['cnama']				= $this->input->post('nama');
 					$data['cemail']				= $this->input->post('email');

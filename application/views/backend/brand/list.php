@@ -13,16 +13,10 @@
                                 <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
                             </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('brand/addbrand'); ?>">Brand Baru</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="<?php echo base_url('brand/addbrand'); ?>" type="button" class="btn bg-orange waves-effect pull-right" 
+                            style="color:#fff;margin-top: -4%;">
+                            <i class="material-icons">add_box</i><span>Brand Baru</span>
+                        </a>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
@@ -83,15 +77,16 @@
                                         <td><?php echo $child; ?></td>
                                         <td><?php echo $subchild; ?></td>
                                         <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('brand/editbrand/'.$list->bid); ?>" class=" waves-effect waves-block">Edit Brand</a></li>
-                                                    <li><a href="<?php echo base_url('brand/hapusbrand/'.$list->bid); ?>" class=" waves-effect waves-block">Hapus</a></li>
-                                                </ul>
-                                            </div>
+                                            <a href="<?php echo base_url('brand/editbrand/'.$list->bid); ?>" type="button" class="btn bg-light-blue 
+                                                btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Brand" style="color:#fff;">
+                                                <i class="material-icons">border_color</i>
+                                            </a>
+
+                                            <a href="<?php echo base_url('brand/hapusbrand/'.$list->bid); ?>" type="button" class="btn bg-red 
+                                                btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" 
+                                                title="Hapus"style="color:#fff;">
+                                                <i class="material-icons">delete</i>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php $pg++; } ?>

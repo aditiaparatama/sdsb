@@ -18,18 +18,9 @@
                                 <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
                             </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('transaksi/addtransaksidebit/'.$idbrand); ?>">Input Deposit</a></li>
-                                    <li><a href="<?php echo base_url('transaksi/addtransaksikredit/'.$idbrand); ?>">Input Withdraw</a></li>
-                                    <li><a href="<?php echo base_url('transaksi/addtransaksipermainan/'.$idbrand); ?>">Input Data Permainan</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="<?php echo base_url('transaksi/addtransaksikredit/'.$idbrand); ?>"  type="button" class="btn bg-orange waves-effect pull-right" style="color:#fff;margin-top: -4%;">
+                            <i class="material-icons">add_box</i><span>Input Withdraw</span>
+                        </a>
                     </div>
                     <div class="body">
                         <ul class="nav nav-tabs tab-nav-right" role="tablist">
@@ -48,19 +39,19 @@
                                 <thead>
                                     <tr class="bg-light-blue">
                                         <th>Tanggal</th>
-                                        <th>Dari Rekening</th>
-                                        <th>Tujuan</th>
                                         <th>Username</th>
                                         <th>Nominal</th>
+                                        <th>Dari Rekening</th>
+                                        <th>Tujuan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                         <th>Tanggal</th>
-                                        <th>Dari Rekening</th>
-                                        <th>Tujuan</th>
                                         <th>Username</th>
                                         <th>Nominal</th>
+                                        <th>Dari Rekening</th>
+                                        <th>Tujuan</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -75,25 +66,25 @@
                                     ?>
                                     <tr>
                                         <td><?php echo date('d F Y', strtotime($list->tperiode)); ?></td>
-                                        <td><?php echo $list->tdari; ?></td>
-                                        <td><?php echo $list->ttujuan.$norek; ?></td>
-                                        <td><a href="<?php echo base_url('transaksi/detailtransaksi/'.$idbrand.'/'.$list->$user); ?>">
-                                            <?php echo $list->$user; ?></a>
+                                        <td>
+                                            <a href="<?php echo base_url('transaksi/detailtransaksi/'.$idbrand.'/'.$list->$user); ?>">
+                                                <?php echo $list->$user; ?>
+                                            </a>
                                         </td>
                                         <td class="col-red">Rp. <?php echo number_format($list->tgrandtotal); ?></td>
+                                        <td><?php echo $list->tdari; ?></td>
+                                        <td><?php echo $list->ttujuan.$norek; ?></td>
                                         <td>
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('transaksi/edittransaksikredit/'.$idbrand.'/'.$list->tnomor); ?>" class=" waves-effect waves-block">Edit transaksi</a></li>
-                                                    <li><a href="<?php echo base_url('transaksi/hapustransaksikredit/'.$idbrand.'/'.$list->tnomor); ?>" class=" waves-effect waves-block">Hapus</a></li>
-                                                </ul>
-                                            </div>
+                                        <a href="<?php echo base_url('transaksi/edittransaksikredit/'.$idbrand.'/'.$list->tnomor); ?>" 
+                                            style="color:#fff;" type="button" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Withdraw"><i class="material-icons">border_color</i>
+                                        </a>
+
+                                        <a href="<?php echo base_url('transaksi/hapustransaksikredit/'.$idbrand.'/'.$list->tnomor); ?>" type="button" 
+                                            class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus" style="color:#fff;"><i class="material-icons">delete</i>
+                                        </a>
                                         <?php } ?>
                                         </td>
                                     </tr>

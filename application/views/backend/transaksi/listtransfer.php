@@ -13,16 +13,8 @@
                                 <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
                             </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('transaksi/addtransfer'); ?>">Transfer Dana Baru</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="<?php echo base_url('transaksi/addtransfer'); ?>" type="button" class="btn bg-orange waves-effect pull-right" style="color:#fff;margin-top: -4%;"><i class="material-icons">add_box</i><span>Transfer Dana Baru</span>
+                        </a>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
@@ -35,7 +27,7 @@
                                         <th>Tujuan Transfer</th>
                                         <th>Nominal</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="min-width: 80px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -45,7 +37,7 @@
                                         <th>Tujuan Transfer</th>
                                         <th>Nominal</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="min-width: 80px;">Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -55,7 +47,7 @@
                                             $status = 'Selesai';
                                             $style  = "style='display:none'"; 
                                         }else{
-                                        	$status = 'Pending';
+                                            $status = 'Pending';
                                             $style  = ""; 
                                         }
                                     ?>
@@ -71,17 +63,17 @@
                                         <td>
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
-                                        ?>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li <?php echo $style;?>><a href="<?php echo base_url('transaksi/transferkonfirmasi_act/'.$list->tnomor); ?>" class=" waves-effect waves-block">Konfirmasi Transfer Dana</a></li>
-                                                    <li><a href="<?php echo base_url('transaksi/edittransfer/'.$list->tnomor); ?>" class=" waves-effect waves-block">Edit Transfer Dana</a></li>
-                                                    <li><a href="<?php echo base_url('transaksi/hapustransfer/'.$list->tnomor); ?>" class=" waves-effect waves-block">Hapus</a></li>
-                                                </ul>
-                                            </div>
+                                        ?>                                        
+                                        <a href="<?php echo base_url('transaksi/edittransfer/'.$list->tnomor); ?>" type="button" 
+                                            class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Transfer" <?php echo $style;?> style="color:#fff;">
+                                            <i class="material-icons">done_all</i>
+                                        </a>
+
+                                        <a href="<?php echo base_url('transaksi/hapustransfer/'.$list->tnomor); ?>" type="button" 
+                                            class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" 
+                                            data-placement="top" title="Hapus" style="color:#fff;">
+                                            <i class="material-icons">delete</i>
+                                        </a>
                                         <?php } ?>
                                         </td>
                                     </tr>

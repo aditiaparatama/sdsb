@@ -91,6 +91,12 @@
                 </a>
             </li> 
             <li>
+                <a href="<?php echo base_url('pesan/listpesan'); ?>">
+                    <i class="material-icons">question_answer</i>
+                    <span>Pesan</span>
+                </a>
+            </li> 
+            <li>
                 <a href="<?php echo base_url('nomor/listnomor'); ?>">
                     <i class="material-icons">archive</i>
                     <span>Kupon</span>

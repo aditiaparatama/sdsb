@@ -48,15 +48,13 @@
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('pemenang/editgrouppemenang/'.$list->pid); ?>" class=" waves-effect waves-block">Edit Pemenang</a></li>
-                                                    <!-- <li><a href="<?php echo base_url('pemenang/hapuspemenang/'.$list->id_pemenang); ?>" class=" waves-effect waves-block">Hapus</a></li> -->
-                                                </ul>
-                                            </div>
+                                        <a href="<?php echo base_url('pemenang/editgrouppemenang/'.$list->pid); ?>" type="button" class="btn 
+                                            bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Pemenang" style="color:#fff;">
+                                            <i class="material-icons">border_color</i>
+                                        </a>
+                                        <!-- <a href="<?php echo base_url('pemenang/hapuspemenang/'.$list->id_pemenang); ?>" type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus"style="color:#fff;">
+                                            <i class="material-icons">delete</i>
+                                        </a> -->
                                         <?php } ?>
                                         </td>
                                     </tr>

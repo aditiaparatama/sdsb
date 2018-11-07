@@ -719,17 +719,17 @@ class General extends CI_Controller {
 		if($this->session->userdata('status') != "backend"){
 		   redirect(base_url('cmskita'));
 		}
-	  	$this->load->model('m_general');
+	  	$this->load->model('m_transaksi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
 		$sampai 		 = date('Y-m-d', strtotime($this->input->post('sampai')));
 
 		$data['dari'] 	 = date('Y-m-d', strtotime($this->input->post('dari')));
 		$data['sampai']  = date('Y-m-d', strtotime($this->input->post('sampai')));
-		$data['lists'] 	 = $this->m_general->ReportBiayaOperasional($dari,$sampai);
+		$data['lists'] 	 = $this->m_transaksi->ReportKupon($dari,$sampai);
 		if($data['lists'] == NULL){
 			$this->load->view('backend/report/ajaxkosong', $data);
 		}else{
-			$this->load->view('backend/excel/biaya', $data);
+			$this->load->view('backend/excel/kupon', $data);
 		}
 	}
 }

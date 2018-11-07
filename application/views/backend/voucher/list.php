@@ -11,16 +11,10 @@
                             List Voucher
                             <small>Daftar voucher yang aktif <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('voucher/addvoucher'); ?>">Voucher Baru</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="<?php echo base_url('voucher/addvoucher'); ?>" type="button" class="btn bg-orange waves-effect pull-right" 
+                            style="color:#fff;margin-top: -4%;">
+                            <i class="material-icons">add_box</i><span>Voucher Baru</span>
+                        </a>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
@@ -53,15 +47,14 @@
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('voucher/editvoucher/'.$list->vid); ?>" class=" waves-effect waves-block">Edit Voucher</a></li>
-                                                    <li><a href="<?php echo base_url('voucher/hapusvoucher/'.$list->vid); ?>" class=" waves-effect waves-block">Hapus</a></li>
-                                                </ul>
-                                            </div>
+
+                                        <a href="<?php echo base_url('voucher/editvoucher/'.$list->vid); ?>" type="button" class="btn bg-light-blue 
+                                            btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Voucher" style="color:#fff;"><i class="material-icons">border_color</i>
+                                        </a>
+
+                                        <a href="<?php echo base_url('voucher/hapusvoucher/'.$list->vid); ?>" type="button" class="btn bg-red 
+                                            btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus"style="color:#fff;"><i class="material-icons">delete</i>
+                                        </a>
                                         <?php } ?>
                                         </td>
                                     </tr>

@@ -759,10 +759,10 @@ class Transaksi extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, user tidak ditemukan!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
-		  		if($saldorekening->rsaldo < $calcu){
-		            $this->session->set_flashdata('warning', 'Maaf, saldo rekening tidak cukup!');
-					redirect($_SERVER['HTTP_REFERER']);
-		  		}
+		  	// 	if($saldorekening->rsaldo < $calcu){
+		   //          $this->session->set_flashdata('warning', 'Maaf, saldo rekening tidak cukup!');
+					// redirect($_SERVER['HTTP_REFERER']);
+		  	// 	}
 		  		if($win < 0){
 		  			$datawin 	= 0;
 		  			$datalose 	= $win;
@@ -770,20 +770,21 @@ class Transaksi extends CI_Controller {
 		  			$datawin 	= $win;
 		  			$datalose 	= 0;
 		  		}
-		  		if($calcu != 0){
+		  		// if($calcu != 0){
 		  			$calcu 		= $calcu;
 		  			$subjenis 	= 52;
 		  			$dari 		= $saldorekening->rno;
 		  			$tujuan 	= 'Pengeluaran Bonus';
 		  			$keterangan = 'Data pengeluaran bonus '.$subbrand->bnama.' - '.$userbrand->bnama;
-		  		}else{
-		  			$calcu 		= $calcu;
-		  			$subjenis 	= 53;
-		  			$dari 		= '';
-		  			$tujuan 	= '';
-		  			$keterangan = 'Data Permainan Harian '.$userbrand->bnama.' - '.$user;
-		  		}
-  	 			$tambahsaldo 			= $saldorekening->rsaldo-$calcu-$win;
+		  		// }else{
+		  		// 	$calcu 		= $calcu;
+		  		// 	$subjenis 	= 52;
+		  		// 	$dari 		= '';
+		  		// 	$tujuan 	= 'Pengeluaran Bonus';
+		  		// 	$keterangan = 'Data Permainan Harian '.$userbrand->bnama.' - '.$user;
+		  		// }
+  	 			// $tambahsaldo 			= $saldorekening->rsaldo-$calcu-$win;
+  	 			$tambahsaldo 			= $saldorekening->rsaldo-$win;
 
 				$record['tcustomer']	= $detacustomer->cid;
 				$record['tnomor']		= random_string('alnum', 15);
@@ -966,10 +967,10 @@ class Transaksi extends CI_Controller {
 		            $this->session->set_flashdata('warning', 'Maaf, user tidak ditemukan!');
 					redirect($_SERVER['HTTP_REFERER']);
 		  		}
-		  		if($saldorekening->rsaldo < $calcu){
-		            $this->session->set_flashdata('warning', 'Maaf, saldo rekening tidak cukup!');
-					redirect($_SERVER['HTTP_REFERER']);
-		  		}
+		  	// 	if($saldorekening->rsaldo < $calcu){
+		   //          $this->session->set_flashdata('warning', 'Maaf, saldo rekening tidak cukup!');
+					// redirect($_SERVER['HTTP_REFERER']);
+		  	// 	}
 		  		if($win < 0){
 		  			$datawin 	= 0;
 		  			$datalose 	= $win;
@@ -979,20 +980,22 @@ class Transaksi extends CI_Controller {
 		  			$datalose 	= 0;
   	 				$calcuwin 	= $win-$this->input->post('oldbonus2');
 		  		}
-		  		if($calcu != 0){
+		  		// if($calcu != 0){
 		  			$calcu 		= $calcu;
 		  			$subjenis 	= 52;
 		  			$dari 		= $saldorekening->rno;
 		  			$tujuan 	= 'Pengeluaran Bonus';
 		  			$keterangan = 'Data pengeluaran bonus '.$subbrand->bnama.' - '.$userbrand->bnama;
-		  		}else{
-		  			$calcu 		= $calcu;
-		  			$subjenis 	= 53;
-		  			$dari 		= '';
-		  			$tujuan 	= '';
-		  			$keterangan = 'Data Permainan Harian '.$userbrand->bnama.' - '.$user;
-		  		}
-  	 			$tambahsaldo 	= $saldorekening->rsaldo+$oldtotal-$calcu;
+		  		// }else{
+		  		// 	$calcu 		= $calcu;
+		  		// 	$subjenis 	= 53;
+		  		// 	$dari 		= '';
+		  		// 	$tujuan 	= '';
+		  		// 	$keterangan = 'Data Permainan Harian '.$userbrand->bnama.' - '.$user;
+		  		// }
+  	 			// $tambahsaldo 	= $saldorekening->rsaldo+$oldtotal-$calcu;
+  	 			$tambahsaldo 		= $saldorekening->rsaldo+$oldtotal;
+
 				$transaksi 				= $this->input->post('nomor');
 				$record['trekeningdari']= $saldorekening->rno;
 				$record['tdari']		= $dari;

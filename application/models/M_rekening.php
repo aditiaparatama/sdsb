@@ -7,6 +7,18 @@ class M_rekening extends CI_Model {
     public function __construct(){
       parent::__construct();
     }
+    //halaman frontend
+    public function CariRekening($bank){
+        $this->db->select('rid, rbank, rnama, rno, rjenis, rsaldo');
+        $this->db->from($this->table[1]);
+        $this->db->where('rstatus', 1);
+        $this->db->where('rbank', $bank);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
+
 
     //halaman backend
     public function Rekening(){

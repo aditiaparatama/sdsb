@@ -13,18 +13,9 @@
                                 <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
                             </small>
                         </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="<?php echo base_url('transaksi/addtransaksidebit/'.$idbrand); ?>">Input Deposit</a></li>
-                                    <li><a href="<?php echo base_url('transaksi/addtransaksikredit/'.$idbrand); ?>">Input Withdraw</a></li>
-                                    <li><a href="<?php echo base_url('transaksi/addtransaksipermainan/'.$idbrand); ?>">Input Data Permainan</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="<?php echo base_url('transaksi/addtransaksipermainan/'.$idbrand); ?>" type="button" class="btn bg-orange waves-effect pull-right" style="color:#fff;margin-top: -4%;">
+                            <i class="material-icons">add_box</i><span>Input Data Permainan</span>
+                        </a>
                     </div>
                     <div class="body">
                         <ul class="nav nav-tabs tab-nav-right" role="tablist">
@@ -99,15 +90,14 @@
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('transaksi/edittransaksipermainan/'.$idbrand.'/'.$list->tnomor); ?>" class=" waves-effect waves-block">Edit transaksi</a></li>
-                                                    <li><a href="<?php echo base_url('transaksi/hapustransaksipermainan/'.$idbrand.'/'.$list->tnomor); ?>" class=" waves-effect waves-block">Hapus</a></li>
-                                                </ul>
-                                            </div>
+                                        <a href="<?php echo base_url('transaksi/edittransaksipermainan/'.$idbrand.'/'.$list->tnomor); ?>"  
+                                            type="button" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Data  Permainan"style="color:#fff;">
+                                            <i class="material-icons">border_color</i>
+                                        </a>
+                                        
+                                        <a href="<?php echo base_url('transaksi/hapustransaksipermainan/'.$idbrand.'/'.$list->tnomor); ?>" type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus" style="color:#fff;">
+                                            <i class="material-icons">delete</i>
+                                        </a>
                                         <?php } ?>
                                         </td>
                                     </tr>

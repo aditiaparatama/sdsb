@@ -7,8 +7,8 @@
                     <tr class="bg-light-blue">
                         <th>User</th>
                         <th>Nomor Kupon</th>
-                        <th>Harga</th>
                         <th>Periode</th>
+                        <th>Harga</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,20 +19,20 @@
                     <tr>
                         <td><?php echo $list->cuser; ?></td>
                         <td><?php echo $list->tkupon; ?></td>
-                        <td>Rp. <?php echo number_format($list->tharga); ?></td>
                         <td><?php echo date('d-M-Y', strtotime($list->nperiode)); ?></td>
+                        <td>Rp. <?php echo number_format($list->tharga); ?></td>
                     </tr>
     			<?php $charga += $list->tharga; } ?>
                 </tbody>
                 <tfoot class="bg-grey">
+                        <th>Keuntungan</th>
                         <th></th>
                         <th></th>
                         <th>Rp. <?php echo number_format($charga); ?></th>
-                        <th></th>
                     </tr>
                 </tfoot>
             </table>
-            <form action="<?php echo base_url('general/reporkupon_excel'); ?>" method="POST">
+            <form action="<?php echo base_url('general/reportkupon_excel'); ?>" method="POST">
                 <input type="hidden" name="dari" value="<?php echo $dari;?>">
                 <input type="hidden" name="sampai" value="<?php echo $sampai;?>">
                 <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg waves-effect pull-left">Download Excel</button>

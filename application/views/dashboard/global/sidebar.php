@@ -21,6 +21,7 @@
                 <li><a href="<?php echo base_url('dashboard/withdraw'); ?>"><i class="fa fa-retweet"></i> Withdraw/Transfer Dana</a></li>
                 <li><a href="<?php echo base_url('dashboard/list'); ?>"><i class="fa fa-ticket"></i> Nomor Kupon </a></li>
                 <li><a href="<?php echo base_url('dashboard/profile'); ?>"><i class="fa fa-user"></i> Profile User </a></li>
+                <li><a href="<?php echo base_url('dashboard/pesan'); ?>"><i class="fa fa-envelope"></i> Pesan </a></li>
                 <li><a href="<?php echo base_url('dashboard/logout'); ?>"><i class="fa fa-sign-out"></i> Log Out </a></li> 
             </ul>
         </div>

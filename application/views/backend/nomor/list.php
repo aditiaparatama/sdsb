@@ -40,14 +40,11 @@
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="<?php echo base_url('nomor/hapusnomor/'.$list->nid); ?>" class=" waves-effect waves-block">Hapus</a></li>
-                                                </ul>
-                                            </div>
+                                        <a href="<?php echo base_url('nomor/hapusnomor/'.$list->nid); ?>" type="button" class="btn bg-red btn-circle 
+                                            waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus" 
+                                            style="color:#fff;">
+                                            <i class="material-icons">delete</i>
+                                        </a>
                                         <?php } ?>
                                         </td>
                                     </tr>

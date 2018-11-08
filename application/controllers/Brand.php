@@ -12,7 +12,7 @@ class Brand extends CI_Controller {
 	//halaman backend
 	public function listsubbrand(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_brand->SubBrand();
 
@@ -22,7 +22,7 @@ class Brand extends CI_Controller {
  	}
  	public function addbrand(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['brands'] = $this->m_brand->Brand();
 
@@ -33,7 +33,7 @@ class Brand extends CI_Controller {
 
  	public function addbrand_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('brand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -78,7 +78,7 @@ class Brand extends CI_Controller {
 
  	public function editbrand($id){
  		if($this->session->userdata('status') != "backend"){
- 			redirect(base_url('cmskita'));
+ 			redirect(base_url('departement-sosial'));
  		}
 		$data['brands'] = $this->m_brand->Brand();
  		$data['detail'] = $this->m_brand->EditBrand($id);
@@ -90,7 +90,7 @@ class Brand extends CI_Controller {
 
  	public function editbrand_act(){
  	 	if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('brand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -137,7 +137,7 @@ class Brand extends CI_Controller {
 
 	public function hapusbrand($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_brand->HapusBrand($id);
 		redirect(base_url('brand/listsubbrand'));

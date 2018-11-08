@@ -11,7 +11,7 @@ class General extends CI_Controller {
 	//Halaman Backend
 	public function harga(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_general->Harga();
 
@@ -22,7 +22,7 @@ class General extends CI_Controller {
 
  	public function harga_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('harga', 'Harga Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -41,7 +41,7 @@ class General extends CI_Controller {
 
 	public function potonganpembelian(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_general->PotonganPembelian();
 
@@ -52,7 +52,7 @@ class General extends CI_Controller {
 
  	public function addpotongan(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Potongan Pembelian Baru - '.BRAND;
@@ -62,7 +62,7 @@ class General extends CI_Controller {
 
  	public function addpotongan_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('jumlah', 'Jumlah Potongan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -84,7 +84,7 @@ class General extends CI_Controller {
 
  	public function editpotongan($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_general->DetailPotongan($id);
 
@@ -95,7 +95,7 @@ class General extends CI_Controller {
 
  	public function editpotongan_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('jumlah', 'Jumlah Potongan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -118,7 +118,7 @@ class General extends CI_Controller {
 
 	public function hapusgeneral($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_general->HapusPotongan($id);
 		redirect(base_url('general/PotonganPembelian'));
@@ -126,7 +126,7 @@ class General extends CI_Controller {
 
 	public function pengeluaranbulanan(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_general->PengeluaranBulanan();
 
@@ -137,7 +137,7 @@ class General extends CI_Controller {
 
  	public function addpengeluaran(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Tambah Pengeluaran Bulanan - '.BRAND;
@@ -147,7 +147,7 @@ class General extends CI_Controller {
 
  	public function addpengeluaran_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -171,7 +171,7 @@ class General extends CI_Controller {
 
   	public function editpengeluaran($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_general->DetailPengeluaran($id);
 
@@ -182,7 +182,7 @@ class General extends CI_Controller {
 
  	public function editpengeluaran_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -207,7 +207,7 @@ class General extends CI_Controller {
 
 	public function hapuspengeluaran($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_general->HapusPengeluaran($id);
 		redirect(base_url().'general/pengeluaranbulanan');
@@ -215,7 +215,7 @@ class General extends CI_Controller {
 
 	public function excelpengeluaranbulanan(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_general->PengeluaranBulanan();
 
@@ -227,7 +227,7 @@ class General extends CI_Controller {
 	//report
 	public function penerimaan(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 
 		$data['title'] = 'Penerimaan Dana - '.BRAND;
@@ -237,7 +237,7 @@ class General extends CI_Controller {
 
 	public function penerimaan_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$dari 			= date('Y-m-d', strtotime($this->input->post('dari')));
@@ -251,7 +251,7 @@ class General extends CI_Controller {
 
 	public function reportpengeluaran(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 
 		$data['title'] = 'Report Pengeluaran - '.BRAND;
@@ -261,7 +261,7 @@ class General extends CI_Controller {
 
 	public function addreportpengeluaran_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$bulan 				= date('m', strtotime($this->input->post('periode')));
 		$tahun 				= date('Y', strtotime($this->input->post('periode')));
@@ -273,7 +273,7 @@ class General extends CI_Controller {
 
 	public function report(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 
 		$data['title'] = 'Report - '.BRAND;
@@ -283,7 +283,7 @@ class General extends CI_Controller {
 
  	public function addreport_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$bulan 					= date('m', strtotime($this->input->post('periode')));

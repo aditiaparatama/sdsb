@@ -11,7 +11,7 @@ class Pemenang extends CI_Controller {
 	//Halaman Backend
 	public function listpemenang(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_pemenang->Pemenang();
 
@@ -22,7 +22,7 @@ class Pemenang extends CI_Controller {
 
  	public function addpemenang(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Tambah Pemenang - '.BRAND;
@@ -32,7 +32,7 @@ class Pemenang extends CI_Controller {
 
  	public function addpemenang_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 	  		$this->load->model('m_nomor');
@@ -237,7 +237,7 @@ class Pemenang extends CI_Controller {
 
  	public function listgroup($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_pemenang->GroupPemenang($id);
 		
@@ -248,7 +248,7 @@ class Pemenang extends CI_Controller {
 
  	public function editpemenang($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail1'] = $this->m_pemenang->Detail($id,1);
  		$data['detail2'] = $this->m_pemenang->Detail($id,2);
@@ -264,7 +264,7 @@ class Pemenang extends CI_Controller {
 
  	public function editpemenang_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {	
 	  		$this->load->model('m_nomor');
@@ -457,7 +457,7 @@ class Pemenang extends CI_Controller {
 
  	public function editgrouppemenang($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_pemenang->DetailGroup($id);
 
@@ -468,7 +468,7 @@ class Pemenang extends CI_Controller {
 
  	public function editgrouppemenang_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {	
 	  		$this->load->model('m_nomor');
@@ -500,7 +500,7 @@ class Pemenang extends CI_Controller {
 
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_pemenang->ExcelPemenang();
 

@@ -11,7 +11,7 @@ class Voucher extends CI_Controller {
 	//halaman backend
 	public function listvoucher(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_voucher->Voucher();
 
@@ -22,7 +22,7 @@ class Voucher extends CI_Controller {
 
  	public function addvoucher(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Tambah Voucher - '.BRAND;
@@ -32,7 +32,7 @@ class Voucher extends CI_Controller {
 
  	public function addvoucher_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('kode', 'Kode Voucher', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -58,7 +58,7 @@ class Voucher extends CI_Controller {
 
  	public function editvoucher($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_voucher->DetailVoucher($id);
 
@@ -69,7 +69,7 @@ class Voucher extends CI_Controller {
 
  	public function editvoucher_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('kode', 'Kode Voucher', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -96,7 +96,7 @@ class Voucher extends CI_Controller {
 
 	public function hapusvoucher($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_voucher->HapusVoucher($id);
 		redirect(base_url('voucher/listvoucher'));
@@ -104,7 +104,7 @@ class Voucher extends CI_Controller {
 
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_voucher->Voucher();
 

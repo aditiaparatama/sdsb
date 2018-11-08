@@ -79,7 +79,7 @@ class Transfer extends CI_Controller {
 	//Halaman Backend
 	public function listtransfer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_transfer->Transfer();
 
@@ -90,7 +90,7 @@ class Transfer extends CI_Controller {
 
  	public function addtransfer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['title'] = 'Transfer Dana Baru - '.BRAND;
 		$data['page']  = 'backend/transfer/add';
@@ -107,7 +107,7 @@ class Transfer extends CI_Controller {
 
  	public function addtransfer_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('email', 'Email Customer', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -151,7 +151,7 @@ class Transfer extends CI_Controller {
 
 	public function hapustransfer($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_transfer->HapusTransfer($id);
 		redirect(base_url('transfer/listtransfer'));
@@ -159,7 +159,7 @@ class Transfer extends CI_Controller {
 
 	public function downloadexceltransfer(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_transfer->Transfer();
 

@@ -64,7 +64,7 @@ class Customer extends CI_Controller {
 	//halaman backend
  	public function addcustomer(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Tambah Customer Baru - '.BRAND;
@@ -74,7 +74,7 @@ class Customer extends CI_Controller {
 
  	public function addcustomer_act(){
   		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -561,7 +561,7 @@ class Customer extends CI_Controller {
 
 	public function listcustomer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_customer->Customer();
 
@@ -572,7 +572,7 @@ class Customer extends CI_Controller {
 
  	public function editcustomer($id){
  		if($this->session->userdata('status') != "backend"){
- 			redirect(base_url('cmskita'));
+ 			redirect(base_url('departement-sosial'));
  		}
  		$data['detail'] = $this->m_customer->EditCustomer($id);
 
@@ -583,7 +583,7 @@ class Customer extends CI_Controller {
 
  	public function editcustomer_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -1054,7 +1054,7 @@ class Customer extends CI_Controller {
 
 	public function hapuscustomer($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_customer->EditCustomer($id);
 		$this->m_customer->HapusCustomer($id);
@@ -1065,7 +1065,7 @@ class Customer extends CI_Controller {
 
 	public function listdeposit(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_customer->Customer();
 
@@ -1076,7 +1076,7 @@ class Customer extends CI_Controller {
 
 	public function detail($id){ 		
 		if($this->session->userdata('status') != "backend"){
- 			redirect(base_url('cmskita'));
+ 			redirect(base_url('departement-sosial'));
  		}
 		$this->load->model('m_transaksi');
  		$data['detail'] 	= $this->m_customer->EditCustomer($id);
@@ -1090,7 +1090,7 @@ class Customer extends CI_Controller {
 
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_customer->DetailCustomer();
 

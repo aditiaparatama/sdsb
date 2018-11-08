@@ -11,7 +11,7 @@ class Rekening extends CI_Controller {
 	//halaman backend
 	public function listrekening(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_rekening->Rekening();
 
@@ -22,7 +22,7 @@ class Rekening extends CI_Controller {
 	 
 	public function addrekening(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Tambah Nomor Rekening - '.BRAND;
@@ -32,7 +32,7 @@ class Rekening extends CI_Controller {
 
  	public function addrekening_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -87,7 +87,7 @@ class Rekening extends CI_Controller {
  	
  	public function editrekening($no){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_rekening->DetailRekening($no);
 
@@ -98,7 +98,7 @@ class Rekening extends CI_Controller {
 
  	public function editrekening_act(){
  	 	if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -153,7 +153,7 @@ class Rekening extends CI_Controller {
 
 	public function hapusrekening($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_rekening->HapusRekening($id);
 		redirect(base_url('rekening/listrekening'));
@@ -161,7 +161,7 @@ class Rekening extends CI_Controller {
 
 	public function transferrekening(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] 		= $this->m_rekening->Rekening();
 		$data['transfer'] 	= $this->m_rekening->RekeningTransfer();
@@ -182,7 +182,7 @@ class Rekening extends CI_Controller {
 
 	public function addtransfer_act(){
  	 	if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('transfer', 'Rekening Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -251,7 +251,7 @@ class Rekening extends CI_Controller {
 
 	public function detailrekening($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['detail'] 		= $this->m_rekening->DetailRekening($id);
 		$data['penerimaan'] 	= $this->m_rekening->RiwayatPenerimaanRekening($id);

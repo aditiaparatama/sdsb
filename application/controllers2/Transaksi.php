@@ -11,7 +11,7 @@ class Transaksi extends CI_Controller {
 	//Halaman Backend
 	public function listpemesanan(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_deposit->DepositPemesanan();
 
@@ -34,7 +34,7 @@ class Transaksi extends CI_Controller {
 
 	public function hapuspesanan($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_deposit->HapusDeposit($id);
 		redirect(base_url('transaksi/listpemesanan'));
@@ -42,7 +42,7 @@ class Transaksi extends CI_Controller {
 
 	public function listpembelian(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_deposit->DepositPembelian();
 
@@ -53,7 +53,7 @@ class Transaksi extends CI_Controller {
 
 	public function downloadexcelpembelian(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_deposit->DepositPembelian();
 
@@ -62,7 +62,7 @@ class Transaksi extends CI_Controller {
 
 	public function downloadexcelpemesanan(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_deposit->DepositPemesanan();
 

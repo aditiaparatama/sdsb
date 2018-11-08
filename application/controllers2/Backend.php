@@ -7,13 +7,13 @@ class Backend extends CI_Controller {
 		parent::__construct();
 	  	$this->load->model(array('m_customer','m_nomor','m_deposit','m_transfer','m_transaksi','m_pemenang'));
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 	}
 
 	public function index(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 	  	$data['customer'] 		= $this->m_customer->CCustomer();
 	  	$data['nomor'] 			= $this->m_nomor->CNomor();

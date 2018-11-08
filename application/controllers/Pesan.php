@@ -11,7 +11,7 @@ class Pesan extends CI_Controller {
 	//halaman backend
 	public function listpesan(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_pesan->Pesan();
 
@@ -22,7 +22,7 @@ class Pesan extends CI_Controller {
 
 	public function detail($id){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_pesan->Pesan();
 		$data['lists'] = $this->m_pesan->DetailPesan($id);
@@ -35,7 +35,7 @@ class Pesan extends CI_Controller {
 
  	public function balaspesan_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('pesan', 'Pesan', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -60,7 +60,7 @@ class Pesan extends CI_Controller {
 
  	public function hapuspesan($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_pesan->HapusPesan($id);
 		redirect(base_url('pesan/listpesan'));

@@ -21,7 +21,7 @@ class User extends CI_Controller {
 			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
 	            $this->session->set_flashdata('warning', 'Maaf, validasi anda salah!');
-	          	redirect(base_url().'cmskita');
+	          	redirect(base_url().'departement-sosial');
 		  	} else { 		
 
 		  		$user 	= $this->input->post('user');
@@ -46,7 +46,7 @@ class User extends CI_Controller {
 					redirect(base_url('backend'));
 				}else{
 		            $this->session->set_flashdata('warning', 'Maaf, anda gagal login!');
-					redirect(base_url('cmskita'));
+					redirect(base_url('departement-sosial'));
 				}
 			}
 		}
@@ -60,7 +60,7 @@ class User extends CI_Controller {
 
 	public function listuser(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		$data['lists'] = $this->m_user->User();
 
@@ -71,7 +71,7 @@ class User extends CI_Controller {
 
  	public function adduser(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		
 		$data['title'] = 'Tambah User Access - '.BRAND;
@@ -81,7 +81,7 @@ class User extends CI_Controller {
 
  	public function adduser_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -114,7 +114,7 @@ class User extends CI_Controller {
  	
  	public function edituser($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
  		$data['detail'] = $this->m_user->DetailUser($id);
 
@@ -126,7 +126,7 @@ class User extends CI_Controller {
 
  	public function edituser_act(){
  	 	if($this->session->userdata('status') != "backend"){
-			redirect(base_url('cmskita'));
+			redirect(base_url('departement-sosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -161,7 +161,7 @@ class User extends CI_Controller {
 
 	public function hapususer($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('cmskita'));
+		   redirect(base_url('departement-sosial'));
 		}
 		$this->m_user->HapusUser($id);
 		redirect(base_url('user/listuser'));

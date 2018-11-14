@@ -11,17 +11,14 @@
         <div class="profile-content">
         <div class="row">
             <div class="col-md-12">
-                <?php
-                    foreach ($brand as $brands) {
-                        
-                ?>
+                <?php foreach ($brand as $brands) { ?>
                 <div class="col-sm-12 col-md-4">
                     <a href="<?php echo $brands->burl; ?>" class="thumbnail" target="_blank">
                         <img src="<?php echo URL_ASSETS; ?>images/dashboard/brand/<?php echo $brands->bfoto; ?>" style="height: auto; display: block;"> </a>
                 </div>
                 <?php } ?>
-                <table class="table table-striped table-bordered table-hover order-column">
-                    <thead>
+                <table class="table table-striped table-bordered table-hover order-column" style="border-color: #3973ee">
+                    <thead style="background: #3973ee;color: #fff;">
                         <tr>
                             <th></th>
                             <th>SBOBET</th>

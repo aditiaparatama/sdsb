@@ -461,6 +461,7 @@ class Dashboard extends CI_Controller {
 	  			$this->load->model('m_rekening');
 	  			$this->load->model('m_customer');
 	  			$this->load->model('m_transaksi');
+	  			$date 		= date('Y-m-d');
 				$id			= $this->session->userdata('id');
 				$customer 	= $this->m_customer->DataCustomer($id);
 				$rekening 	= $this->m_rekening->RekeningPenerima();
@@ -474,6 +475,7 @@ class Dashboard extends CI_Controller {
 					$cek = $this->m_general->CekPotongan($jumlah);
 					if($cek > 0){
 		 				$harga 		= $this->m_general->SearchHarga();
+						$periode 	= $this->m_general->SearchPeriode($date);
 		 				$potongan 	= $this->m_general->SearchPotongan($jumlah);
 						$total 		= $jumlah*$harga->gharga;
 						$calculate 	= $potongan->gdiskon/100*$total;
@@ -483,10 +485,10 @@ class Dashboard extends CI_Controller {
 		 			}else{
 		 				$diskon 	= 0;
 		 				$harga 		= $this->m_general->SearchHarga();
+						$periode 	= $this->m_general->SearchPeriode($date);
 						$bruto 		= $jumlah*$harga->gharga;
 		 				$total 		= $jumlah*$harga->gharga;
 		 			}
-		 			// $harga 			= $this->m_general->SearchHarga();
 		  		}
 
 		  		if($deposit->cdeposit < $bruto){
@@ -497,7 +499,7 @@ class Dashboard extends CI_Controller {
 				
 				for ($x = 1; $x <= $jumlah; $x++){
 					$voucher 	= random_string('numeric', 6);
-			  		$count 		= $this->m_nomor->CountNomor($voucher);
+			  		$count 		= $this->m_nomor->CountNomor($voucher, $periode->gperiodeawal);
 			  		if($count > 0){
 						$voucher1 = random_string('numeric', 6);
 						$data['tcustomer']	 = $id;
@@ -512,11 +514,11 @@ class Dashboard extends CI_Controller {
 						$data['tbrand'] 	 = 5;
 						$data['tketerangan'] = 'Pembelian nomor kupon sdsb'. $customer->cuser; 
 						$data['tstatus'] 	 = 1;
-						$data['tperiode'] 	 = date('Y-m-d');
+						$data['tperiode'] 	 = $periode->gperiodeawal;
 						$data['tdate'] 		 = date('Y-m-d H:i:s');
 						$row['ncustomer']	 = $id;
 						$row['nnomor'] 		 = $voucher1;
-						$row['nperiode'] 	 = date('Y-m-d');
+						$row['nperiode'] 	 = $periode->gperiodeawal;
 			  	 		$this->m_transaksi->SaveTransaksi($data);
 	  	 				$this->m_nomor->SaveNomor($row);	
 			  		}else{
@@ -532,11 +534,11 @@ class Dashboard extends CI_Controller {
 						$data['tbrand'] 	 = 5;
 						$data['tketerangan'] = 'Pembelian nomor kupon sdsb'. $customer->cuser; 
 						$data['tstatus'] 	 = 1;
-						$data['tperiode'] 	 = date('Y-m-d');
+						$data['tperiode'] 	 = $periode->gperiodeawal;
 						$data['tdate'] 		 = date('Y-m-d H:i:s');
 						$row['ncustomer']	 = $id;
 						$row['nnomor'] 		 = $voucher;
-						$row['nperiode'] 	 = date('Y-m-d');
+						$row['nperiode'] 	 = $periode->gperiodeawal;
 			  	 		$this->m_transaksi->SaveTransaksi($data);
 	  	 				$this->m_nomor->SaveNomor($row);	
 			  	 	}

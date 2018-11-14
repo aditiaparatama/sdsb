@@ -13,7 +13,7 @@
                         </h2>
                         <a href="<?php echo base_url('pemenang/addpemenang'); ?>" type="button" class="btn bg-orange waves-effect pull-right" 
                             style="color:#fff;margin-top: -4%;">
-                            <i class="material-icons">add_box</i><span>Tambah Pemenang</span>
+                            <i class="material-icons">add_box</i><span>Pemenang Periode Baru</span>
                         </a>
                     </div>
                     <div class="body">

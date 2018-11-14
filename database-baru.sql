@@ -85,7 +85,10 @@ CREATE TABLE `general` (
 
 INSERT INTO `general` (`gid`, `gname`, `gdolar`, `grate`, `gharga`, `gpotongan`, `gdiskon`, `gqtydari`, `gqtysampai`, `gketerangan`, `gketerangan2`, `gperiodeawal`, `gperiodeakhir`, `gbrand`, `gstatus`, `gdate`) VALUES
 (1,	'Harga Kupon',	NULL,	NULL,	10000,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1,	'2018-11-07 23:31:50'),
-(2,	'Periode Kupon',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'2018-11-01',	'2018-11-12',	NULL,	9,	'2018-11-07 23:32:22');
+(2,	'Periode Kupon',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'Periode Pertama',	NULL,	'2018-11-01',	'2018-11-19',	5,	9,	'2018-11-13 22:22:59'),
+(3,	'Periode Kupon',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'Periode Kedua',	NULL,	'2018-11-20',	'2018-11-26',	5,	9,	'2018-11-13 22:27:16'),
+(4,	'Potongan Pembelian',	NULL,	NULL,	NULL,	NULL,	3,	10,	20,	NULL,	NULL,	NULL,	NULL,	NULL,	2,	'2018-11-14 17:03:27'),
+(5,	'Potongan Pembelian',	NULL,	NULL,	NULL,	NULL,	5,	21,	30,	NULL,	NULL,	NULL,	NULL,	NULL,	2,	'2018-11-14 17:03:35');
 
 DROP TABLE IF EXISTS `nomor`;
 CREATE TABLE `nomor` (
@@ -139,8 +142,8 @@ CREATE TABLE `rekening` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `rekening` (`rid`, `rbank`, `rnama`, `rno`, `rsaldo`, `rjenis`, `rstatus`, `rdate`) VALUES
-(1,	'BCA',	'SDSB Online',	'121212121212',	5000000,	2,	1,	'2018-11-07 17:33:25'),
-(2,	'Mandiri',	'Mike Mohede',	'131313131313',	50000,	1,	1,	'2018-11-07 17:33:52');
+(1,	'BCA',	'SDSB Online',	'121212121212',	5000000,	0,	1,	'2018-11-14 19:26:39'),
+(2,	'Mandiri',	'Mike Mohede',	'151515151515',	50000,	0,	1,	'2018-11-14 19:27:04');
 
 DROP TABLE IF EXISTS `reportdetailcustomer`;
 CREATE TABLE `reportdetailcustomer` (
@@ -224,8 +227,8 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `transaksi` (`tid`, `tcustomer`, `tnomor`, `tkupon`, `tvoucher`, `tpotongan`, `trekeningdari`, `tdari`, `ttujuan`, `twin`, `tlose`, `tmembercomm`, `tbonus`, `tbonus2`, `tharga`, `tgrandtotal`, `tjenis`, `tsubjenis`, `tsubdeposit`, `tbrand`, `tsubbrand`, `tterbaca`, `tketerangan`, `tstatus`, `tperiode`, `tuser`, `tdate`) VALUES
-(1,	NULL,	'1QwcBhymP9iNzjp',	'0',	NULL,	0,	NULL,	NULL,	'121212121212',	0,	0,	0,	0,	0,	5000000,	5000000,	5,	51,	0,	5,	NULL,	0,	'Saldo awal',	1,	NULL,	1,	'2018-11-07 17:33:25'),
-(2,	NULL,	'eBFobjDv3ltuhmg',	'0',	NULL,	0,	NULL,	NULL,	'131313131313',	0,	0,	0,	0,	0,	50000,	50000,	5,	51,	0,	5,	NULL,	0,	'Saldo awal',	1,	NULL,	1,	'2018-11-07 17:33:52');
+(1,	NULL,	'uXYkcmn23EoAVl0',	'0',	NULL,	0,	NULL,	NULL,	'121212121212',	0,	0,	0,	0,	0,	5000000,	5000000,	5,	51,	0,	5,	NULL,	0,	'Saldo awal',	1,	NULL,	1,	'2018-11-14 19:26:39'),
+(2,	NULL,	'hQenUFW6JB5fkoY',	'0',	NULL,	0,	NULL,	NULL,	'151515151515',	0,	0,	0,	0,	0,	50000,	50000,	5,	51,	0,	5,	NULL,	0,	'Saldo awal',	1,	NULL,	1,	'2018-11-14 19:27:04');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -245,7 +248,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`uid`, `unama`, `uuser`, `upass`, `uemail`, `utlp`, `ualamat`, `ufoto`, `urole`, `ustatus`, `udate`) VALUES
 (1,	'SDSB Super Admin	',	'admin',	'202cb962ac59075b964b07152d234b70',	'admin@sdsb.com',	'081219917799',	'Jl. Penjaringan Utara No. 15 Rt: 01/06, Jakarta',	'user.png',	1,	1,	'2018-11-07 12:57:10'),
-(2,	'User Baru',	'user',	'202cb962ac59075b964b07152d234b70',	'userbaru@gmail.com',	'0812412756',	'Jl. test',	'1541576467.jpeg',	2,	1,	'2018-11-07 08:41:07');
+(2,	'Aan',	'aan',	'202cb962ac59075b964b07152d234b70',	'aan@sdsb.online',	'0812152352323',	'Jl. Kecubung Raya No.15 Pasar Minggu - Jakarta',	'1542220185.jpeg',	2,	1,	'2018-11-07 08:41:07');
 
 DROP TABLE IF EXISTS `voucher`;
 CREATE TABLE `voucher` (
@@ -261,4 +264,4 @@ CREATE TABLE `voucher` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-11-07 16:34:44
+-- 2018-11-14 18:31:06

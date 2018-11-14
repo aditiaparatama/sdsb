@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <title><?php echo $title; ?></title>
-<link rel="icon" href="<?php echo URL_ASSETS; ?>images/backend/favicon.ico" type="image/x-icon">
+<link rel="icon" href="<?php echo URL_ASSETS; ?>images/dashboard/ren.png" type="image/x-icon">
 
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
 <link href="<?php echo URL_ASSETS; ?>css/dashboard/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -41,8 +41,8 @@
                       
     <div class="page-footer">
         <div class="page-footer-inner">
-        2018 &copy; made with <i class="fa fa-heart" aria-hidden="true"></i> in
-          <a href="#">Tangerang</a>
+        <?php echo date('Y'); ?> &copy; made with <i class="fa fa-heart" aria-hidden="true" style="color: red"></i> in
+          <a href="#" style="color: red;text-shadow: 1px 0px #fff;">Indonesia</a>
         </div>
         <div class="scroll-to-top">
             <i class="icon-arrow-up"></i>

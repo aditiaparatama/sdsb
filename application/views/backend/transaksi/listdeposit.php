@@ -63,7 +63,7 @@
                                             if ($this->session->userdata('role') == 1){
                                         ?>  
                                         <a href="<?php echo base_url('transaksi/depositkonfirmasi_act/'.$list->tnomor); ?>" type="button" 
-                                            class="btn bg-lime btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Deposit" <?php echo $style;?> style="color:#fff;"><i class="material-icons">done_all</i>
+                                            class="btn bg-lime btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Konfirmasi Deposit" <?php echo $style;?> style="color:#fff;"><i class="material-icons">done_all</i>
                                         </a>
                                         
                                         <a href="<?php echo base_url('transaksi/hapusdeposit/'.$list->tnomor); ?>" type="button" 

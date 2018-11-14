@@ -24,6 +24,8 @@ class Pemenang extends CI_Controller {
  		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('departementnsosial'));
 		}
+	  	$this->load->model('m_general');
+		$data['lists'] = $this->m_general->ListPeriode();
 		
 		$data['title'] = 'Tambah Pemenang - '.BRAND;
 		$data['page']  = 'backend/pemenang/add';
@@ -42,7 +44,8 @@ class Pemenang extends CI_Controller {
 			//pemenang1
 	  		if($this->input->post('pemenang1') == ''){
 	  			$pemenang1 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang1);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang1, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 1 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -85,7 +88,8 @@ class Pemenang extends CI_Controller {
 			//pemenang2
 	  		if($this->input->post('pemenang2') == ''){
 	  			$pemenang2 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang2);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang2, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 2 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -128,7 +132,8 @@ class Pemenang extends CI_Controller {
 			//pemenang3
 	  		if($this->input->post('pemenang3') == ''){
 	  			$pemenang3 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang3);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang3, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 3 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -171,7 +176,8 @@ class Pemenang extends CI_Controller {
 			//pemenang4
 	  		if($this->input->post('pemenang4') == ''){
 	  			$pemenang4 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang4);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang4, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 4 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -214,7 +220,8 @@ class Pemenang extends CI_Controller {
 			//pemenang5
 	  		if($this->input->post('pemenang5') == ''){
 	  			$pemenang5 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang5);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang5, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 5 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -257,7 +264,8 @@ class Pemenang extends CI_Controller {
 			//pemenang6
 	  		if($this->input->post('pemenang6') == ''){
 	  			$pemenang6 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang6);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang6, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 6 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -305,7 +313,7 @@ class Pemenang extends CI_Controller {
  		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('departementnsosial'));
 		}
-		$data['lists'] = $this->m_pemenang->GroupPemenang($id);
+		$data['lists'] 	  = $this->m_pemenang->GroupPemenang($id);
 		
 		$data['title'] = 'List Pemenang Group - '.BRAND;
 		$data['page']  = 'backend/pemenang/listgroup';
@@ -316,12 +324,14 @@ class Pemenang extends CI_Controller {
  		if($this->session->userdata('status') != "backend"){
 			redirect(base_url('departementnsosial'));
 		}
- 		$data['detail1'] = $this->m_pemenang->Detail($id,1);
- 		$data['detail2'] = $this->m_pemenang->Detail($id,2);
- 		$data['detail3'] = $this->m_pemenang->Detail($id,3);
- 		$data['detail4'] = $this->m_pemenang->Detail($id,4);
- 		$data['detail5'] = $this->m_pemenang->Detail($id,5);
- 		$data['detail6'] = $this->m_pemenang->Detail($id,6);
+	  	$this->load->model('m_general');
+ 		$data['detail1']  = $this->m_pemenang->Detail($id,1);
+ 		$data['detail2']  = $this->m_pemenang->Detail($id,2);
+ 		$data['detail3']  = $this->m_pemenang->Detail($id,3);
+ 		$data['detail4']  = $this->m_pemenang->Detail($id,4);
+ 		$data['detail5']  = $this->m_pemenang->Detail($id,5);
+ 		$data['detail6']  = $this->m_pemenang->Detail($id,6);
+		$data['periodes'] = $this->m_general->ListPeriode();
 
  		$data['title'] = 'Edit Pemenang - '.BRAND;
  		$data['page']  = 'backend/pemenang/edit';
@@ -336,12 +346,13 @@ class Pemenang extends CI_Controller {
 	  		$this->load->model('m_nomor');
 	  		$this->load->model('m_transaksi');
 			$this->load->helper('string');
-
+			
 			//pemenang1
 	  		if($this->input->post('pemenang1') == ''){
 				$id	  		= $this->input->post('id_pemenang1');
 	  			$pemenang1 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang1);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang1, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 1 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -376,7 +387,8 @@ class Pemenang extends CI_Controller {
 	  		if($this->input->post('pemenang2') == ''){
 				$id	  		= $this->input->post('id_pemenang2');
 	  			$pemenang2 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang2);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang2, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 2 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -416,7 +428,8 @@ class Pemenang extends CI_Controller {
 	  		if($this->input->post('pemenang3') == ''){
 				$id	  		= $this->input->post('id_pemenang3');
 	  			$pemenang3 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang3);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang3, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 3 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -456,7 +469,8 @@ class Pemenang extends CI_Controller {
 	  		if($this->input->post('pemenang4') == ''){
 				$id	  		= $this->input->post('id_pemenang4');
 	  			$pemenang4 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang4);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang4, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 4 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -496,7 +510,8 @@ class Pemenang extends CI_Controller {
 	  		if($this->input->post('pemenang5') == ''){
 				$id	  		= $this->input->post('id_pemenang5');
 	  			$pemenang5 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang5);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang5, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 5 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);
@@ -536,7 +551,8 @@ class Pemenang extends CI_Controller {
 	  		if($this->input->post('pemenang6') == ''){
 				$id	  		= $this->input->post('id_pemenang6');
 	  			$pemenang6 	= random_string('numeric', 6);
-		  		$count 		= $this->m_nomor->CountNomor($pemenang6);
+	  			$periode 	= date('Y-m-d', strtotime($this->input->post('tanggal')));
+		  		$count 		= $this->m_nomor->CountNomor($pemenang6, $periode);
 		  		if($count > 0){
 	            	$this->session->set_flashdata('warning', 'Maaf, Pemenang 6 gagal mendapat nilai unik!');
 		          	redirect($_SERVER['HTTP_REFERER']);

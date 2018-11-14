@@ -27,7 +27,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="btn-group">
-                                                <a class="btn sbold green" href="<?php echo base_url('dashboard/addtransfer'); ?>"> WITHDRAW/TRANSFER DANA BARU
+                                                <a class="btn sbold green" href="<?php echo base_url('dashboard/addtransfer'); ?>" style="background-color: dimgrey"> WITHDRAW/TRANSFER DANA BARU
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>

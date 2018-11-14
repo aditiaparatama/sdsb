@@ -104,7 +104,7 @@
                                         Pastikan anda mengisi semua data dengan benar, karena akan berpengaruh <br>pada proses pembayaran dan penarikan deposit anda<br><br>
                                         </div>
                                         <div class="col-md-12"> 
-                                            <button type="submit" name="submit" class="btn red btn-lg">Update Profile</button>
+                                            <button type="submit" name="submit" class="btn red btn-lg" style="background-color: dimgrey">Update Profile</button>
                                         </div>
                                     </div>
 

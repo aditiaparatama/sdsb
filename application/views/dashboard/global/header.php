@@ -2,7 +2,7 @@
     <div class="page-header-inner">
         <div class="nav navbar-nav pull-left">
             <a href="#">
-                <img src="<?php echo URL_ASSETS; ?>images/backend/favicon.ico" alt="logo" class="logo-default" style="padding: 15px 0px 0px 25px"/> 
+                <img src="<?php echo URL_ASSETS; ?>images/dashboard/ren.png" class="logo-default" style="width: 100px;padding: 7px 0px 0px 25px;"/> 
             </a>
         </div>
         <div class="top-menu">

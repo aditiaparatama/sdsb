@@ -1506,7 +1506,7 @@ class Transaksi extends CI_Controller {
 				$jumlah 	= $this->input->post("jumlah");
 				$nomor  	= random_string('alnum', 15);
 				$rekening 	= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
-				$periode 	= $this->m_general->SearchPeriode();
+				$periode 	= $this->m_general->SearchPeriode($date);
 
 		  		if($jumlah == 0 || $jumlah == ''){
 					$total = 0;

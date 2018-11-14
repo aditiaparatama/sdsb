@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="btn-group">
-                                        <a class="btn sbold green" href="<?php echo base_url('dashboard/addpesan'); ?>"> PESAN BARU <i class="fa fa-plus"></i></a>
+                                        <a class="btn sbold green" href="<?php echo base_url('dashboard/addpesan'); ?>" style="background-color: dimgrey"> PESAN BARU <i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>

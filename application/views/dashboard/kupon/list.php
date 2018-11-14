@@ -27,7 +27,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="btn-group">
-                                                <a class="btn sbold green" href="<?php echo base_url('dashboard/addnomor'); ?>"> BELI NOMOR KUPON
+                                                <a class="btn sbold green" href="<?php echo base_url('dashboard/addnomor'); ?>" style="background-color: dimgrey"> BELI NOMOR KUPON
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>
@@ -39,6 +39,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nomor Kupon</th>
+                                            <th>Periode</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -53,7 +54,8 @@
                                     ?>
                                     <tr>
                                         <td><b><?php echo $list->tkupon; ?></b></td>
-                                        <td><?php echo date('d F Y', strtotime($list->tdate)); ?></td>
+                                        <td><?php echo date('d F Y', strtotime($list->tperiode)); ?></td>
+                                        <td><?php echo date('d F Y H:i:s', strtotime($list->tdate)); ?></td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>

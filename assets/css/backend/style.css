@@ -1854,7 +1854,7 @@
     color: #fff !important; }
 
 .bg-pink {
-  background-color: #E91E63 !important;
+  background-color: dimgrey !important;
   color: #fff; }
   .bg-pink .content .text,
   .bg-pink .content .number {
@@ -7720,13 +7720,13 @@ fieldset[disabled] .form-control {
 
 /* Login Page ================================== */
 .login-page {
-  background-color: #00BCD4;
+  background-color: #3973ee;
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
   overflow-x: hidden; }
   .login-page .login-box .msg {
-    color: #555;
+    color: red;
     margin-bottom: 30px;
     text-align: center; }
   .login-page .login-box a {

@@ -14,7 +14,7 @@
                         </h2>
                         <a href="<?php echo base_url('general/addpotongan'); ?>" type="button" class="btn bg-orange waves-effect pull-right" 
                             style="color:#fff;margin-top: -4%;">
-                            <i class="material-icons">add_box</i><span>Brand Baru</span>
+                            <i class="material-icons">add_box</i><span>Potongan Pembelian Baru</span>
                         </a>
                     </div>
                     <div class="body">

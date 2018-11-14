@@ -64,9 +64,11 @@
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>                                        
-                                        <a href="<?php echo base_url('transaksi/edittransfer/'.$list->tnomor); ?>" type="button" 
-                                            class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Transfer" <?php echo $style;?> style="color:#fff;">
-                                            <i class="material-icons">done_all</i>
+                                        <a href="<?php echo base_url('transaksi/transferkonfirmasi_act/'.$list->tnomor); ?>" style="color:#fff;">
+                                            <button type="button" class="btn bg-lime btn-circle waves-effect waves-circle waves-float" 
+                                            data-toggle="tooltip" data-placement="top" title="Konfirmasi Withdraw" <?php echo $style;?>>
+                                                <i class="material-icons">done_all</i>
+                                            </button>
                                         </a>
 
                                         <a href="<?php echo base_url('transaksi/hapustransfer/'.$list->tnomor); ?>" type="button" 

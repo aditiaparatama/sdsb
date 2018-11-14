@@ -23,6 +23,7 @@
                                 <thead>
                                     <tr class="bg-light-blue">
                                         <th>Tanggal</th>
+                                        <th>Periode Kupon</th>
                                         <th>Username</th>
                                         <th>Nomor Kupon</th>
                                         <th>Total</th>
@@ -31,6 +32,7 @@
                                 </thead>
                                 <tfoot>
                                         <th>Tanggal</th>
+                                        <th>Periode Kupon</th>
                                         <th>Username</th>
                                         <th>Potongan</th>
                                         <th>Total</th>
@@ -48,6 +50,7 @@
                                     ?>
                                     <tr>
                                         <td><?php echo date('d F Y H:i:s', strtotime($list->tdate)); ?></td>
+                                        <td><?php echo date('d F Y', strtotime($list->tperiode)); ?></td>
                                         <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>">
                                             <?php echo $list->cuser; ?>
                                         </a></td>

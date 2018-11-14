@@ -18,7 +18,7 @@ class M_nomor extends CI_Model {
     }
 
     public function Nomor(){
-        $this->db->select('n.nid, n.nnomor, c.cnama');
+        $this->db->select('n.nid, n.nnomor, n.nperiode, c.cnama');
         $this->db->from($this->table[1].' as n');
         $this->db->join($this->table[2].' as c','c.cid = n.ncustomer');
      

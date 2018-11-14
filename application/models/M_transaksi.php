@@ -33,7 +33,7 @@ class M_transaksi extends CI_Model {
         return $data;
     }
     public function ListKupon($id){
-        $this->db->select('t.tkupon, t.tcustomer, t.tstatus, t.tdate, c.cnama');
+        $this->db->select('t.tkupon, t.tcustomer, t.tstatus, t.tperiode, t.tdate, c.cnama');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->where('t.tcustomer',$id);
@@ -359,7 +359,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function Kupon(){
-        $this->db->select('t.tnomor, t.tkupon, t.tharga, t.tgrandtotal, t.tstatus, t.tdate, c.cuser, c.cemail');
+        $this->db->select('t.tnomor, t.tkupon, t.tharga, t.tgrandtotal, t.tstatus, t.tdate, t.tperiode, c.cuser, c.cemail');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer');
         $this->db->where('t.tjenis', 3);

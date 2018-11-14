@@ -48,7 +48,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12"> 
-                                            <button type="submit" name="submit" class="btn red btn-lg">Update Password</button>
+                                            <button type="submit" name="submit" class="btn red btn-lg" style="background-color: dimgrey">Update Password</button>
                                         </div>
                                     </div>
 

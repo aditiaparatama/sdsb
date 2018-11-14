@@ -21,12 +21,15 @@
                                 <thead>
                                     <tr class="bg-light-blue">
                                         <th>Nomor Kupon</th>
+                                        <th>Periode</th>
                                         <th>Customer</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                         <th>Nomor Kupon</th>
+                                        <th>Periode</th>
+                                        <th>Customer</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -35,6 +38,7 @@
                                         ?>
                                     <tr>
                                         <td><?php echo $list->nnomor; ?></td>
+                                        <td><?php echo date('d F Y', strtotime($list->nperiode)); ?></td>
                                         <td><?php echo $list->cnama; ?></td>
                                         <td>
                                         <?php 

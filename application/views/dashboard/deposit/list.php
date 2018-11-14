@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="btn-group">
-                                        <a class="btn sbold green" href="<?php echo base_url('dashboard/adddeposit'); ?>"> TAMBAH DEPOSIT<i class="fa fa-plus"></i></a>
+                                        <a class="btn sbold green" href="<?php echo base_url('dashboard/adddeposit'); ?>" style="background-color: dimgrey"> TAMBAH DEPOSIT<i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>

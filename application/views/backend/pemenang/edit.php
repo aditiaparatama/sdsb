@@ -17,7 +17,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="tanggal" class="datepicker form-control" value="<?php echo date('l d F Y', strtotime($detail1->pperiode)); ?>" readonly>
+                                        <input type="text" name="tanggal" class="form-control" value="<?php echo date('l d F Y', strtotime($detail1->pperiode)); ?>" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                             <input type="hidden" name="id_pemenang5" value="<?php echo $detail5->pid; ?>">
                             <input type="hidden" name="id_pemenang6" value="<?php echo $detail6->pid; ?>">
                             <div class="col-sm-12">
-                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">SIMPAN</button>&nbsp;&nbsp;
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg waves-effect">UBAH</button>&nbsp;&nbsp;
                                 <a href="<?php echo base_url('pemenang/listpemenang'); ?>" class="btn btn-danger btn-lg waves-effect">BATAL</a>
                             </div>
                         </div>

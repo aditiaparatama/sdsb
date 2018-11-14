@@ -45,7 +45,7 @@
                                 <tbody>
                                     <?php foreach($lists as $list) { ?>
                                     <tr>
-                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>">
+                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cid); ?>">
                                             <?php echo $list->cnama; ?>
                                         </a></td>
                                         <td><?php echo $list->cusersbo; ?></td>
@@ -57,12 +57,12 @@
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                        <a href="<?php echo base_url('customer/editcustomer/'.$list->cemail); ?>" type="button" class="btn bg-light-blue 
+                                        <a href="<?php echo base_url('customer/editcustomer/'.$list->cid); ?>" type="button" class="btn bg-light-blue 
                                             btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Customer" style="color:#fff;">
                                             <i class="material-icons">border_color</i>
                                         </a>
 
-                                        <a href="<?php echo base_url('customer/hapuscustomer/'.$list->cemail); ?>" type="button" class="btn bg-red 
+                                        <a href="<?php echo base_url('customer/hapuscustomer/'.$list->cid); ?>" type="button" class="btn bg-red 
                                             btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus"style="color:#fff;">
                                             <i class="material-icons">delete</i>
                                         </a>

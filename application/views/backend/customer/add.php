@@ -59,14 +59,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <textarea cols="30" rows="3" name="alamat" class="form-control no-resize" aria-required="true"></textarea>
                                     <label class="form-label">Alamat</label>
                                 </div>
                             </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -82,8 +82,18 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="bank" class="form-control" required>
-                                        <label class="form-label">Bank</label>
+                                        <select class="form-control show-tick" name="bank" required>
+                                            <option value="" selected="selected">
+                                                - Pilih Rekening -
+                                            </option>
+                                            <?php
+                                              foreach ($penerima as $terima) { 
+                                            ?>
+                                            <option value="<?php echo $terima->rbank; ?>">
+                                                <?php echo $terima->rbank; ?>
+                                            </option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

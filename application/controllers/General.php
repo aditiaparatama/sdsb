@@ -11,7 +11,7 @@ class General extends CI_Controller {
 	//halaman backend
 	public function backend(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model(array('m_customer','m_nomor','m_transaksi','m_pemenang','m_pemenang'));
 		$data['customer'] 		= $this->m_customer->CCustomer();
@@ -31,7 +31,7 @@ class General extends CI_Controller {
 
 	public function harga(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$data['lists'] = $this->m_general->Harga();
@@ -43,44 +43,116 @@ class General extends CI_Controller {
 
 	public function periode(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
-		$data['lists'] = $this->m_general->Periode();
+		$data['lists'] = $this->m_general->ListPeriode();
 
 		$data['title'] = 'List Periode Kupon - '.BRAND;
 		$data['page']  = 'backend/general/periode';
 		$this->load->view('backend/thamplate', $data); 
  	}
 
- 	public function periode_act(){
+	public function listperiode(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('departementnsosial'));
+		}
+	  	$this->load->model('m_general');
+		$data['lists'] = $this->m_general->ListPeriode();
+
+		$data['title'] = 'List Periode Kupon - '.BRAND;
+		$data['page']  = 'backend/general/periode';
+		$this->load->view('backend/thamplate', $data); 
+ 	}
+
+	public function addperiode(){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('departementnsosial'));
+		}
+
+		$data['title'] = 'Periode Baru - '.BRAND;
+		$data['page']  = 'backend/general/addperiode';
+		$this->load->view('backend/thamplate', $data); 
+ 	}
+
+ 	public function addperiode_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('periode', 'Periode', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('periode1', 'Periode Awal', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('periode2', 'Periode Akhir', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			if($this->form_validation->run() == false){
             	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
-				redirect(base_url().'general/periode');
+				redirect($_SERVER['HTTP_REFERER']);
 		  	} else { 		
-				$id 					= 9;
 				$data['gname'] 			= 'Periode Kupon';
+				$data['gketerangan'] 	= $this->input->post('periode');
 				$data['gperiodeawal'] 	= date('Y-m-d', strtotime($this->input->post('periode1')));
 				$data['gperiodeakhir']  = date('Y-m-d', strtotime($this->input->post('periode2')));
-				$data['gbrand'] 		= 'SDSB Online';
+				$data['gbrand'] 		= 5;
+				$data['gstatus'] 		= 9;
 				$data['gdate'] 			= date('Y-m-d H:i:s');
 				
 	  			$this->load->model('m_general');
-	  	 		$this->m_general->SavePeriode($id, $data);	
-	       		redirect(base_url().'general/periode');
+	  	 		$this->m_general->SavePeriode($data);	
+	       		redirect(base_url().'general/listperiode');
 		  	}
 	    }
  	}
 
+	public function editperiode($id){
+		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('departementnsosial'));
+		}
+	  	$this->load->model('m_general');
+		$data['lists'] = $this->m_general->DetailPeriode($id);
+
+		$data['title'] = 'Edit Periode - '.BRAND;
+		$data['page']  = 'backend/general/editperiode';
+		$this->load->view('backend/thamplate', $data); 
+ 	}
+
+ 	public function editperiode_act(){
+ 		if($this->session->userdata('status') != "backend"){
+			redirect(base_url('departementnsosial'));
+		}
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('periode', 'Periode', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('periode1', 'Periode Awal', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			$this->form_validation->set_rules('periode2', 'Periode Akhir', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			if($this->form_validation->run() == false){
+            	$this->session->set_flashdata('warning', 'Maaf, validasi anda gagal!');
+				redirect($_SERVER['HTTP_REFERER']);
+		  	} else { 		
+				$id 					= $this->input->post('id');
+				$data['gname'] 			= 'Periode Kupon';
+				$data['gketerangan'] 	= $this->input->post('periode');
+				$data['gperiodeawal'] 	= date('Y-m-d', strtotime($this->input->post('periode1')));
+				$data['gperiodeakhir']  = date('Y-m-d', strtotime($this->input->post('periode2')));
+				$data['gbrand'] 		= 5;
+				$data['gdate'] 			= date('Y-m-d H:i:s');
+				
+	  			$this->load->model('m_general');
+	  	 		$this->m_general->SavePeriode($id, $data);	
+	       		redirect(base_url().'general/listperiode');
+		  	}
+	    }
+ 	}
+
+ 	public function hapusperiode($id){
+		if($this->session->userdata('status') != "backend"){
+		   redirect(base_url('departementnsosial'));
+		}
+	  	$this->load->model('m_general');
+		$this->m_general->HapusPeriode($id);
+		redirect(base_url('general/listperiode'));
+ 	}
+
  	public function harga_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('harga', 'Harga Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -100,7 +172,7 @@ class General extends CI_Controller {
 
 	public function potonganpembelian(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$data['lists'] = $this->m_general->PotonganPembelian();
@@ -112,7 +184,7 @@ class General extends CI_Controller {
 
  	public function addpotongan(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		
 		$data['title'] = 'Potongan Pembelian Baru - '.BRAND;
@@ -122,7 +194,7 @@ class General extends CI_Controller {
 
  	public function addpotongan_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('jmhdari', 'Mininal Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -148,7 +220,7 @@ class General extends CI_Controller {
 
  	public function editpotongan($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
  		$data['detail'] = $this->m_general->DetailPotongan($id);
@@ -160,7 +232,7 @@ class General extends CI_Controller {
 
  	public function editpotongan_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('jmhdari', 'Minimal Kupon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -187,7 +259,7 @@ class General extends CI_Controller {
 
 	public function hapusgeneral($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$this->m_general->HapusPotongan($id);
@@ -196,7 +268,7 @@ class General extends CI_Controller {
 
 	public function pengeluaranbulanan(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$data['lists'] = $this->m_general->PengeluaranBulanan();
@@ -208,7 +280,7 @@ class General extends CI_Controller {
 
  	public function addpengeluaran(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_rekening');
 		$data['transfer'] 	= $this->m_rekening->RekeningTransfer();
@@ -221,7 +293,7 @@ class General extends CI_Controller {
 
  	public function addpengeluaran_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('transfer', 'Rekening Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -304,7 +376,7 @@ class General extends CI_Controller {
 
   	public function editpengeluaran($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_rekening');
 	  	$this->load->model('m_general');
@@ -319,7 +391,7 @@ class General extends CI_Controller {
 
  	public function editpengeluaran_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('transfer', 'Rekening Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -398,7 +470,7 @@ class General extends CI_Controller {
 
 	public function hapuspengeluaran($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$this->m_general->HapusPengeluaran($id);
@@ -407,7 +479,7 @@ class General extends CI_Controller {
 
 	public function excelpengeluaranbulanan(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$data['lists'] = $this->m_general->PengeluaranBulanan();
@@ -417,7 +489,7 @@ class General extends CI_Controller {
 
 	public function reportpermainanharian(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_brand');
 		$data['brands']  = $this->m_brand->Brand();
@@ -429,7 +501,7 @@ class General extends CI_Controller {
 
 	public function reportpermainanharian_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -451,7 +523,7 @@ class General extends CI_Controller {
 
 	public function reportpermainanharian_excel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -471,7 +543,7 @@ class General extends CI_Controller {
 
 	public function reportrekening(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 
 		$data['title'] = 'Report Rekening - '.BRAND;
@@ -481,7 +553,7 @@ class General extends CI_Controller {
 
 	public function reportrekening_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$dari 			= date('Y-m-d', strtotime($this->input->post('dari')));
@@ -495,7 +567,7 @@ class General extends CI_Controller {
 
 	public function periodepermainanharian($periode) {
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$data['lists'] = $this->m_transaksi->ReportPeriodePermainanHarian($periode);
@@ -506,7 +578,7 @@ class General extends CI_Controller {
 
 	public function reportbiayaoperasional(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_brand');
 		$data['brands']  = $this->m_brand->Brand();
@@ -518,7 +590,7 @@ class General extends CI_Controller {
 
 	public function reportbiayaoperasional_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$dari 			= date('Y-m-d', strtotime($this->input->post('dari')));
@@ -536,7 +608,7 @@ class General extends CI_Controller {
 
 	public function reportbiaya_excel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_general');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -554,7 +626,7 @@ class General extends CI_Controller {
 
 	public function reportrugilaba(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 
 		$data['title'] = 'Report Rugi/Laba - '.BRAND;
@@ -564,7 +636,7 @@ class General extends CI_Controller {
 
 	public function reportrugilaba_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_reportlabarugi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -579,7 +651,7 @@ class General extends CI_Controller {
 
 	public function reportrugilaba_excel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_reportlabarugi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -597,7 +669,7 @@ class General extends CI_Controller {
 
 	public function detaildeposit($periode) {
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$data['lists'] = $this->m_transaksi->ReportPeriodeDeposit($periode);
@@ -608,7 +680,7 @@ class General extends CI_Controller {
 
 	public function detailwithdraw($periode) {
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$data['lists'] = $this->m_transaksi->ReportPeriodeWithdraw($periode);
@@ -619,7 +691,7 @@ class General extends CI_Controller {
 
 	public function reportcustomer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_brand');
 		$data['brands']  = $this->m_brand->Brand();
@@ -631,7 +703,7 @@ class General extends CI_Controller {
 
 	public function reportcustomer_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_customer');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -651,7 +723,7 @@ class General extends CI_Controller {
 
 	public function reportdetailcustomer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_brand');
 		$data['brands']  = $this->m_brand->Brand();
@@ -663,7 +735,7 @@ class General extends CI_Controller {
 
 	public function reportdetailcustomer_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_detailcustomer');
 		// $dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));
@@ -687,7 +759,7 @@ class General extends CI_Controller {
 
 	public function reportkupon(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_brand');
 		$data['brands']  = $this->m_brand->Brand();
@@ -699,7 +771,7 @@ class General extends CI_Controller {
 
 	public function reportkupon_act(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$dari 			= date('Y-m-d', strtotime($this->input->post('dari')));
@@ -717,7 +789,7 @@ class General extends CI_Controller {
 
 	public function reportkupon_excel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_transaksi');
 		$dari 			 = date('Y-m-d', strtotime($this->input->post('dari')));

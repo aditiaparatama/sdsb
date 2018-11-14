@@ -77,7 +77,7 @@ class M_rekening extends CI_Model {
     public function RekeningTransfer(){
         $this->db->select('rid, rbank, rnama, rno, rsaldo');
         $this->db->from($this->table[1]);
-        $this->db->where('rjenis', 2);
+        $this->db->where('rstatus', 1);
 
         $data = $this->db->get()->row();
         return $data;
@@ -87,7 +87,6 @@ class M_rekening extends CI_Model {
         $this->db->select('rid, rbank, rnama, rno, rjenis, rsaldo');
         $this->db->from($this->table[1]);
         $this->db->where('rstatus', 1);
-        $this->db->where('rjenis !=', 2);
 
         $data = $this->db->get()->result();
         return $data;
@@ -98,6 +97,16 @@ class M_rekening extends CI_Model {
         $this->db->from($this->table[1]);
         $this->db->where('rstatus', 1);
         $this->db->where('rjenis !=', 2);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
+    public function RekeningPenerimaAuto($bank){
+        $this->db->select('rid, rbank, rnama, rno, rjenis, rsaldo');
+        $this->db->from($this->table[1]);
+        $this->db->where('rstatus', 1);
+        $this->db->where('rbank', $bank);
 
         $data = $this->db->get()->row();
         return $data;
@@ -135,4 +144,51 @@ class M_rekening extends CI_Model {
         $data = $this->db->get()->result();
         return $data;
     }
+
+    public function Pemasukan(){
+        $this->db->select('r.rbank, r.rnama, r.rno, t.tnomor, t.ttujuan, t.tgrandtotal, t.tketerangan, t.tdari, t.tdate');
+        $this->db->from($this->table[1].' as r');
+        $this->db->join($this->table[2].' as t','t.ttujuan = r.rno','left');
+        $this->db->where('t.tsubjenis',51);
+        $this->db->where('t.tbrand !=',5);
+        $this->db->where('t.tstatus',1);
+
+        $data = $this->db->get()->result();
+        return $data;
+    }
+
+    public function DetailPemasukan($id){
+        $this->db->select('r.rbank, r.rnama, r.rno, r.rsaldo, t.tnomor, t.ttujuan, t.tgrandtotal, t.tketerangan, t.tdari, t.tdate');
+        $this->db->from($this->table[1].' as r');
+        $this->db->join($this->table[2].' as t','t.ttujuan = r.rno','left');
+        $this->db->where('t.tnomor',$id);
+        $this->db->where('t.tsubjenis',51);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
+    public function Pengeluaran(){
+        $this->db->select('r.rbank, r.rnama, r.rno, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tketerangan, t.tdari, t.tdate');
+        $this->db->from($this->table[1].' as r');
+        $this->db->join($this->table[2].' as t','t.tdari = r.rno','left');
+        $this->db->where('t.tsubjenis',52);
+        $this->db->where('t.tbrand !=',5);
+        $this->db->where('t.tstatus',1);
+
+        $data = $this->db->get()->result();
+        return $data;
+    }
+
+    public function DetailPengeluaran($id){
+        $this->db->select('r.rbank, r.rnama, r.rno, r.rsaldo, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tketerangan, t.tdari, t.tdate');
+        $this->db->from($this->table[1].' as r');
+        $this->db->join($this->table[2].' as t','t.tdari = r.rno','left');
+        $this->db->where('t.tnomor',$id);
+        $this->db->where('t.tsubjenis',52);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
 }

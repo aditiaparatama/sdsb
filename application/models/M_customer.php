@@ -101,7 +101,7 @@ class M_customer extends CI_Model {
     }
 
     public function Customer(){
-        $this->db->select('cnama, cemail, cuser, cusersbo, cusermax, cuserhorey, cusertangkas, cdeposit, cdepositsbo, cdepositmax, cdeposithorey, cdeposittangkas');
+        $this->db->select('cid,  cnama, cemail, cuser, cusersbo, cusermax, cuserhorey, cusertangkas, cdeposit, cdepositsbo, cdepositmax, cdeposithorey, cdeposittangkas');
         $this->db->from($this->table[1]);
         $this->db->where('cstatus', 1);
 
@@ -127,7 +127,7 @@ class M_customer extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->table[1]);
         $this->db->where('cstatus', 1);
-        $this->db->where('cemail', $id);
+        $this->db->where('cid', $id);
 
         $data = $this->db->get()->row();
         return $data;
@@ -142,7 +142,7 @@ class M_customer extends CI_Model {
 
     public function HapusCustomer($id){
         $this->db->set('cstatus', 0);
-        $this->db->where('cemail',$id);
+        $this->db->where('cid',$id);
         $this->db->update($this->table[1]);
     }
 
@@ -174,7 +174,7 @@ class M_customer extends CI_Model {
     }
 
     public function CariDataCustomer($where){      
-        $this->db->select('cid, cnama, cemail, cuser, cusersbo, cusermax, cuserhorey, cusertangkas, cdeposit, cdepositsbo, cdepositmax, cdeposithorey, cdeposittangkas');
+        $this->db->select('cid, cnama, cemail, cuser, cusersbo, cusermax, cuserhorey, cusertangkas, cdeposit, cdepositsbo, cdepositmax, cdeposithorey, cdeposittangkas, cbank');
         $this->db->from($this->table[1]);
         $this->db->where($where);
 

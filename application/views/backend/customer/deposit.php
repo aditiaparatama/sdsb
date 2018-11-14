@@ -36,7 +36,7 @@
                                         foreach($lists as $list) { 
                                     ?>
                                     <tr>
-                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cemail); ?>">
+                                        <td><a href="<?php echo base_url('customer/detail/'.$list->cid); ?>">
                                             <?php echo $list->cnama; ?>
                                         </a></td>
                                         <td>Rp. <?php echo number_format($list->cdepositsbo); ?></td>

@@ -1,3 +1,7 @@
+<link href="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+<link href="<?php echo URL_ASSETS; ?>vendors/backend/multi-select/css/multi-select.css" rel="stylesheet">
+<link href="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
 <section class="content">
     <div class="container-fluid">
     <div class="row clearfix">
@@ -20,18 +24,6 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="password" class="form-control" name="pass" required>
-                                <label class="form-label">Password</label>
-                            </div>
-                        </div>
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="password" class="form-control" name="kpass" required>
-                                <label class="form-label">Konfirmasi Password</label>
-                            </div>
-                        </div>
-                        <div class="form-group form-float">
-                            <div class="form-line">
                                 <input type="email" class="form-control" name="email" value="<?php echo $detail->cemail; ?>" required>
                                 <label class="form-label">Email</label>
                             </div>
@@ -42,13 +34,13 @@
                                 <label class="form-label">Telepon</label>
                             </div>
                         </div>
-                        <div class="form-group form-float">
+                        <!-- <div class="form-group form-float">
                             <div class="form-line">
                                 <textarea name="alamat" cols="10" rows="3" class="form-control no-resize" required><?php echo $detail->calamat; ?>
                                 </textarea>
                                 <label class="form-label">Alamat</label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="file" id="photo" name="photo" class="file" accept="image/jpg, image/jpeg, image/png">
@@ -61,8 +53,13 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="bank" value="<?php echo $detail->cbank; ?>" required>
-                                <label class="form-label">Bank</label>
+                            <select class="form-control show-tick" name="bank" required>
+                                <?php foreach ($penerima as $terima) { ?>
+                                <option value="<?php echo $terima->rbank; ?>" <?php if($detail->cbank==$terima->rbank) echo 'selected="selected"'?>>
+                                    <?php echo $terima->rbank; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
                             </div>
                         </div>
                         <div class="form-group form-float">
@@ -169,14 +166,15 @@
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap/js/bootstrap.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-select/js/bootstrap-select.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/jquery-slimscroll/jquery.slimscroll.js"></script>
-<script src="<?php echo URL_ASSETS; ?>vendors/backend/jquery-validation/jquery.validate.js"></script>
-<script src="<?php echo URL_ASSETS; ?>vendors/backend/jquery-steps/jquery.steps.js"></script>
-<script src="<?php echo URL_ASSETS; ?>vendors/backend/sweetalert/sweetalert.min.js"></script>
+<script src="<?php echo URL_ASSETS; ?>vendors/backend/multi-select/js/jquery.multi-select.js"></script>
 <script src="<?php echo URL_ASSETS; ?>vendors/backend/node-waves/waves.js"></script>
+<script src="<?php echo URL_ASSETS; ?>vendors/backend/autosize/autosize.js"></script>
+<script src="<?php echo URL_ASSETS; ?>vendors/backend/momentjs/moment.js"></script>
+<script src="<?php echo URL_ASSETS; ?>vendors/backend/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
 <!-- Custom Js -->
 <script src="<?php echo URL_ASSETS; ?>js/backend/admin.js"></script>
-<script src="<?php echo URL_ASSETS; ?>js/backend/pages/forms/form-validation.js"></script>
+<script src="<?php echo URL_ASSETS; ?>js/backend/pages/forms/basic-form-elements.js"></script>
 <script>
 function tandaPemisahTitik(b){
     var _minus = false;

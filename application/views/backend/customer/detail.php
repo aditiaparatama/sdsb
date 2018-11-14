@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
-            <div class="header" style="height: 450px;">
+            <div class="header" style="height: 380px;">
                 <h2>DETAIL CUSTOMER <?php echo strtoupper($detail->cnama); ?></h2>
                 <div class="body">
                     <div class="col-md-6">
@@ -76,12 +76,12 @@
                           <li>: <?php echo $detail->cnorek; ?></li>
                         </ul>
                     </div>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <ul class="list-inline">
                           <li><strong>Alamat</strong></li>
                           <li style="margin-left: 60px;">: <?php echo $detail->calamat; ?></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

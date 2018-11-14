@@ -64,7 +64,7 @@ class Customer extends CI_Controller {
 	//Halaman Backend
 	public function listcustomer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_customer->Customer();
 
@@ -75,7 +75,7 @@ class Customer extends CI_Controller {
 
  	public function editcustomer($id){
  		if($this->session->userdata('status') != "backend"){
- 			redirect(base_url('departement-sosial'));
+ 			redirect(base_url('departementnsosial'));
  		}
  		$data['detail'] = $this->m_customer->EditCustomer($id);
 
@@ -87,7 +87,7 @@ class Customer extends CI_Controller {
 
  	public function editcustomer_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -139,7 +139,7 @@ class Customer extends CI_Controller {
 
 	public function hapuscustomer($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$this->m_customer->HapusCustomer($id);
 
@@ -148,7 +148,7 @@ class Customer extends CI_Controller {
 
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_customer->DetailCustomer();
 

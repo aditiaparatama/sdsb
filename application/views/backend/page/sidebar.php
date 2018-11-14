@@ -118,7 +118,13 @@
                         <a href="<?php echo base_url('rekening/listrekening'); ?>">Rekening</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('rekening/transferrekening'); ?>">Transfer Dana</a>
+                        <a href="<?php echo base_url('rekening/pemasukan'); ?>">Pemasukan</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('rekening/pengeluaran'); ?>">Pengeluaran</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('rekening/transferrekening'); ?>">Transfer Rekening</a>
                     </li>
                 </ul>
             </li>    
@@ -138,7 +144,7 @@
                         <a href="<?php echo base_url('general/harga'); ?>">Harga Kupon</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('general/periode'); ?>">Periode Kupon</a>
+                        <a href="<?php echo base_url('general/listperiode'); ?>">Periode Kupon</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('brand/listsubbrand'); ?>">List Brand</a>

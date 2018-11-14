@@ -12,7 +12,7 @@ class Transaksi extends CI_Controller {
 	//halaman backend  	
 	public function listhariandebit($id){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
   		$where  	= array('bid' => $id);		
 		$userbrand 	= $this->m_brand->CariBrand($where);
@@ -29,7 +29,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransaksidebit($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
   		$where  	= array('bid' => $id);		
 		$userbrand 	= $this->m_brand->CariBrand($where);
@@ -47,7 +47,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransaksidebit_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('user', 'User Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -159,7 +159,7 @@ class Transaksi extends CI_Controller {
 
 	public function edittransaksidebit($brand,$nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  	= array('bid' => $brand);		
 		$userbrand 	= $this->m_brand->CariBrand($cbrand);
@@ -177,7 +177,7 @@ class Transaksi extends CI_Controller {
  	
 	public function edittransaksidebit_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('user', 'User Transfer', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -285,7 +285,7 @@ class Transaksi extends CI_Controller {
 
  	public function hapustransaksidebit($brand,$nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$this->load->model('m_customer');
 		$this->load->model('m_reportlabarugi');
@@ -332,7 +332,7 @@ class Transaksi extends CI_Controller {
 
 	public function listhariankredit($id){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  		 = array('bid' => $id);		
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
@@ -349,7 +349,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransaksikredit($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  		 = array('bid' => $id);		
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
@@ -366,7 +366,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransaksikredit_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('transfer', 'Transfer Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -488,7 +488,7 @@ class Transaksi extends CI_Controller {
 
 	public function edittransaksikredit($brand,$nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  		 = array('bid' => $brand);		
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
@@ -508,7 +508,7 @@ class Transaksi extends CI_Controller {
  	
 	public function edittransaksikredit_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('transfer', 'Transfer Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -621,7 +621,7 @@ class Transaksi extends CI_Controller {
 
  	public function hapustransaksikredit($brand,$nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$this->load->model('m_customer');
 		$this->load->model('m_reportlabarugi');
@@ -679,7 +679,7 @@ class Transaksi extends CI_Controller {
 
 	public function listharianpermainan($id){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  		 = array('bid' => $id);		
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
@@ -695,7 +695,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransaksipermainan($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  		 = array('bid' => $id, 'bstatus' => 1);	
 		$cntbrand  		 = array('bstatus' => 1, 'bchild' => $id);	
@@ -718,7 +718,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransaksipermainan_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('idbrand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -751,8 +751,8 @@ class Transaksi extends CI_Controller {
 		  		$cperiode  	= array('rperiode' => $periode);		
 				$report 	= $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
-  	 			$saldorekening 	= $this->m_rekening->RekeningTransfer();
 		  		$detacustomer 	= $this->m_customer->CariDataCustomer($where);
+  	 			$saldorekening 	= $this->m_rekening->RekeningPenerimaAuto($detacustomer->cbank);
 		  		$count 	 		= $this->m_customer->CariCustomer($where)->num_rows();	
   	 			$calcu 			= $comm+$referal;
 			  	if($count == 0){
@@ -894,7 +894,7 @@ class Transaksi extends CI_Controller {
 	 
 	public function edittransaksipermainan($brand,$nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}		
 		$cbrand  		 = array('bid' => $brand, 'bstatus' => 1);	
 		$cntbrand  		 = array('bstatus' => 1, 'bchild' => $brand);	
@@ -924,7 +924,7 @@ class Transaksi extends CI_Controller {
  	
 	public function edittransaksipermainan_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('idbrand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -958,8 +958,8 @@ class Transaksi extends CI_Controller {
 		  		$cperiode  	= array('rperiode' => $periode);		
 				$report 	= $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
-  	 			$saldorekening 	= $this->m_rekening->RekeningTransfer();
 		  		$detacustomer 	= $this->m_customer->CariDataCustomer($where);
+  	 			$saldorekening 	= $this->m_rekening->RekeningPenerimaAuto($detacustomer->cbank);
 		  		$count 	 		= $this->m_customer->CariCustomer($where)->num_rows();	
   	 			$calcu 			= $comm+$referal;
 
@@ -1108,7 +1108,7 @@ class Transaksi extends CI_Controller {
 
  	public function hapustransaksipermainan($brand,$nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_brand');
 	  	$this->load->model('m_reportlabarugi');
@@ -1157,7 +1157,7 @@ class Transaksi extends CI_Controller {
 
  	public function detailtransaksi($brand,$user){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_customer');
 		$cbrand  		 = array('bid' => $brand, 'bstatus' => 1);	
@@ -1182,7 +1182,7 @@ class Transaksi extends CI_Controller {
 
  	public function listharianbonus($id){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$cbrand  		 = array('bid' => $id);		
 		$userbrand 		 = $this->m_brand->CariBrand($cbrand);
@@ -1198,7 +1198,7 @@ class Transaksi extends CI_Controller {
 
  	public function listdeposit(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_transaksi->Deposit();
 
@@ -1209,7 +1209,7 @@ class Transaksi extends CI_Controller {
 
  	public function adddeposit(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['transfer'] 	= $this->m_rekening->RekeningPenerima();
 		$data['lists'] 		= $this->m_rekening->Rekening();
@@ -1221,7 +1221,7 @@ class Transaksi extends CI_Controller {
 
 	public function adddeposit_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('user', 'Username', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -1243,7 +1243,7 @@ class Transaksi extends CI_Controller {
 		  		$cperiode = array('rperiode' => $date);		
 				$report   = $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
-				$rekening = $this->m_rekening->RekeningPenerima();
+				$rekening = $this->m_rekening->RekeningPenerimaAuto($this->input->post('daribank'));
 		  		$customer = $this->m_customer->CariDataCustomer($where);
 		  		$count 	  = $this->m_customer->CariCustomer($where)->num_rows();	
 			  	if($count == 0){
@@ -1346,7 +1346,7 @@ class Transaksi extends CI_Controller {
 
 	public function depositkonfirmasi_act($nomor){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_customer');
 	  	$this->load->model('m_reportlabarugi');
@@ -1355,7 +1355,7 @@ class Transaksi extends CI_Controller {
  		$transaksi  = $this->m_transaksi->DetailDeposit($nomor);
 		$where 	 	= array('cid' => $transaksi->tcustomer);
  		$customer 	= $this->m_customer->CariDataCustomer($where);
-		$rekening 	= $this->m_rekening->RekeningPenerima();
+		$rekening 	= $this->m_rekening->RekeningPenerimaAuto($customer->cbank);
 		$cperiode   = array('rperiode' => $date);		
 		$report     = $this->m_reportlabarugi->CariLabaRugi($cperiode);
 
@@ -1422,7 +1422,7 @@ class Transaksi extends CI_Controller {
 
  	public function hapusdeposit($nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_customer');
 	  	$this->load->model('m_reportlabarugi');
@@ -1466,7 +1466,7 @@ class Transaksi extends CI_Controller {
 
  	public function listkupon(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_transaksi->Kupon();
 
@@ -1477,7 +1477,7 @@ class Transaksi extends CI_Controller {
 
  	public function addkupon(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['transfer'] 	= $this->m_rekening->RekeningPenerima();
 		$data['lists'] 		= $this->m_rekening->Rekening();
@@ -1489,7 +1489,7 @@ class Transaksi extends CI_Controller {
 
 	public function addkupon_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}		
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('jumlah', 'Jumlah', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -1505,7 +1505,7 @@ class Transaksi extends CI_Controller {
 				$cusdepo 	= $this->input->post("deposito");
 				$jumlah 	= $this->input->post("jumlah");
 				$nomor  	= random_string('alnum', 15);
-				$rekening 	= $this->m_rekening->RekeningPenerima();
+				$rekening 	= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 				$periode 	= $this->m_general->SearchPeriode();
 
 		  		if($jumlah == 0 || $jumlah == ''){
@@ -1601,7 +1601,7 @@ class Transaksi extends CI_Controller {
 
  	public function hapuskupon($kupon){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$this->m_transaksi->HapusKupon($kupon);
 	    redirect(base_url().'transaksi/listkupon/');
@@ -1609,7 +1609,7 @@ class Transaksi extends CI_Controller {
 
  	public function listtransfer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_transaksi->TransferDana();
 
@@ -1620,7 +1620,7 @@ class Transaksi extends CI_Controller {
 
  	public function addtransfer(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['brands'] 		= $this->m_brand->Brand();
 		
@@ -1631,7 +1631,7 @@ class Transaksi extends CI_Controller {
 
 	public function addtransfer_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('user', 'username SDSB', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -1737,7 +1737,7 @@ class Transaksi extends CI_Controller {
 
 	public function edittransfer($nomor){
 		 if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
  		$data['detail'] = $this->m_transaksi->DetailTransferDana($nomor);
 		$data['lists']	= $this->m_rekening->Rekening();
@@ -1750,7 +1750,7 @@ class Transaksi extends CI_Controller {
 
 	public function edittransfer_act(){
 				if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('user', 'Username', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -1840,7 +1840,7 @@ class Transaksi extends CI_Controller {
 
 	public function transferkonfirmasi_act($nomor){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$this->load->model('m_customer');
 		$this->load->model('m_brand');
@@ -1889,7 +1889,7 @@ class Transaksi extends CI_Controller {
 
  	public function hapustransfer($nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$this->m_transaksi->HapusTransferDana($nomor);
 	    redirect(base_url().'transaksi/listtransfer/');
@@ -1897,7 +1897,7 @@ class Transaksi extends CI_Controller {
 	
 	public function listwithdraw(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_transaksi->WithdrawDana();
 
@@ -1908,7 +1908,7 @@ class Transaksi extends CI_Controller {
 
  	public function addwithdraw(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['transfer'] 	= $this->m_rekening->RekeningTransfer();
 		$data['lists'] 		= $this->m_rekening->Rekening();
@@ -1921,7 +1921,7 @@ class Transaksi extends CI_Controller {
 
 	public function addwithdraw_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('brand', 'Brand', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -2043,7 +2043,7 @@ class Transaksi extends CI_Controller {
 
 	public function editwithdraw($nomor){
 		 if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
  		$data['detail'] 	= $this->m_transaksi->DetailWithdrawDana($nomor);
 		$data['transfer'] 	= $this->m_rekening->RekeningTransfer();
@@ -2063,7 +2063,7 @@ class Transaksi extends CI_Controller {
 
 	public function editwithdraw_act(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nominal', 'Pemilik Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -2173,7 +2173,7 @@ class Transaksi extends CI_Controller {
 
 	public function withdrawkonfirmasi_act($nomor){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$this->load->model('m_customer');
 		$this->load->model('m_brand');
@@ -2194,8 +2194,8 @@ class Transaksi extends CI_Controller {
 		    $userbrand->bfield1 => $transaksi->$user
 	    );
 
-		$rekening = $this->m_rekening->RekeningTransfer();
   		$customer = $this->m_customer->CariDataCustomer($where2);
+		$rekening = $this->m_rekening->RekeningPenerimaAuto($customer->cbank);
   		$count 	  = $this->m_customer->CariCustomer($where2)->num_rows();	
 	  	if($count == 0){
             $this->session->set_flashdata('warning', 'Maaf, user tidak ditemukan!');
@@ -2272,13 +2272,13 @@ class Transaksi extends CI_Controller {
 
  	public function hapuswithdraw($nomor){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 	  	$this->load->model('m_customer');
 	  	$this->load->model('m_reportlabarugi');
 	  	$this->load->model('m_detailcustomer');
  		$detail 	= $this->m_transaksi->DetailWithdrawDana($nomor); 
-		$rekening 	= $this->m_rekening->RekeningTransfer();
+		$rekening 	= $this->m_rekening->RekeningPenerimaAuto($detail->cbank);
 		$periode	= $detail->tperiode;
   		$cperiode  	= array('rperiode' => $periode);		
 		$report 	= $this->m_reportlabarugi->CariLabaRugi($cperiode);

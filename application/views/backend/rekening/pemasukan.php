@@ -8,13 +8,14 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            List Periode Kupon
-                            <small>Daftar periode kupon
-                            <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a></small>
+                            Pemasukan Rekening
+                            <small>Daftar pemasukan transaksi rekening yang aktif 
+                                <a href="<?php echo DOMAIN_WEB; ?>" target="_blank"><?php echo DOMAIN_WEB; ?></a>
+                            </small>
                         </h2>
-                        <a href="<?php echo base_url('general/addperiode'); ?>" type="button" class="btn bg-orange waves-effect pull-right" 
+                        <a href="<?php echo base_url('rekening/addpemasukan'); ?>" type="button" class="btn bg-orange waves-effect pull-right" 
                             style="color:#fff;margin-top: -4%;">
-                            <i class="material-icons">add_box</i><span>Periode Baru</span>
+                            <i class="material-icons">add_box</i><span>Pemasukan Rekening Baru</span>
                         </a>
                     </div>
                     <div class="body">
@@ -22,39 +23,45 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr class="bg-light-blue">
-                                        <th>Periode</th>
-                                        <th>Awal Periode</th>
-                                        <th>Akhir Periode</th>
+                                        <th>Keterangan</th>
+                                        <th>Sumber</th>
+                                        <th>Nominal</th>
+                                        <th>Bank</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
-                                        <th>Periode</th>
-                                        <th>Awal Periode</th>
-                                        <th>Akhir Periode</th>
+                                        <th>Keterangan</th>
+                                        <th>Sumber</th>
+                                        <th>Nominal</th>
+                                        <th>Bank</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php foreach($lists as $list) { ?>
+                                    <?php 
+                                        foreach($lists as $list) { 
+                                    ?>
                                     <tr>
-                                        <td><?php echo $list->gketerangan; ?></td>
-                                        <td><?php echo date('d F Y', strtotime($list->gperiodeawal)); ?></td>
-                                        <td><?php echo date('d F Y', strtotime($list->gperiodeakhir)); ?></td>
+                                        <td><?php echo $list->tketerangan; ?></td>
+                                        <td><?php echo $list->tdari; ?></td>
+                                        <td>Rp. <?php echo number_format($list->tgrandtotal); ?></td>
+                                        <td>
+                                            <a href="<?php echo base_url('rekening/detailrekening/'.$list->rno); ?>">
+                                                <?php echo $list->rno.' - '.$list->rbank.' ('.$list->rnama.')'; ?>
+                                            </a>
+                                        </td>
                                         <td>
                                         <?php 
                                             if ($this->session->userdata('role') == 1){
                                         ?>
-                                            <a href="<?php echo base_url('general/editperiode/'.$list->gid); ?>" type="button" class="btn 
-                                                bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" 
-                                                data-placement="top" title="Edit Periode Kupon" style="color:#fff;">
-                                                <i class="material-icons">border_color</i>
-                                            </a>
+                                        <a href="<?php echo base_url('rekening/editpemasukan/'.$list->tnomor); ?>" type="button" class="btn bg-light-blue 
+                                            btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Edit Pemasukan" style="color:#fff;"><i class="material-icons">border_color</i>
+                                        </a>
 
-                                            <a href="<?php echo base_url('general/hapusperiode/'.$list->gid); ?>" type="button" class="btn bg-red 
-                                                btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus"style="color:#fff;">
-                                                <i class="material-icons">delete</i>
-                                            </a>
+                                        <a href="<?php echo base_url('rekening/hapuspemasukan/'.$list->tnomor); ?>" type="button" class="btn bg-red 
+                                            btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="top" title="Hapus"style="color:#fff;"><i class="material-icons">delete</i>
+                                        </a>
                                         <?php } ?>
                                         </td>
                                     </tr>

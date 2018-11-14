@@ -149,7 +149,7 @@ class Nomor extends CI_Controller {
 	//Halaman Backend
 	public function listnomor(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_nomor->Nomor();
 
@@ -160,7 +160,7 @@ class Nomor extends CI_Controller {
 
 	public function hapusnomor($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$this->m_nomor->HapusNomor($id);
 
@@ -169,7 +169,7 @@ class Nomor extends CI_Controller {
 
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_nomor->nomor();
 

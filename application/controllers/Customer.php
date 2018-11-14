@@ -64,8 +64,10 @@ class Customer extends CI_Controller {
 	//halaman backend
  	public function addcustomer(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
+		$this->load->model('m_rekening');
+		$data['penerima'] 	= $this->m_rekening->RekeningPenerimaTransfer();
 		
 		$data['title'] = 'Tambah Customer Baru - '.BRAND;
 		$data['page']  = 'backend/customer/add';
@@ -74,14 +76,14 @@ class Customer extends CI_Controller {
 
  	public function addcustomer_act(){
   		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tlp', 'Telepon', 'htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('alamat', 'Alamat', 'htmlspecialchars|strip_image_tags|encode_php_tags');
+			// $this->form_validation->set_rules('alamat', 'Alamat', 'htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('nmrek', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('norek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -159,7 +161,7 @@ class Customer extends CI_Controller {
 					$data['cemail']				= $this->input->post('email');
 					$data['cpass'] 				= md5($this->input->post('pass'));
 					$data['ctlp']				= $this->input->post('tlp');
-					$data['calamat']			= $this->input->post('alamat');
+					// $data['calamat']			= $this->input->post('alamat');
 					$data['cbank']				= $this->input->post('bank');
 					$data['cnamarek']			= $this->input->post('nmrek');
 					$data['cnorek']				= $this->input->post('norek');
@@ -178,7 +180,7 @@ class Customer extends CI_Controller {
  				$customer = $this->m_customer->SearchCustomer($this->input->post('email'));
 
 	  	 		if($this->input->post('dsbobet') != ''){		
-	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $customer->cid;
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cusersbo;
@@ -249,7 +251,7 @@ class Customer extends CI_Controller {
 	  	 		}
 
 	  	 		if($this->input->post('dmaxbet') != ''){		
-	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $customer->cid;
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cusermax;
@@ -343,7 +345,7 @@ class Customer extends CI_Controller {
 	  	 		}
 
 	  	 		if($this->input->post('dhorey4d') != ''){		
-	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $customer->cid;
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cuserhorey;
@@ -414,7 +416,7 @@ class Customer extends CI_Controller {
 	  	 		}
 
 	  	 		if($this->input->post('dtangkas') != ''){		
-	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $customer->cid;
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cusertangkas;
@@ -485,7 +487,7 @@ class Customer extends CI_Controller {
 	  	 		}
 
 	  	 		if($this->input->post('dsdsb') != ''){		
-	  	 			$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $customer->cid;
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $customer->cuser;
@@ -561,7 +563,7 @@ class Customer extends CI_Controller {
 
 	public function listcustomer(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_customer->Customer();
 
@@ -572,9 +574,11 @@ class Customer extends CI_Controller {
 
  	public function editcustomer($id){
  		if($this->session->userdata('status') != "backend"){
- 			redirect(base_url('departement-sosial'));
+ 			redirect(base_url('departementnsosial'));
  		}
- 		$data['detail'] = $this->m_customer->EditCustomer($id);
+		$this->load->model('m_rekening');
+ 		$data['detail'] 	= $this->m_customer->EditCustomer($id);
+		$data['penerima'] 	= $this->m_rekening->RekeningPenerimaTransfer();
 
  		$data['title'] = 'Edit Customer - '.BRAND;
  		$data['page']  = 'backend/customer/edit';
@@ -583,14 +587,14 @@ class Customer extends CI_Controller {
 
  	public function editcustomer_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
-			$this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			// $this->form_validation->set_rules('pass', 'Password', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('tlp', 'Telepon', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
-			$this->form_validation->set_rules('alamat', 'Alamat', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
+			// $this->form_validation->set_rules('alamat', 'Alamat', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('bank', 'Bank', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('nmrek', 'Nama Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
 			$this->form_validation->set_rules('norek', 'Nomor Rekening', 'required|htmlspecialchars|strip_image_tags|encode_php_tags|numeric');
@@ -667,9 +671,9 @@ class Customer extends CI_Controller {
 					$data['cusermax']			= $this->input->post('maxbet');
 					$data['cuserhorey']			= $this->input->post('horey4d');
 					$data['cusertangkas']		= $this->input->post('tangkasnet');
-					$data['cpass'] 				= md5($this->input->post('pass'));
+					// $data['cpass'] 				= md5($this->input->post('pass'));
 					$data['ctlp']				= $this->input->post('tlp');
-					$data['calamat']			= $this->input->post('alamat');
+					// $data['calamat']			= $this->input->post('alamat');
 					$data['cbank']				= $this->input->post('bank');
 					$data['cnamarek']			= $this->input->post('nmrek');
 					$data['cnorek']				= $this->input->post('norek');
@@ -687,7 +691,7 @@ class Customer extends CI_Controller {
 		 		if($this->input->post('olddsbo') != str_replace(",", "", $this->input->post('dsbobet'))){	
 		 			$dsbobet = str_replace(",", "", $this->input->post('dsbobet'));	
 			 		
-			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('usersbo');
@@ -759,7 +763,7 @@ class Customer extends CI_Controller {
 		 		if($this->input->post('olddmax') != str_replace(",", "", $this->input->post('dmaxbet'))){	
 		 			$dmaxbet = str_replace(",", "", $this->input->post('dmaxbet'));	
 
-			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('maxbet');
@@ -832,7 +836,7 @@ class Customer extends CI_Controller {
 		 		if($this->input->post('olddhorey') != str_replace(",", "", $this->input->post('dhorey4d'))){	
 		 			$dhorey4d = str_replace(",", "", $this->input->post('dhorey4d'));	
 
-			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('horey4d');
@@ -905,7 +909,7 @@ class Customer extends CI_Controller {
 		 		if($this->input->post('olddtangkas') != str_replace(",", "", $this->input->post('dtangkas'))){	
 		 			$dtangkas = str_replace(",", "", $this->input->post('dtangkas'));	
 	
-			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('tangkasnet');
@@ -978,7 +982,7 @@ class Customer extends CI_Controller {
 		 		if($this->input->post('olddsdsb') != str_replace(",", "", $this->input->post('dsdsb'))){	
 		 			$dsdsb = str_replace(",", "", $this->input->post('dsdsb'));	
 
-			 		$rekening 			= $this->m_rekening->RekeningPenerima();
+	  	 			$rekening 			= $this->m_rekening->RekeningPenerimaAuto($this->input->post('bank'));
 					$row['tcustomer']	= $this->input->post('idcus');
 					$row['tnomor']		= random_string('alnum', 15);
 					$row['tdari']		= $this->input->post('sdsb');
@@ -1054,7 +1058,7 @@ class Customer extends CI_Controller {
 
 	public function hapuscustomer($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
  		$data['detail'] = $this->m_customer->EditCustomer($id);
 		$this->m_customer->HapusCustomer($id);
@@ -1065,7 +1069,7 @@ class Customer extends CI_Controller {
 
 	public function listdeposit(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_customer->Customer();
 
@@ -1076,12 +1080,12 @@ class Customer extends CI_Controller {
 
 	public function detail($id){ 		
 		if($this->session->userdata('status') != "backend"){
- 			redirect(base_url('departement-sosial'));
+ 			redirect(base_url('departementnsosial'));
  		}
 		$this->load->model('m_transaksi');
  		$data['detail'] 	= $this->m_customer->EditCustomer($id);
-		$data['deposit'] 	= $this->m_transaksi->RiwayatCustomerDeposit($id);
-		$data['withdraw'] 	= $this->m_transaksi->RiwayatCustomerWithdraw($id);
+		$data['deposit'] 	= $this->m_transaksi->RiwayatCustomerDeposit($data['detail']->cemail);
+		$data['withdraw'] 	= $this->m_transaksi->RiwayatCustomerWithdraw($data['detail']->cemail);
 
  		$data['title'] = 'Detail Customer - '.BRAND;
  		$data['page']  = 'backend/customer/detail';
@@ -1090,7 +1094,7 @@ class Customer extends CI_Controller {
 
 	public function downloadexcel(){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_customer->DetailCustomer();
 
@@ -1143,11 +1147,13 @@ class Customer extends CI_Controller {
 			$data['deposit'] = '';
 			$data['deposio'] = '';
 			$data['sumber']  = '';	
+			$data['bank']  	 = '';	
 		}else{
 			$data['userid']  = $data['customer']->cid;
 			$data['deposit'] = 'Rp. '.number_format($data['customer']->$deposit);
 			$data['deposio'] = $data['customer']->$deposit;
-			$data['sumber']  = 'DEPOSIT '. $userbrand->bnama;	
+			$data['sumber']  = 'DEPOSIT '. $userbrand->bnama;
+			$data['bank']	 = $data['customer']->cbank;	
 		}
 
 		$data['page']  = 'backend/customer/searchdeposit';
@@ -1175,6 +1181,7 @@ class Customer extends CI_Controller {
 			$data['sumber']  	= '';
 			$data['tujuan']  	= '';	
 			$data['rekening']  	= '';	
+			$data['bank']  		= '';	
 		}else{
 			$data['userid']  	= $data['customer']->cid;
 			$data['deposit'] 	= 'Rp. '.number_format($data['customer']->$deposit);
@@ -1182,6 +1189,7 @@ class Customer extends CI_Controller {
 			$data['sumber']  	= 'DEPOSIT '. $userbrand->bnama;
 			$data['tujuan']  	= $data['customer']->cnorek.' ('.$data['customer']->cbank.' - '.$data['customer']->cnamarek.')';
 			$data['rekening']  	= $data['customer']->cnorek;
+			$data['bank']		= $data['customer']->cbank;
 		}
 
 		$data['page']  = 'backend/customer/searchrekening';

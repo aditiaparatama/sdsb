@@ -12,7 +12,7 @@ class User extends CI_Controller {
 	//Halaman Backend
 	public function listuser(){
 		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		$data['lists'] = $this->m_user->User();
 
@@ -23,7 +23,7 @@ class User extends CI_Controller {
 
  	public function adduser(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		
 		$data['title'] = 'Tambah User - '.BRAND;
@@ -33,7 +33,7 @@ class User extends CI_Controller {
 
  	public function adduser_act(){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -66,7 +66,7 @@ class User extends CI_Controller {
 
  	public function edituser($id){
  		if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
  		$data['detail'] = $this->m_user->DetailUser($id);
 
@@ -78,7 +78,7 @@ class User extends CI_Controller {
 
  	public function edituser_act(){
  	 	if($this->session->userdata('status') != "backend"){
-			redirect(base_url('departement-sosial'));
+			redirect(base_url('departementnsosial'));
 		}
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules('nama', 'Nama', 'required|htmlspecialchars|strip_image_tags|encode_php_tags');
@@ -115,7 +115,7 @@ class User extends CI_Controller {
 
 	public function hapususer($id){
 		if($this->session->userdata('status') != "backend"){
-		   redirect(base_url('departement-sosial'));
+		   redirect(base_url('departementnsosial'));
 		}
 		$this->m_user->HapusUser($id);
 		redirect(base_url('user/listuser'));

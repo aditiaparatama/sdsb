@@ -418,7 +418,7 @@ class M_transaksi extends CI_Model {
     }
 
     public function DetailWithdrawDana($nomor){
-        $this->db->select('t.tid, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tstatus, t.tbrand, t.tperiode, c.cuser, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cid, c.cdeposit, c.cdepositsbo, c.cdepositmax, c.cdeposithorey, c.cdeposittangkas, c.cnorek, b.bnama');
+        $this->db->select('t.tid, t.tnomor, t.tdari, t.ttujuan, t.tgrandtotal, t.tstatus, t.tbrand, t.tperiode, c.cuser, c.cusersbo, c.cusermax, c.cuserhorey, c.cusertangkas, c.cid, c.cdeposit, c.cdepositsbo, c.cdepositmax, c.cdeposithorey, c.cdeposittangkas, c.cbank, c.cnorek, b.bnama');
         $this->db->from($this->table[1].' as t');
         $this->db->join($this->table[2].' as c','c.cid = t.tcustomer','left');
         $this->db->join($this->table[4].' as b','b.bid = t.tbrand','left');

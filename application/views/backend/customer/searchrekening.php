@@ -22,6 +22,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" value="<?php echo $bank; ?>" name="bank"> 
 <input type="hidden" value="<?php echo $deposio; ?>" name="deposito"> 
 <input type="hidden" value="<?php echo $userid; ?>" name="userid"> 
 <input type="hidden" value="<?php echo $rekening; ?>" name="tujuan"> 

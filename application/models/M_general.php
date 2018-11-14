@@ -18,6 +18,25 @@ class M_general extends CI_Model {
         return $data;
     }
 
+    public function ListPeriode(){
+        $this->db->select('gid, gketerangan, gperiodeawal, gperiodeakhir');
+        $this->db->from($this->table[1]);
+        $this->db->where('gstatus', 9);
+
+        $data = $this->db->get()->result();
+        return $data;
+    }
+
+    public function DetailPeriode($id){
+        $this->db->select('gid, gketerangan, gperiodeawal, gperiodeakhir');
+        $this->db->from($this->table[1]);
+        $this->db->where('gstatus', 9);
+        $this->db->where('gid', $id);
+
+        $data = $this->db->get()->row();
+        return $data;
+    }
+
     public function Periode(){
         $this->db->select('gperiodeawal, gperiodeakhir');
         $this->db->from($this->table[1]);
@@ -26,15 +45,21 @@ class M_general extends CI_Model {
         $data = $this->db->get()->row();
         return $data;
     }
+    
+    public function HapusPeriode($id){
+        $this->db->set('gstatus', 0);
+        $this->db->where('gid',$id);
+        $this->db->update($this->table[1]);
+    }
 
     public function SaveHarga($id,$data) {
         $this->db->where('gid',$id);
         $this->db->update('general',$data);
     }
 
-    public function SavePeriode($id,$data) {
-        $this->db->where('gstatus',$id);
-        $this->db->update('general',$data);
+    public function SavePeriode($data) {
+        $data = $this->db->insert($this->table[1], $data);
+        return $data;
     }
 
     public function PotonganPembelian(){
